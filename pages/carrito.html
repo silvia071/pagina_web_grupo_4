@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrito | Bazar Home</title>
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../assets/css/stylesProducto.css" />
+    <style>
+      table{width:100%;border-collapse:collapse} th,td{padding:.75rem;border-bottom:1px solid #ddd;text-align:left}
+      thead th{background:#f7f7f7} #totales{margin-top:1rem;text-align:right} .empty{padding:1rem;background:#fff7f0;border:1px solid #ffd9b3;border-radius:8px}
+    </style>
+  </head>
+  <body class="layout">
+    <header>
+      <h1>Bazar Home</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="./productos.html">Productos</a></li>
+          <li><a href="./carrito.html">Carrito (<span id="cartCount">0</span>)</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>Tu carrito</h2>
+      <section id="carritoVacio" class="empty" hidden>El carrito está vacío.</section>
+      <section id="carritoTabla">
+        <table>
+          <thead><tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Subtotal</th></tr></thead>
+          <tbody id="carritoBody"></tbody>
+        </table>
+        <div id="totales">Total: $<span id="total">0</span></div>
+      </section>
+    </main>
+
+    <footer><p>&copy; 2025 Bazar Home</p></footer>
+
+    <script type="module" src="../assets/js/carrito-utils.js"></script>
+    <script type="module" src="../assets/js/carrito-page.js"></script>
+  </body>
+</html>

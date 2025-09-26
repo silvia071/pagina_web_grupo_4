@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bazar Online - Productos</title>
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../assets/css/stylesProducto.css" />
+  </head>
+  <body class="layout">
+    <header>
+      <h1>Bazar Home</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="./productos.html">Productos</a></li>
+          <li><a href="./carrito.html">Carrito (<span id="cartCount">0</span>)</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="catalogo">
+        <h2>Catálogo</h2>
+        <div id="gridProductos" class="grid"></div>
+      </section>
+    </main>
+
+    <footer><p>&copy; 2025 Bazar Home</p></footer>
+
+    <script type="module" src="../assets/js/carrito-utils.js"></script>
+    <script type="module" src="../assets/js/productos.js"></script>
+  </body>
+</html>

@@ -1,0 +1,172 @@
+/* estilo general */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  line-height: 1.6;
+
+  /* Grid layout principal */
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* header/nav - main - footer */
+  grid-template-areas:
+    "nav"
+    "main"
+    "footer";
+  min-height: 100vh;
+}
+
+/* header y nav */
+header {
+  grid-area: nav;
+  background-color: #004466;
+  color: white;
+  padding: 0.7rem;
+}
+
+header h1 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex; /* Flexbox para menú */
+  justify-content: space-evenly;
+  gap: 0.75rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 0.5rem; /* corregido */
+  border-radius: 8px;
+}
+
+nav a:hover {
+  background: #006699;
+}
+
+/* main y footer asignados al grid */
+main {
+  grid-area: main;
+}
+
+footer {
+  grid-area: footer;
+  background: #004466;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* catálogo de productos */
+#catalogo {
+  padding: 2rem;
+}
+
+#catalogo h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* grid reutilizable para contenedores de cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+/* tarjeta de producto */
+.producto {
+  background: white;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.producto img {
+  width: 100%;
+  height: 200px;        /* alto fijo para todas */
+  object-fit: contain;  /* o prueba con cover */
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+/* ==== Destacados (index) ==== */
+.destacado img {
+  height: 200px;
+  object-fit: cover;   /* destacados: recorta y llena la card */
+}
+
+.producto button {
+  margin-top: auto; /* empuja el botón al final */
+  background: #004466;
+  color: white;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.producto button:hover {
+  background: #006699;
+}
+/* ==== Tabla del carrito (carrito.html) ==== */
+#carritoTabla table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden; /* redondeo en toda la tabla */
+}
+
+#carritoTabla thead {
+  background: #004466;
+  color: white;
+}
+
+#carritoTabla th,
+#carritoTabla td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+#carritoTabla tr:nth-child(even) {
+  background: #f2f2f2; /* zebra */
+}
+
+#carritoTabla tr:hover {
+  background: #e6f3ff; /* hover suave */
+}
+
+#totales {
+  margin-top: 1rem;
+  text-align: right;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #004466;
+}
+
+/* ==== Ajustes responsive (pantallas chicas) ==== */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr; /* solo 1 columna en móviles */
+    gap: 1rem;
+  }
+  #catalogo {
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,157 @@
+/* estilo general */
+* {
+  margin: 0; /* Elimina márgenes y padding predeterminados */
+  padding: 0; /* Elimina márgenes y padding predeterminados */
+  box-sizing: border-box; /* Incluye padding y border en el tamaño total del elemento */
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  line-height: 1.6;
+  display: grid;
+
+  /* Grid layout principal */
+  grid-template-rows: auto 1fr auto; /* header/nav - main - footer */
+  grid-template-areas:
+    "nav"
+    "main"
+    "footer";
+  min-height: 100vh;
+}
+
+/* header y nav*/
+header {
+  grid-area: nav;
+  background-color: #004466;
+  color: white;
+  padding: 0.7rem;
+}
+
+header h1 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+nav {
+  padding: 0.5rem 0; /* respiro para la barra */
+}
+
+nav ul {
+  list-style: none;
+  display: flex; /* Flexbox para menú */
+  justify-content: space-evenly; /* Espacio uniforme */
+  align-items: center; /* Centrado vertical */
+  gap: 0.5rem; /* Espacio entre enlaces */
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 0.5rem;
+  border-radius: 8px;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  background: #006699;
+}
+
+/* main */
+main {
+  grid-area: main;
+  padding: 2rem;
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+#hero {
+  background: #e0f0f5;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#destacados h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* cards producto*/
+.cards {
+  display: grid; /* Grid para organizar tarjetas */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Columnas responsivas */
+  gap: 0.5rem; /* Espacio entre tarjetas */
+}
+/*Tarjeta Base*/
+.card,
+.producto {
+  background: #006699;
+  border-radius: 8px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15); /* Sombra sutil */
+  padding: 1rem; /* Espaciado interno */
+  display: flex; /* Flexbox interno */
+  flex-direction: column; /* Columna para centrar */
+  align-items: center; /* Centrar horizontalmente */
+  text-align: center; /* Texto centrado */
+  min-height: 100%; /* Altura mínima para igualar alturas */
+}
+/* Variante producto en blanco */
+.producto {
+  background: #fff;
+  color: #333;
+  border: 1px solid #e6e6e6;
+}
+
+/*Imagen de tarjeta*/
+.card img,
+.producto img {
+  width: 100%; /* Ancho completo */
+  height: 180px; /* Altura fija */
+  object-fit: cover; /* Cubre el área sin distorsionar */
+  border-radius: 10px; /* Bordes redondeados */
+  margin-bottom: 1rem; /* Espacio debajo de la imagen */
+}
+/*Boton de tarjeta*/
+.card button,
+.producto button {
+  margin-top: auto; /* empuja el botón hacia abajo */
+  background: #004466;
+  color: white;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.card button:hover,
+.producto
+  button:hover
+  .card
+  button:focus-visible
+  .producto
+  button:focus-visible {
+  background: #006699;
+}
+
+/* footer*/
+footer {
+  grid-area: footer;
+  background: #004466;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Accesibilidad: foco visible  para enlaces*/
+a:focus-visible {
+  outline: 2px solid #66bfff; /* Contorno amarillo */
+  outline-offset: 2px; /* Separación del contorno */
+}

@@ -1,34 +1,34 @@
 // assets/js/index.js
 import { productos } from "./data.js";
 
-function tomarAleatorios(arr, n = 3) {
+// Toma n productos aleatorios, preferentemente en stock
+function tomarAleatorios(arr, n = 3) { 
   const src = [...arr];
   const enStock = src.filter((p) => p.stock > 0);
   const base = enStock.length >= n ? enStock : src;
 
-  // shuffle
-  for (let i = base.length - 1; i > 0; i--) {
+  // Aleatorio de productos - Algoritmo de Fisher-Yates
+  for (let i = base.length - 1; i > 0; i--) { 
     const j = Math.floor(Math.random() * (i + 1));
     [base[i], base[j]] = [base[j], base[i]];
   }
   return base.slice(0, n);
 }
 
-function cardDestacado(p) {
+// Crea la tarjeta HTML para un producto destacado
+function cardDestacado(p) { 
   const div = document.createElement("div");
-  // Usamos tus clases de estilo:
   div.className = "producto destacado";
   div.innerHTML = `
     <img src="${p.img}" alt="${p.nombre}" loading="lazy" />
     <h3>${p.nombre}</h3>
     <p class="precio">$ ${p.precio.toLocaleString("es-AR")}</p>
-    <a class="btn-detalle" href="./pages/producto.html?id=${p.id}" aria-label="Ver detalles de ${p.nombre}">
-      Ver detalles
-    </a>
-  `;
+    <a href="pages/detalle.html?id=${p.id}" class="btn-detalle" target="_blank">Ver detalle</a>
+  ` ;  
   return div;
 }
 
+// Inicializa la sección de productos destacados en la página principal
 function initIndex() {
   const cont = document.querySelector("#destacados .cards");
   if (!cont) return;
@@ -41,4 +41,5 @@ function initIndex() {
   destacados.forEach((p) => cont.appendChild(cardDestacado(p)));
 }
 
-document.addEventListener("DOMContentLoaded", initIndex);
+// Inicializa al cargar la página
+document.addEventListener("DOMContentLoaded", initIndex); 

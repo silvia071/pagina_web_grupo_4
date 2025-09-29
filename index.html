@@ -1,56 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inicio | Bazar Home</title>
-    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="./assets/css/styles.css" />
-  </head>
 
-  <body>
-    <!-- header común de inicio de página-->
-    <header>
-      <h1>Bazar Home</h1>
-      <nav>
-        <ul>
-          <li><a href="./index.html">Inicio</a></li>
-          <li><a href="./pages/productos.html">Productos</a></li>
-          <li>
-            <a href="./pages/carrito.html"
-              >Carrito (<span id="cartCount">0</span>)</a
-            >
-          </li>
-        </ul>
-      </nav>
-    </header>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio | Bazar Home</title>
+  <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
 
-    <!-- contenido principal de la página-->
-    <main>
-      <section id="hero">
-        <h2>Bienvenidos a Bazar Home</h2>
-        <p>
-          Productos seleccionados de <strong>hogar</strong>,
-          <strong>organización</strong> y mucho más.
-        </p>
-      </section>
+<body>
+  <!-- header común de inicio de página-->
+  <header>
+    <h1>Bazar Home</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="/pages/productos.html">Productos</a></li>
+        <li><a href="/pages/carrito.html">
+            <img src="/assets/img/carrito.svg" alt="carrito" class="icono-carrito">
+            Carrito (<span id="cartCount">0</span>)</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- contenido principal de la página-->
+  <main>
+    <section id="hero">
+      <h2>Bienvenidos a Bazar Home</h2>
+      <p>
+        Productos seleccionados de hogar, organización y mucho más.
+      </p>
+    </section>
+    <br />
+
+    <!-- Destacados -->
+    <section id="destacados">
+      <h2>Destacados</h2>
       <br />
+      <section class="cards grid"></section> <!-- agregué "grid" acá -->
+    </section>
+  </main>
 
-      <!-- Destacados -->
-      <section id="destacados">
-  <h2>Destacados</h2>
-  <br />
-  <section class="cards grid"></section> <!-- agregué "grid" acá -->
-</section>
-    </main>
+  <!-- footer común -->
+  <footer>
+    <p>&copy; 2025 Bazar Home</p>
+  </footer>
 
-    <!-- footer común -->
-    <footer>
-      <p>&copy; 2025 Bazar Home</p>
-    </footer>
+  <!-- scripts -->
+  <script type="module" src="./assets/js/carrito-utils.js"></script>
+  <script type="module" src="./assets/js/index.js"></script>
+</body>
 
-    <!-- scripts -->
-    <script type="module" src="./assets/js/carrito-utils.js"></script>
-    <script type="module" src="./assets/js/index.js"></script>
-  </body>
 </html>

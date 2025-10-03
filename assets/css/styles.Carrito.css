@@ -1,0 +1,35 @@
+table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    th,
+    td {
+      padding: .75rem;
+      border-bottom: 1px solid #ddd;
+      text-align: left
+    }
+
+    thead th {
+      background: #f7f7f7
+    }
+
+    #totales {
+      margin-top: 1rem;
+      text-align: right
+    }
+
+    .empty {
+      padding: 1rem;
+      background: #fff7f0;
+      border: 1px solid #ffd9b3;
+      border-radius: 8px
+    }
+
+    .icono-carrito {
+      width: 22px;
+      height: 22px;
+      vertical-align: middle;
+      margin-right: 4px;
+      object-fit: contain;
+    }

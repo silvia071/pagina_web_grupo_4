@@ -1,5 +1,4 @@
-// assets/js/carrito-utils.js
-import { productos } from "./data.js";
+import { productos, guardarProductos } from "./data.js";
 const KEY = "carrito";
 
 export function getCart() {
@@ -33,8 +32,12 @@ export function addToCart(id, qty = 1) {
   if (existing) existing.cantidad = newQty;
   else
     cart.push({ id: p.id, nombre: p.nombre, precio: p.precio, cantidad: qty });
-  saveCart(cart);
-  return { ok: true };
+
+  p.stock -= qty; // Actualiza el stock del producto
+  guardarProductos(); // Guarda el stock actualizado
+
+  saveCart(cart); // Guarda el carrito actualizado
+  return { ok: true }; // Indica que la operación fue exitosa
 }
 export function cartTotal() {
   return getCart().reduce((acc, it) => acc + it.precio * it.cantidad, 0);

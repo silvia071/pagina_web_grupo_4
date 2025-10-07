@@ -1,35 +1,158 @@
+/* TABLA DEL CARRITO  */
 table {
-      width: 100%;
-      border-collapse: collapse
-    }
+  width: 100%;
+  border-collapse: collapse;
+}
 
-    th,
-    td {
-      padding: .75rem;
-      border-bottom: 1px solid #ddd;
-      text-align: left
-    }
+th,
+td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
 
-    thead th {
-      background: #f7f7f7
-    }
+thead th {
+  background: #f7f7f7;
+}
 
-    #totales {
-      margin-top: 1rem;
-      text-align: right
-    }
+#totales {
+  margin-top: 1rem;
+  text-align: right;
+}
 
-    .empty {
-      padding: 1rem;
-      background: #fff7f0;
-      border: 1px solid #ffd9b3;
-      border-radius: 8px
-    }
+.empty {
+  padding: 1rem;
+  background: #fff7f0;
+  border: 1px solid #ffd9b3;
+  border-radius: 8px;
+}
 
-    .icono-carrito {
-      width: 22px;
-      height: 22px;
-      vertical-align: middle;
-      margin-right: 4px;
-      object-fit: contain;
-    }
+
+.icono-carrito {
+  width: 26px;
+  height: 26px;
+  vertical-align: middle;
+  margin-right: 6px;
+  object-fit: contain;
+}
+
+/*  MENÚ HAMBURGUESA  */
+.menu-toggle {
+  display: none;
+  border: 0;
+  background: #006699;
+  color: #fff;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* MEDIA QUERIES – RESPONSIVIDAD DEL SITIO*/
+
+
+@media (max-width: 37.5rem) { /* 600px */
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  .menu-toggle {
+    display: inline-block;
+    font-size: 1.6rem;
+    padding: 0.85rem 1.1rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  nav a {
+    font-size: 1.15rem;
+    padding: 1rem 1rem;
+    min-height: 48px;
+    display: block;
+  }
+
+  .icono-carrito {
+    width: 28px;
+    height: 28px;
+    margin-right: 8px;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  table,
+  th,
+  td {
+    font-size: 0.95rem;
+  }
+
+  footer {
+    font-size: 1rem;
+    padding: 0.9rem;
+  }
+}
+
+
+@media (max-width: 56.25rem) { /* 900px */
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .menu-toggle {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 1.4rem;
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+  }
+
+  /* Menú colapsable controlado por JS */
+  nav ul {
+    display: block;
+    margin-top: 0.75rem;
+    background: #004466;
+    border-radius: 12px;
+    padding: 0.5rem;
+  }
+
+  nav ul[hidden] {
+    display: none;
+  }
+
+  nav ul li {
+    margin: 0.25rem 0;
+  }
+
+  nav a {
+    display: block;
+    font-size: 1.1rem;
+    padding: 0.85rem 1rem;
+    min-height: 48px;
+  }
+
+  main {
+    padding: 1.5rem;
+  }
+
+  table,
+  th,
+  td {
+    font-size: 1rem;
+  }
+}
+
+
+@media (max-width: 75rem) { /* 1200px */
+  body {
+    font-size: 1rem;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+}

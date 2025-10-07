@@ -1,4 +1,4 @@
-// Menú hamburguesa accesible, sin tocar tus otros JS
+
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.querySelector(".menu-toggle");
   const menu = document.getElementById("mainmenu");

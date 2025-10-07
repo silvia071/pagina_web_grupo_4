@@ -1,8 +1,8 @@
 /* estilo general */
 * {
-  margin: 0; /* Elimina márgenes y padding predeterminados */
-  padding: 0; /* Elimina márgenes y padding predeterminados */
-  box-sizing: border-box; /* Incluye padding y border en el tamaño total del elemento */
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
 }
 
 body {
@@ -38,7 +38,7 @@ nav {
   padding: 0.5rem 0; /* respiro para la barra */
 }
 
-/* ====== NAV (desktop) ====== */
+
 nav ul {
   list-style: none;
   display: flex; /* Flexbox para menú */
@@ -51,17 +51,17 @@ nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.05rem;         /* (subido) tamaño texto */
-  padding: 0.75rem 1rem;      /* (subido) área táctil */
+  font-size: 1.05rem;         
+  padding: 0.75rem 1rem;      
   line-height: 1.2;
-  min-height: 44px;           /* (subido) accesibilidad táctil */
+  min-height: 44px;           
   display: inline-flex;
   align-items: center;
-  border-radius: 10px;        /* (subido) radios */
+  border-radius: 10px;        
 }
 
 .icono-carrito {
-  width: 26px;                /* (subido) tamaño icono */
+  width: 26px;                
   height: 26px;
   margin-right: 6px;
   object-fit: contain;
@@ -146,7 +146,7 @@ main {
 /*Boton de tarjeta*/
 .card button,
 .producto button {
-  margin-top: auto; /* empuja el botón hacia abajo */
+  margin-top: auto; 
   background: #004466;
   color: white;
   border: none;
@@ -156,7 +156,7 @@ main {
   transition: background 0.2s ease-in-out;
 }
 
-/* (ARREGLO) hover/focus: selector corregido */
+/*  hover/focus */
 .card button:hover,
 .producto button:hover,
 .card button:focus-visible,
@@ -179,14 +179,14 @@ a:focus-visible {
   outline-offset: 2px; /* Separación del contorno */
 }
 
-/* ==========================================================
+/* 
    MEDIA QUERIES PARA RESPONSIVIDAD DEL SITIO
-   ========================================================== */
+    */
 
 /* === Pantallas pequeñas: hasta 600px === */
 @media (max-width: 37.5rem) { /* 600px */
   header h1 {
-    font-size: 1.6rem;            /* (subido) */
+    font-size: 1.6rem;            
   }
 
   /* Botón de menú más grande en móviles pequeños */
@@ -203,14 +203,14 @@ a:focus-visible {
   }
 
   nav a {
-    font-size: 1.15rem;           /* (subido) */
-    padding: 1rem 1rem;           /* (subido) */
+    font-size: 1.15rem;           
+    padding: 1rem 1rem;           
     min-height: 48px;
     display: block;
   }
 
   .icono-carrito {
-    width: 28px; height: 28px; margin-right: 8px; /* (subido) */
+    width: 28px; height: 28px; margin-right: 8px; 
   }
 
   main {
@@ -230,7 +230,7 @@ a:focus-visible {
   table,
   th,
   td {
-    font-size: 0.95rem;           /* (subido un poco) */
+    font-size: 0.95rem;           
   }
 
   footer {
@@ -242,7 +242,7 @@ a:focus-visible {
 /* === Pantallas medianas: hasta 900px === */
 @media (max-width: 56.25rem) { /* 900px */
   header h1 {
-    font-size: 1.8rem;            /* (subido) */
+    font-size: 1.8rem;            
   }
 
   /* Mostrar botón hamburguesa y colapsar menú por defecto */
@@ -268,8 +268,8 @@ a:focus-visible {
 
   nav a {
     display: block;
-    font-size: 1.1rem;            /* (subido) */
-    padding: 0.85rem 1rem;        /* (subido) */
+    font-size: 1.1rem;            
+    padding: 0.85rem 1rem;        
     min-height: 48px;
   }
 

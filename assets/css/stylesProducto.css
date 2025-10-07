@@ -39,24 +39,24 @@ nav ul {
   display: flex; /* Flexbox para menú */
   justify-content: space-evenly;
   align-items: center;
-  gap: 1rem;             /* subido */
+  gap: 1rem;            
 }
 
 nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.05rem;    /* subido */
-  padding: 0.75rem 1rem; /* subido */
+  font-size: 1.05rem;   
+  padding: 0.75rem 1rem; 
   line-height: 1.2;
-  min-height: 44px;      /* accesibilidad táctil */
+  min-height: 44px;      
   display: inline-flex;
   align-items: center;
   border-radius: 10px;
 }
 
 .icono-carrito {
-  width: 26px; height: 26px;     /* subido */
+  width: 26px; height: 26px;     
   margin-right: 6px;
   object-fit: contain;
 }
@@ -186,15 +186,13 @@ footer {
   color: #004466;
 }
 
-/* ==========================================================
-   MEDIA QUERIES – Sitio responsivo (3 breakpoints)
-   ========================================================== */
+/* MEDIA QUERIES – Sitio responsivo */
 
-/* === Pequeñas: hasta 600px === */
+
 @media (max-width: 37.5rem) { /* 600px */
-  header h1 { font-size: 1.6rem; }      /* subido */
+  header h1 { font-size: 1.6rem; }      
 
-  /* Botón menú más grande */
+  
   .menu-toggle {
     font-size: 1.6rem;
     padding: 0.85rem 1.1rem;
@@ -207,8 +205,8 @@ footer {
   }
 
   nav a {
-    font-size: 1.15rem;                 /* subido */
-    padding: 1rem 1rem;                 /* subido */
+    font-size: 1.15rem;                
+    padding: 1rem 1rem;                
     min-height: 48px;
     display: block;
   }
@@ -229,15 +227,15 @@ footer {
   #carritoTabla th,
   #carritoTabla td {
     padding: 0.5rem;
-    font-size: 0.95rem;                 /* subido un poco */
+    font-size: 0.95rem;                 
   }
 }
 
-/* === Medianas: hasta 900px === */
+
 @media (max-width: 56.25rem) { /* 900px */
   header h1 { font-size: 1.8rem; }
 
-  /* Menú hamburguesa activo y UL colapsable (controlado por JS con [hidden]) */
+  /* Menú hamburguesa activo y UL colapsable  */
   .menu-toggle {
     display: inline-block;
     margin-left: 0.5rem;
@@ -274,7 +272,7 @@ footer {
   .producto img { height: 180px; }
 }
 
-/* === Grandes: hasta 1200px === */
+
 @media (max-width: 75rem) { /* 1200px */
   .grid { grid-template-columns: repeat(3, 1fr); }
   main { width: min(1100px, 92%); }

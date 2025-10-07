@@ -1,4 +1,4 @@
-/* ======= TABLA DEL CARRITO ======= */
+/* TABLA DEL CARRITO  */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -27,7 +27,7 @@ thead th {
   border-radius: 8px;
 }
 
-/* ======= ICONO CARRITO ======= */
+
 .icono-carrito {
   width: 26px;
   height: 26px;
@@ -36,7 +36,7 @@ thead th {
   object-fit: contain;
 }
 
-/* ======= MENÚ HAMBURGUESA ======= */
+/*  MENÚ HAMBURGUESA  */
 .menu-toggle {
   display: none;
   border: 0;
@@ -48,11 +48,9 @@ thead th {
   cursor: pointer;
 }
 
-/* ==========================================================
-   MEDIA QUERIES – RESPONSIVIDAD DEL SITIO
-   ========================================================== */
+/* MEDIA QUERIES – RESPONSIVIDAD DEL SITIO*/
 
-/* === Pantallas pequeñas: hasta 600px === */
+
 @media (max-width: 37.5rem) { /* 600px */
   header h1 {
     font-size: 1.6rem;
@@ -99,7 +97,7 @@ thead th {
   }
 }
 
-/* === Pantallas medianas: hasta 900px === */
+
 @media (max-width: 56.25rem) { /* 900px */
   header h1 {
     font-size: 1.8rem;
@@ -148,7 +146,7 @@ thead th {
   }
 }
 
-/* === Pantallas grandes: hasta 1200px === */
+
 @media (max-width: 75rem) { /* 1200px */
   body {
     font-size: 1rem;

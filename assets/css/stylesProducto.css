@@ -38,19 +38,43 @@ nav ul {
   list-style: none;
   display: flex; /* Flexbox para menú */
   justify-content: space-evenly;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 1rem;             /* subido */
 }
 
 nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  padding: 0.5rem 0.5rem; /* corregido */
-  border-radius: 8px;
+  font-size: 1.05rem;    /* subido */
+  padding: 0.75rem 1rem; /* subido */
+  line-height: 1.2;
+  min-height: 44px;      /* accesibilidad táctil */
+  display: inline-flex;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.icono-carrito {
+  width: 26px; height: 26px;     /* subido */
+  margin-right: 6px;
+  object-fit: contain;
 }
 
 nav a:hover {
   background: #006699;
+}
+
+/* Botón hamburguesa (oculto en desktop; visible en <=900px) */
+.menu-toggle {
+  display: none;
+  border: 0;
+  background: #006699;
+  color: #fff;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
 }
 
 /* main y footer asignados al grid */
@@ -98,19 +122,20 @@ footer {
 
 .producto img {
   width: 100%;
-  height: 200px;        /* alto fijo para todas */
-  object-fit: contain;  /* o prueba con cover */
+  height: 200px;
+  object-fit: contain;
   border-radius: 10px;
   margin-bottom: 1rem;
 }
+
 /* ==== Destacados (index) ==== */
 .destacado img {
   height: 200px;
-  object-fit: cover;   /* destacados: recorta y llena la card */
+  object-fit: cover;
 }
 
 .producto button {
-  margin-top: auto; /* empuja el botón al final */
+  margin-top: auto;
   background: #004466;
   color: white;
   border: none;
@@ -123,6 +148,7 @@ footer {
 .producto button:hover {
   background: #006699;
 }
+
 /* ==== Tabla del carrito (carrito.html) ==== */
 #carritoTabla table {
   width: 100%;
@@ -130,7 +156,7 @@ footer {
   margin-top: 1rem;
   background: white;
   border-radius: 8px;
-  overflow: hidden; /* redondeo en toda la tabla */
+  overflow: hidden;
 }
 
 #carritoTabla thead {
@@ -145,11 +171,11 @@ footer {
 }
 
 #carritoTabla tr:nth-child(even) {
-  background: #f2f2f2; /* zebra */
+  background: #f2f2f2;
 }
 
 #carritoTabla tr:hover {
-  background: #e6f3ff; /* hover suave */
+  background: #e6f3ff;
 }
 
 #totales {
@@ -160,13 +186,97 @@ footer {
   color: #004466;
 }
 
-/* ==== Ajustes responsive (pantallas chicas) ==== */
-@media (max-width: 480px) {
+/* ==========================================================
+   MEDIA QUERIES – Sitio responsivo (3 breakpoints)
+   ========================================================== */
+
+/* === Pequeñas: hasta 600px === */
+@media (max-width: 37.5rem) { /* 600px */
+  header h1 { font-size: 1.6rem; }      /* subido */
+
+  /* Botón menú más grande */
+  .menu-toggle {
+    font-size: 1.6rem;
+    padding: 0.85rem 1.1rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  nav a {
+    font-size: 1.15rem;                 /* subido */
+    padding: 1rem 1rem;                 /* subido */
+    min-height: 48px;
+    display: block;
+  }
+
+  .icono-carrito { width: 28px; height: 28px; margin-right: 8px; }
+
+  #catalogo { padding: 1rem; }
+  main { padding: 1rem; }
+
   .grid {
-    grid-template-columns: 1fr; /* solo 1 columna en móviles */
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
-  #catalogo {
-    padding: 1rem;
+
+  .producto img { height: 150px; }
+
+  /* Tabla carrito */
+  #carritoTabla th,
+  #carritoTabla td {
+    padding: 0.5rem;
+    font-size: 0.95rem;                 /* subido un poco */
   }
 }
+
+/* === Medianas: hasta 900px === */
+@media (max-width: 56.25rem) { /* 900px */
+  header h1 { font-size: 1.8rem; }
+
+  /* Menú hamburguesa activo y UL colapsable (controlado por JS con [hidden]) */
+  .menu-toggle {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 1.4rem;
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+  }
+
+  nav ul {
+    display: block;
+    margin-top: 0.75rem;
+    background: #004466;
+    border-radius: 12px;
+    padding: 0.5rem;
+  }
+  nav ul[hidden] { display: none; }
+
+  nav ul li { margin: 0.25rem 0; }
+
+  nav a {
+    display: block;
+    font-size: 1.1rem;
+    padding: 0.85rem 1rem;
+    min-height: 48px;
+  }
+
+  #catalogo { padding: 1.25rem; }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .producto img { height: 180px; }
+}
+
+/* === Grandes: hasta 1200px === */
+@media (max-width: 75rem) { /* 1200px */
+  .grid { grid-template-columns: repeat(3, 1fr); }
+  main { width: min(1100px, 92%); }
+}
+

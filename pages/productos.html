@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bazar Online - Productos</title>
+  <title>Productos | Bazar Home</title>
   <link rel="icon" href="../assets/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="../assets/css/stylesProducto.css" />
 </head>
@@ -12,26 +11,27 @@
 <body class="layout">
   <header>
     <h1>Bazar Home</h1>
-    <nav>
-      <ul>
-        <li><a href="/index.html">Inicio</a></li>
-        <li><a href="#">Productos</a></li>
-        <li><a href="/pages/carrito.html">
-            <img src="/assets/img/carrito.svg" alt="carrito" class="icono-carrito">
-            Carrito (<span id="cartCount">0</span>)</a></li>
+    <nav aria-label="Navegación principal">
+      <button class="menu-toggle" aria-expanded="false" aria-controls="mainmenu" aria-label="Abrir menú">☰</button>
+      <ul id="mainmenu">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="productos.html" aria-current="page">Productos</a></li>
+        <li>
+          <a href="carrito.html">
+            <img src="../assets/img/carrito.svg" alt="" class="icono-carrito" aria-hidden="true">
+            Carrito (<span id="cartCount">0</span>)
+          </a>
+        </li>
       </ul>
     </nav>
   </header>
 
   <main>
-
     <section id="catalogo">
-      <h2>Catálogo</h2>
+      <h2>Catálogo de productos</h2>
       <div class="toolbar">
         <label for="filtroCategoria">Categoría:</label>
-        <select id="filtroCategoria">
-          <!-- Se completa por JS -->
-        </select>
+        <select id="filtroCategoria"></select>
         <span id="contador"></span>
       </div>
       <div id="gridProductos" class="grid"></div>
@@ -44,6 +44,6 @@
 
   <script type="module" src="../assets/js/carrito-utils.js"></script>
   <script type="module" src="../assets/js/productos.js"></script>
+  <script type="module" src="../assets/js/menu.js"></script>
 </body>
-
 </html>

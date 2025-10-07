@@ -1,7 +1,6 @@
 import { productos } from "./data.js";
 import { addToCart, syncCartCount } from "./carrito-utils.js";
 
-// Ajusta la ruta de la imagen según la ubicación del HTML
 function rutaImg(img) { 
   if (img.startsWith("/")) return img;
   return location.pathname.includes("/pages/")
@@ -9,7 +8,6 @@ function rutaImg(img) {
     : img;
 }
 
-// Crea la tarjeta HTML para un producto
 function cardProducto(p) {
   const div = document.createElement("div");
   div.className = "producto";
@@ -25,7 +23,6 @@ function cardProducto(p) {
   return div;
 }
 
-// Llenar el select de categorías
 function llenarFiltroCategorias() {
   const filtro = document.getElementById("filtroCategoria");
   if (!filtro) return;
@@ -34,7 +31,12 @@ function llenarFiltroCategorias() {
     categorias.map(cat => `<option value="${cat}">${cat}</option>`).join("");
 }
 
-// Renderiza la grilla de productos según filtro
+function actualizarContador(cantidad) {
+  const el = document.getElementById("contador");
+  if (!el) return;
+  el.textContent = `Mostrando ${cantidad} producto${cantidad === 1 ? "" : "s"}`;
+}
+
 function renderProductos(filtrarCategoria = "todas") {
   const cont = document.getElementById("gridProductos");
   cont.innerHTML = "";
@@ -43,9 +45,9 @@ function renderProductos(filtrarCategoria = "todas") {
     lista = productos.filter(p => p.categoria === filtrarCategoria);
   }
   lista.forEach((p) => cont.appendChild(cardProducto(p)));
+  actualizarContador(lista.length);
 }
 
-// Maneja clicks en los botones de agregar al carrito
 function manejarAgregarCarrito() {
   const cont = document.getElementById("gridProductos");
   cont.addEventListener("click", (e) => {
@@ -56,23 +58,25 @@ function manejarAgregarCarrito() {
     btn.textContent = "Agregado ✓";
     setTimeout(() => (btn.textContent = "Agregar al carrito"), 900); 
     syncCartCount();
-    // Vuelve a renderizar para actualizar stock y botones
     const filtro = document.getElementById("filtroCategoria");
     renderProductos(filtro.value);
   });
 }
 
-// Evento para el filtro
 function manejarFiltro() {
   const filtro = document.getElementById("filtroCategoria");
   filtro.addEventListener("change", () => {
+    localStorage.setItem("filtroCategoriaSel", filtro.value);
     renderProductos(filtro.value);
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   llenarFiltroCategorias();
-  renderProductos();
+  const filtro = document.getElementById("filtroCategoria");
+  const guardada = localStorage.getItem("filtroCategoriaSel") || "todas";
+  if (filtro) filtro.value = guardada;
+  renderProductos(guardada);
   manejarAgregarCarrito();
   manejarFiltro();
   syncCartCount();

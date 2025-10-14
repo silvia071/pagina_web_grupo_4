@@ -1,57 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inicio | Bazar Home</title>
-  <meta name="description" content="Bazar Home: productos seleccionados para el hogar, organización y mucho más." />
-  <meta name="keywords" content="hogar, bazar, organización, cocina, decoración, productos" />
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio | Bazar Home</title>
+    <meta
+      name="description"
+      content="Bazar Home: productos seleccionados para el hogar, organización y mucho más."
+    />
+    <meta
+      name="keywords"
+      content="hogar, bazar, organización, cocina, decoración, productos"
+    />
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
 
-<body>
-  <a href="#main" class="sr-only" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Saltar al contenido</a>
+  <body>
+    <header>
+      <h1>Bazar Home</h1>
+      <nav aria-label="Navegación principal">
+        <button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="mainmenu"
+          aria-label="Abrir menú"
+        >
+          ☰
+        </button>
+        <ul id="mainmenu">
+          <li><a href="index.html" aria-current="page">Inicio</a></li>
+          <li><a href="pages/productos.html">Productos</a></li>
+          <li><a href="pages/contacto.html">Contacto</a></li>
+          <li>
+            <a href="pages/carrito.html">
+              <img
+                src="assets/img/carrito.svg"
+                alt=""
+                class="icono-carrito"
+                aria-hidden="true"
+              />
+              Carrito (<span id="cartCount">0</span>)
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-  <header>
-    <h1>Bazar Home</h1>
-    <nav aria-label="Navegación principal">
-      <button class="menu-toggle" aria-expanded="false" aria-controls="mainmenu" aria-label="Abrir menú">☰</button>
-      <ul id="mainmenu">
-        <li><a href="index.html" aria-current="page">Inicio</a></li>
-        <li><a href="pages/productos.html">Productos</a></li>
-        <li>
-          <a href="pages/carrito.html">
-            <img src="assets/img/carrito.svg" alt="" class="icono-carrito" aria-hidden="true">
-            Carrito (<span id="cartCount">0</span>)
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+    <main id="main">
+      <section id="hero">
+        <h2>Bienvenidos a Bazar Home</h2>
+        <p>Productos seleccionados de hogar, organización y mucho más.</p>
+      </section>
 
-  <main id="main">
-    <section id="hero">
-      <h2>Bienvenidos a Bazar Home</h2>
-      <p>Productos seleccionados de hogar, organización y mucho más.</p>
-    </section>
+      <section id="destacados" aria-labelledby="titulo-destacados">
+        <h2 id="titulo-destacados">Destacados</h2>
+        <section class="cards grid"></section>
+      </section>
+    </main>
 
-    <section id="destacados" aria-labelledby="titulo-destacados">
-      <h2 id="titulo-destacados">Destacados</h2>
-      <section class="cards grid"></section>
-    </section>
-  </main>
+    <footer>
+      <p>&copy; 2025 Bazar Home</p>
+    </footer>
 
-  <footer>
-    <p>&copy; 2025 Bazar Home</p>
-  </footer>
+    <script type="module" src="assets/js/carrito-utils.js"></script>
+    <script type="module" src="assets/js/index.js"></script>
+    <script type="module" src="assets/js/menu.js"></script>
 
-  <script type="module" src="assets/js/carrito-utils.js"></script>
-  <script type="module" src="assets/js/index.js"></script>
-  <script type="module" src="assets/js/menu.js"></script>
-
-  <noscript>
-    <p style="text-align:center; padding:1rem;">Para ver los productos destacados, habilitá JavaScript en tu navegador.</p>
-  </noscript>
-</body>
+    <noscript>
+      <p style="text-align: center; padding: 1rem">
+        Para ver los productos destacados, habilitá JavaScript en tu navegador.
+      </p>
+    </noscript>
+  </body>
 </html>

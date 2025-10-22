@@ -56,13 +56,9 @@ function ensureToastHost() {
     box = document.createElement("div");
     box.id = "toastBox";
 
-    // Reemplazo: usar clase CSS en vez de estilos inline
-    box.className = "toast-box";
+    box.className = "toast-box"; // Añadido: clase para estilos externos
 
-    document.body.appendChild(box);
-
-    // Eliminado: Object.assign(box.style, {...}) y todo el bloque que creaba
-    // el <style id="toast-styles"> con las reglas.
+    document.body.appendChild(box); 
   }
   return box;
 }

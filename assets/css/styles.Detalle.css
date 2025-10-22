@@ -81,7 +81,7 @@ main {
   width: 100%;
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
   padding: 2rem 1.5rem;
   margin: 2rem 0;
 }
@@ -97,7 +97,7 @@ main {
   width: 100%;
   height: auto;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 #detalleProducto p,
@@ -145,7 +145,8 @@ footer a:hover {
 }
 
 /* MEDIA QUERIES – RESPONSIVIDAD DEL SITIO */
-@media (max-width: 37.5rem) { /* 600px */
+@media (max-width: 37.5rem) {
+  /* 600px */
   header h1 {
     font-size: 1.6rem;
   }
@@ -196,7 +197,8 @@ footer a:hover {
   }
 }
 
-@media (max-width: 56.25rem) { /* 900px */
+@media (max-width: 56.25rem) {
+  /* 900px */
   header h1 {
     font-size: 1.8rem;
   }
@@ -248,7 +250,8 @@ footer a:hover {
   }
 }
 
-@media (max-width: 75rem) { /* 1200px */
+@media (max-width: 75rem) {
+  /* 1200px */
   body {
     font-size: 1rem;
   }
@@ -256,4 +259,12 @@ footer a:hover {
   header h1 {
     font-size: 2rem;
   }
+}
+.btn-back {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 8px;
 }

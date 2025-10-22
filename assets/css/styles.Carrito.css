@@ -12,7 +12,7 @@ td {
 }
 
 thead th {
-  background: #f7f7f7;
+  background: #040404;
 }
 
 #totales {
@@ -26,7 +26,6 @@ thead th {
   border: 1px solid #ffd9b3;
   border-radius: 8px;
 }
-
 
 .icono-carrito {
   width: 26px;
@@ -50,8 +49,8 @@ thead th {
 
 /* MEDIA QUERIES – RESPONSIVIDAD DEL SITIO*/
 
-
-@media (max-width: 37.5rem) { /* 600px */
+@media (max-width: 37.5rem) {
+  /* 600px */
   header h1 {
     font-size: 1.6rem;
   }
@@ -97,8 +96,8 @@ thead th {
   }
 }
 
-
-@media (max-width: 56.25rem) { /* 900px */
+@media (max-width: 56.25rem) {
+  /* 900px */
   header h1 {
     font-size: 1.8rem;
   }
@@ -146,8 +145,8 @@ thead th {
   }
 }
 
-
-@media (max-width: 75rem) { /* 1200px */
+@media (max-width: 75rem) {
+  /* 1200px */
   body {
     font-size: 1rem;
   }

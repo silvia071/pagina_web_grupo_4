@@ -36,10 +36,13 @@
       .form-control:focus {
         box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
       }
+    
+    .invalid-feedback { display: block; }
+    .valid-feedback { display: none; }
     </style>
   </head>
   <body>
-    <!-- Barra superior fina (como en la captura) -->
+    <!-- Barra superior fina -->
     <div class="topbar w-100"></div>
 
     <main class="container py-5">
@@ -67,7 +70,9 @@
                 h hábiles.
               </div>
 
+              <!-- novalidate para usar validación JS + Bootstrap -->
               <form id="contactForm" class="needs-validation" novalidate>
+                <!--Nombre--> 
                 <div class="mb-3">
                   <label for="name" class="form-label">Nombre</label>
                   <input
@@ -77,14 +82,18 @@
                     name="name"
                     placeholder="Tu nombre completo"
                     required
+                    minlength="3"
+                    maxlength="50"
+                    pattern="^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]{3,50}$"
+                    aria-describedby="nameError"
                   />
-                  <div class="invalid-feedback">Ingresá tu nombre.</div>
+                  <div id="nameError" class="invalid-feedback"></div>
+                  <div class="valid-feedback">¡Se ve bien!</div>
                 </div>
 
+                <!-- Email -->
                 <div class="mb-3">
-                  <label for="email" class="form-label"
-                    >Correo electrónico</label
-                  >
+                  <label for="email" class="form-label">Correo electrónico</label>
                   <input
                     type="email"
                     class="form-control"
@@ -92,10 +101,13 @@
                     name="email"
                     placeholder="nombre@ejemplo.com"
                     required
+                    aria-describedby="emailError"
                   />
-                  <div class="invalid-feedback">Ingresá un email válido.</div>
+                  <div id="emailError" class="invalid-feedback"></div>
+                  <div class="valid-feedback">¡Correo válido!</div>
                 </div>
 
+                <!-- Mensaje -->
                 <div class="mb-4">
                   <label for="message" class="form-label">Mensaje</label>
                   <textarea
@@ -105,8 +117,11 @@
                     rows="6"
                     placeholder="Escribí tu consulta..."
                     required
+                    minlength="10"
+                    aria-describedby="messageError"
                   ></textarea>
-                  <div class="invalid-feedback">Escribí tu mensaje.</div>
+                  <div id="messageError" class="invalid-feedback"></div>
+                  <div class="valid-feedback">¡Perfecto!</div>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg w-100">
@@ -122,28 +137,9 @@
     <!-- Bootstrap JS (Bundle con Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-      // Validación Bootstrap + simulación de envío
-      (() => {
-        "use strict";
-        const form = document.getElementById("contactForm");
-        const alertBox = document.getElementById("formAlert");
-        form.addEventListener(
-          "submit",
-          (event) => {
-            event.preventDefault();
-            if (!form.checkValidity()) {
-              form.classList.add("was-validated");
-              return;
-            }
-            alertBox.classList.remove("d-none");
-            form.reset();
-            form.classList.remove("was-validated");
-            setTimeout(() => alertBox.classList.add("d-none"), 5000);
-          },
-          false
-        );
-      })();
-    </script>
+    <!-- Tu validación personalizada (ruta para /pages/) -->
+    <script src="../assets/js/validacion-contacto.js" defer></script>
   </body>
 </html>
+
+

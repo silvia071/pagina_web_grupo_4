@@ -1,46 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inicio | Bazar Home</title>
-  <meta name="description" content="Bazar Home: productos seleccionados para el hogar, organización y mucho más." />
-  <meta name="keywords" content="hogar, bazar, organización, cocina, decoración, productos" />
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
- <link rel="stylesheet" href="../assets/css/styles.Detalle.css" />
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio | Bazar Home</title>
+    <meta
+      name="description"
+      content="Bazar Home: productos seleccionados para el hogar, organización y mucho más."
+    />
+    <meta
+      name="keywords"
+      content="hogar, bazar, organización, cocina, decoración, productos"
+    />
+    <link rel="stylesheet" href="../assets/css/styles.Detalle.css" />
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon" />
+  </head>
 
-<body>
-  <header>
-    <h1>Bazar Home</h1>
-    <nav aria-label="Navegación principal">
-      <button class="menu-toggle" aria-expanded="false" aria-controls="mainmenu" aria-label="Abrir menú">☰</button>
-      <ul id="mainmenu">
-        <li><a href="../index.html">Inicio</a></li>
-        <li><a href="productos.html">Productos</a></li>
-        <li>
-          <a href="carrito.html">
-            <img src="../assets/img/carrito.svg" alt="" class="icono-carrito" aria-hidden="true">
-            Carrito (<span id="cartCount">0</span>)
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <body>
+    <header>
+      <h1>Bazar Home</h1>
+      <nav aria-label="Navegación principal">
+        <button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="mainmenu"
+          aria-label="Abrir menú"
+        >
+          ☰
+        </button>
+        <ul id="mainmenu">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li>
+            <a href="carrito.html">
+              <img
+                src="../assets/img/carrito.svg"
+                alt=""
+                class="icono-carrito"
+                aria-hidden="true"
+              />
+              Carrito (<span id="cartCount">0</span>)
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-  <main>
-    <section id="detalleProducto">
-    <div id="detalleProducto"></div>
-    <p style="margin-top:1rem;"><a href="productos.html">← Volver a productos</a></p>
-    </section>
-  </main>
+    <main>
+      <section id="detalleProducto">
+        <div id="detalleProducto"></div>
+        <p style="margin-top: 1rem">
+          <a href="productos.html">← Volver a productos</a>
+        </p>
+      </section>
+    </main>
 
-  <footer>
-    <p>&copy; 2025 Bazar Home</p>
-  </footer>
+    <footer>
+      <p>&copy; 2025 Bazar Home</p>
+    </footer>
 
-  <script type="module" src="../assets/js/carrito-utils.js"></script>
-  <script type="module" src="../assets/js/detalles.js"></script>
-  <script type="module" src="../assets/js/menu.js"></script>
-</body>
+    <script type="module" src="../assets/js/carrito-utils.js"></script>
+    <script type="module" src="../assets/js/detalles.js"></script>
+    <script type="module" src="../assets/js/menu.js"></script>
+  </body>
 </html>

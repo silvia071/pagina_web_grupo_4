@@ -55,44 +55,14 @@ function ensureToastHost() {
   if (!box) {
     box = document.createElement("div");
     box.id = "toastBox";
-    Object.assign(box.style, {
-      position: "fixed",
-      right: "16px",
-      top: "16px",
-      display: "flex",
-      flexDirection: "column",
-      gap: "10px",
-      zIndex: 99999,
-      pointerEvents: "none",
-      maxWidth: "360px",
-    });
+
+    // Reemplazo: usar clase CSS en vez de estilos inline
+    box.className = "toast-box";
+
     document.body.appendChild(box);
 
-    const style = document.createElement("style");
-    style.id = "toast-styles";
-    style.textContent = `
-      .toast {
-        pointer-events: auto;
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        padding: 10px 12px;
-        border-radius: 10px;
-        box-shadow: 0 6px 18px rgba(0,0,0,.12);
-        font-size: 14px;
-        color: #042028;
-        transform-origin: right top;
-        animation: toast-in .18s ease-out;
-      }
-      .toast.toast-success { background: linear-gradient(180deg,#dff7e6,#c6f0d3); border: 1px solid #86d27c; }
-      .toast.toast-warning { background: linear-gradient(180deg,#fff7ea,#fff0d8); border: 1px solid #e0b84d; }
-      .toast .toast-icon { font-weight:700; width:26px; text-align:center; }
-      .toast .toast-text { flex:1; line-height:1.1; }
-      .toast .toast-close { margin-left:8px; background:transparent; border:0; cursor:pointer; font-size:16px; color:rgba(0,0,0,.6); }
-      @keyframes toast-in { from { transform: translateX(12px) scale(.98); opacity:0 } to { transform: translateX(0) scale(1); opacity:1 } }
-      @keyframes toast-out { from { opacity:1; transform: scale(1) } to { opacity:0; transform: scale(.98) } }
-    `;
-    document.head.appendChild(style);
+    // Eliminado: Object.assign(box.style, {...}) y todo el bloque que creaba
+    // el <style id="toast-styles"> con las reglas.
   }
   return box;
 }

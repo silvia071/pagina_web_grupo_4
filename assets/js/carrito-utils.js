@@ -1,3 +1,4 @@
+// ...existing code...
 import { productos, guardarProductos } from "./data.js";
 
 /* -------------------------
@@ -25,7 +26,9 @@ export function syncCartCount() {
     .forEach((el) => (el.textContent = count));
 }
 
-// Normaliza el stock a número (o null si no es válido)
+/* -------------------------
+   Productos / stock
+   ------------------------- */
 function normalizeStock(p) {
   if (!p) return;
   if (p.stock == null) {
@@ -38,7 +41,6 @@ function normalizeStock(p) {
   }
 }
 
-// Productos
 export function findProduct(id) {
   const p = productos.find((x) => String(x.id) === String(id));
   normalizeStock(p);
@@ -46,7 +48,7 @@ export function findProduct(id) {
 }
 
 /* -------------------------
-   Toast mínimo (visual)
+   Toast visual
    ------------------------- */
 function ensureToastHost() {
   let box = document.getElementById("toastBox");
@@ -55,33 +57,81 @@ function ensureToastHost() {
     box.id = "toastBox";
     Object.assign(box.style, {
       position: "fixed",
-      right: "12px",
-      bottom: "12px",
+      right: "16px",
+      top: "16px",
       display: "flex",
       flexDirection: "column",
-      gap: "8px",
-      zIndex: 9999,
+      gap: "10px",
+      zIndex: 99999,
+      pointerEvents: "none",
+      maxWidth: "360px",
     });
     document.body.appendChild(box);
+
+    const style = document.createElement("style");
+    style.id = "toast-styles";
+    style.textContent = `
+      .toast {
+        pointer-events: auto;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        padding: 10px 12px;
+        border-radius: 10px;
+        box-shadow: 0 6px 18px rgba(0,0,0,.12);
+        font-size: 14px;
+        color: #042028;
+        transform-origin: right top;
+        animation: toast-in .18s ease-out;
+      }
+      .toast.toast-success { background: linear-gradient(180deg,#dff7e6,#c6f0d3); border: 1px solid #86d27c; }
+      .toast.toast-warning { background: linear-gradient(180deg,#fff7ea,#fff0d8); border: 1px solid #e0b84d; }
+      .toast .toast-icon { font-weight:700; width:26px; text-align:center; }
+      .toast .toast-text { flex:1; line-height:1.1; }
+      .toast .toast-close { margin-left:8px; background:transparent; border:0; cursor:pointer; font-size:16px; color:rgba(0,0,0,.6); }
+      @keyframes toast-in { from { transform: translateX(12px) scale(.98); opacity:0 } to { transform: translateX(0) scale(1); opacity:1 } }
+      @keyframes toast-out { from { opacity:1; transform: scale(1) } to { opacity:0; transform: scale(.98) } }
+    `;
+    document.head.appendChild(style);
   }
   return box;
 }
 
-export function toast(msg, type = "success") {
+export function toast(msg, type = "success", opts = {}) {
   const box = ensureToastHost();
   const n = document.createElement("div");
-  n.textContent = msg;
-  Object.assign(n.style, {
-    padding: "10px 12px",
-    borderRadius: "8px",
-    background: type === "warning" ? "#fff4e5" : "#d1f7c4",
-    border: "1px solid " + (type === "warning" ? "#e0b84d" : "#86d27c"),
-    boxShadow: "0 6px 18px rgba(0,0,0,.15)",
-    fontSize: "14px",
-    color: "#000",
+  n.className = "toast toast-" + (type === "warning" ? "warning" : "success");
+  n.setAttribute("role", "status");
+  n.setAttribute("aria-live", type === "warning" ? "assertive" : "polite");
+  n.innerHTML = `
+    <div class="toast-icon">${type === "warning" ? "⚠️" : "✓"}</div>
+    <div class="toast-text">${String(msg)}</div>
+    <button class="toast-close" aria-label="Cerrar">✕</button>
+  `;
+  const closeBtn = n.querySelector(".toast-close");
+  let autoTimer = null;
+
+  function close(animated = true) {
+    if (autoTimer) clearTimeout(autoTimer);
+    if (animated) {
+      n.style.animation = "toast-out .12s ease-in forwards";
+      setTimeout(() => n.remove(), 140);
+    } else n.remove();
+  }
+
+  closeBtn.addEventListener("click", () => close());
+  n.addEventListener("mouseenter", () => {
+    if (autoTimer) clearTimeout(autoTimer);
   });
+  n.addEventListener("mouseleave", () => {
+    if (opts.duration !== 0)
+      autoTimer = setTimeout(() => close(), opts.duration ?? 3500);
+  });
+
   box.appendChild(n);
-  setTimeout(() => n.remove(), 1800);
+  if (opts.duration !== 0)
+    autoTimer = setTimeout(() => close(), opts.duration ?? 3500);
+  return n;
 }
 
 /* -------------------------
@@ -89,31 +139,18 @@ export function toast(msg, type = "success") {
    ------------------------- */
 export function addToCart(id, qty = 1) {
   const p = findProduct(id);
-  console.log("[addToCart] start", { id, qty, producto: p });
   if (!p) {
-    toast("Producto no encontrado", "warning");
-    console.log("[addToCart] producto no encontrado");
     return { ok: false, error: "Producto no encontrado" };
   }
 
   const stockNum = p.stock == null ? null : Number(p.stock);
-  console.log(
-    "[addToCart] stockNum:",
-    stockNum,
-    "tipo original:",
-    typeof p.stock
-  );
 
   if (stockNum !== null && Number.isFinite(stockNum) && stockNum <= 0) {
-    // mostramos toast (visible) y devolvemos error
-    toast("No hay stock disponible", "warning");
-    console.log("[addToCart] sin stock (<=0)");
     return { ok: false, error: "No hay stock disponible" };
   }
 
   if (stockNum !== null && Number.isFinite(stockNum) && stockNum < qty) {
     toast("No hay stock suficiente", "warning");
-    console.log("[addToCart] stock insuficiente", stockNum);
     return { ok: false, error: "No hay stock suficiente" };
   }
 
@@ -129,8 +166,7 @@ export function addToCart(id, qty = 1) {
 
   guardarProductos();
   saveCart(cart);
-  toast("Producto agregado correctamente", "success");
-  console.log("[addToCart] done, producto after:", p);
+
   return { ok: true };
 }
 
@@ -145,14 +181,14 @@ export function changeQty(id, delta) {
   if (nueva < 1) return { ok: false, toRemove: true };
 
   if (delta > 0) {
-    if (p && typeof p.stock === "number" && p.stock < delta)
+    const stockNum = p && p.stock != null ? Number(p.stock) : null;
+    if (stockNum !== null && Number.isFinite(stockNum) && stockNum < delta)
       return { ok: false, error: "No hay stock suficiente" };
-    if (p && typeof p.stock === "number") {
-      p.stock -= delta;
-      if (p.stock < 0) p.stock = 0;
+    if (p && stockNum !== null && Number.isFinite(stockNum)) {
+      p.stock = Math.max(0, stockNum - delta);
     }
   } else if (delta < 0) {
-    if (p && typeof p.stock === "number") p.stock += -delta;
+    if (p && p.stock != null) p.stock = Number(p.stock) + Math.abs(delta);
   }
 
   it.cantidad = nueva;
@@ -168,7 +204,7 @@ export function removeFromCart(id) {
 
   const it = cart[idx];
   const p = findProduct(id);
-  if (p && typeof p.stock === "number") p.stock += it.cantidad;
+  if (p && p.stock != null) p.stock = Number(p.stock) + it.cantidad;
   cart.splice(idx, 1);
 
   saveCart(cart);
@@ -181,7 +217,7 @@ export function clearCart() {
   const cart = getCart();
   cart.forEach((it) => {
     const p = findProduct(it.id);
-    if (p && typeof p.stock === "number") p.stock += it.cantidad;
+    if (p && p.stock != null) p.stock = Number(p.stock) + it.cantidad;
   });
   localStorage.removeItem(KEY);
   guardarProductos();
@@ -220,8 +256,8 @@ function renderCarrito() {
   cart.forEach((item) => {
     const tr = document.createElement("tr");
     const prod = findProduct(item.id);
-    const disp = typeof prod?.stock === "number" ? prod.stock : null;
-    const plusDisabled = disp !== null && disp <= 0 ? "disabled" : "";
+    const disp = prod && prod.stock != null ? Number(prod.stock) : null;
+    const plusDisabledAttr = disp !== null && disp <= 0 ? "disabled" : "";
 
     tr.dataset.id = item.id;
     tr.innerHTML = `
@@ -232,7 +268,7 @@ function renderCarrito() {
         <input class="qty-input" value="${
           item.cantidad
         }" readonly aria-label="Cantidad">
-        <button class="btn-mas" data-accion="mas" ${plusDisabled} aria-label="Aumentar">+</button>
+        <button class="btn-mas" data-accion="mas" ${plusDisabledAttr} aria-label="Aumentar">+</button>
         ${disp !== null ? `<small class="disp">Disp: ${disp}</small>` : ""}
       </td>
       <td>$${(item.precio * item.cantidad).toLocaleString("es-AR")}</td>
@@ -249,74 +285,87 @@ function renderCarrito() {
    Eventos de la página carrito
    ------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
-  const carritoBody = document.getElementById("carritoBody");
-  if (carritoBody) {
-    carritoBody.addEventListener("click", (e) => {
-      const btn = e.target.closest("button[data-accion]");
-      if (!btn) return;
+  try {
+    const carritoBody = document.getElementById("carritoBody");
 
-      const fila = btn.closest("tr[data-id]");
-      const id = fila?.dataset.id;
-      const acc = btn.dataset.accion;
+    if (carritoBody) {
+      carritoBody.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-accion]");
+        if (!btn) return;
 
-      if (acc === "mas") {
-        const r = changeQty(id, +1);
-        if (!r.ok) {
-          if (r.error) toast(r.error, "warning");
-          return;
-        }
-        renderCarrito();
-      }
+        const fila = btn.closest("tr[data-id]");
+        const id = fila?.dataset.id;
+        const acc = btn.dataset.accion;
 
-      if (acc === "menos") {
-        const r = changeQty(id, -1);
-        if (r?.toRemove) {
-          if (confirm("¿Eliminar este producto del carrito?")) {
-            removeFromCart(id);
+        try {
+          if (acc === "mas") {
+            const r = changeQty(id, +1);
+            if (!r.ok) {
+              if (r.error) toast(r.error, "warning");
+              return;
+            }
             renderCarrito();
+            return;
           }
-          return;
-        }
-        if (!r.ok) {
-          if (r.error) toast(r.error, "warning");
-          return;
-        }
-        renderCarrito();
-      }
 
-      if (acc === "eliminar") {
-        if (confirm("¿Eliminar este producto del carrito?")) {
-          removeFromCart(id);
+          if (acc === "menos") {
+            const r = changeQty(id, -1);
+            if (r?.toRemove) {
+              if (confirm("¿Eliminar este producto del carrito?")) {
+                removeFromCart(id);
+                renderCarrito();
+              }
+              return;
+            }
+            if (!r.ok) {
+              if (r.error) toast(r.error, "warning");
+              return;
+            }
+            renderCarrito();
+            return;
+          }
+
+          if (acc === "eliminar") {
+            if (confirm("¿Eliminar este producto del carrito?")) {
+              removeFromCart(id);
+              renderCarrito();
+            }
+            return;
+          }
+        } catch (innerErr) {
+          console.error("[carrito-body handler] error:", innerErr);
+        }
+      });
+    }
+
+    const vaciarBtn = document.getElementById("vaciarCarrito");
+    if (vaciarBtn) {
+      vaciarBtn.addEventListener("click", () => {
+        if (!getCart().length) return;
+        if (confirm("¿Está seguro de vaciar el carrito?")) {
+          clearCart();
           renderCarrito();
+          toast("Carrito vaciado", "success");
         }
-      }
-    });
-  }
+      });
+    }
 
-  const vaciarBtn = document.getElementById("vaciarCarrito");
-  if (vaciarBtn) {
-    vaciarBtn.addEventListener("click", () => {
-      if (!getCart().length) return;
-      if (confirm("¿Está seguro de vaciar el carrito?")) {
-        clearCart();
-        renderCarrito();
-        toast("Carrito vaciado", "success");
-      }
-    });
-  }
+    const finalizarBtn = document.getElementById("finalizarCompra");
+    if (finalizarBtn) {
+      finalizarBtn.addEventListener("click", () => {
+        if (!getCart().length) {
+          toast("Tu carrito está vacío", "warning");
+          return;
+        }
+        toast("Simulación: finalizar compra", "success");
+      });
+    }
 
-  const finalizarBtn = document.getElementById("finalizarCompra");
-  if (finalizarBtn) {
-    finalizarBtn.addEventListener("click", () => {
-      if (!getCart().length) {
-        toast("Tu carrito está vacío", "warning");
-        return;
-      }
-      toast("Simulación: finalizar compra", "success");
-    });
+    // render inicial
+    renderCarrito();
+    syncCartCount();
+  } catch (e) {
+    console.error("[carrito-utils] init error:", e);
   }
-
-  // render inicial
-  renderCarrito();
-  syncCartCount();
 });
+// ...existing code...

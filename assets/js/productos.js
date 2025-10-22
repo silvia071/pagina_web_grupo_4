@@ -1,5 +1,5 @@
 import { productos } from "./data.js";
-import { addToCart, syncCartCount } from "./carrito-utils.js";
+import { addToCart, syncCartCount, toast } from "./carrito-utils.js";
 
 function rutaImg(img) {
   if (!img) return "";
@@ -19,9 +19,9 @@ function cardProducto(p) {
     <p><strong>Precio: $${p.precio.toLocaleString("es-AR")}</strong></p>
     <p>${p.descripcion}</p>
     <p>Categoría: ${p.categoria} • Stock: ${stockNum ?? "—"}</p>
-    <button class="btn-add" data-id="${p.id}" ${
-    stockNum === 0 ? "disabled" : ""
-  }>Agregar al carrito</button>
+    <button class="btn-add" data-id="${p.id}" data-stock="${stockNum ?? ""}">
+      ${stockNum === 0 ? "Sin stock" : "Agregar al carrito"}
+    </button>
     <a href="detalle.html?id=${
       p.id
     }" class="btn-detalle" target="_blank"> Ver detalle</a>
@@ -62,12 +62,26 @@ function manejarAgregarCarrito() {
   cont.addEventListener("click", (e) => {
     const btn = e.target.closest(".btn-add");
     if (!btn) return;
+
+    const stockAttr = btn.dataset.stock;
+    const stockNum = stockAttr === "" ? null : Number(stockAttr);
+    console.log(
+      "[productos] click btn, id:",
+      btn.dataset.id,
+      "stockAttr:",
+      stockAttr,
+      "stockNum:",
+      stockNum
+    );
+
     const res = addToCart(btn.dataset.id, 1);
+    console.log("[productos] addToCart resultado:", res);
     if (!res.ok) {
-      // mostrar mensaje visible (alert) — podés reemplazar por toast o inline
-      alert(res.error || "Error al agregar");
+      toast(res.error || "Error al agregar", "warning");
       return;
     }
+    toast("Producto agregado correctamente", "success");
+
     btn.textContent = "Agregado ✓";
     setTimeout(() => (btn.textContent = "Agregar al carrito"), 900);
     syncCartCount();

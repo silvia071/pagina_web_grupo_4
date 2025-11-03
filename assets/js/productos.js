@@ -109,3 +109,62 @@ document.addEventListener("DOMContentLoaded", () => {
   manejarFiltro();
   syncCartCount();
 });
+
+// fromRow y toRow con producto real del catálogo
+
+class Producto {
+  constructor(id, nombre, precio, stock) {
+    this.id = id;
+    this.nombre = nombre;
+    this.precio = Number(precio);
+    // preserva null/undefined; si viene valor, lo numera
+    this.stock = stock == null ? null : Number(stock);
+  }
+
+  static fromRow(row) {
+    return new Producto(row.id, row.nombre, row.precio, row.stock);
+  }
+
+  
+  toRow() {
+    return {
+      id: this.id,
+      nombre: this.nombre,
+      precio: this.precio,
+      stock: this.stock
+    };
+  }
+}
+
+// Simulamos la fila que vendría de la BD 
+const row = {
+  id: "101",
+  nombre: "Bowl de acero inoxidable",
+  descripcion: "Bowl de acero inoxidable 24 cm, plateado.",
+  detalle:
+    "Bowl de acero inoxidable 24 cm, plateado. Ideal para mezclar ingredientes en la cocina o para servir ensaladas y otros alimentos. Resistente y duradero, fácil de limpiar y apto para uso diario.",
+  categoria: "cocina",
+  precio: 10000,
+  stock: 8,
+  img: "assets/img/Bowl.jpg"
+};
+
+// Creamos el objeto Producto desde la fila
+const producto = Producto.fromRow(row);
+
+
+const originalSnap = producto.toRow(); 
+console.log("Producto ", originalSnap);
+
+// Modificamos el stock (solo si hay stock numérico)
+if (producto.stock != null && producto.stock > 0) {
+  producto.stock -= 1;
+}
+
+
+const actualizadoSnap = producto.toRow();
+console.log(actualizadoSnap);
+
+
+
+

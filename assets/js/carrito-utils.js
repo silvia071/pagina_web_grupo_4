@@ -1,9 +1,6 @@
-// ...existing code...
 import { productos, guardarProductos } from "./data.js";
 
-/* -------------------------
-   Utilidades de carrito
-   ------------------------- */
+
 const KEY = "carrito";
 
 export function getCart() {
@@ -26,9 +23,7 @@ export function syncCartCount() {
     .forEach((el) => (el.textContent = count));
 }
 
-/* -------------------------
-   Productos / stock
-   ------------------------- */
+
 function normalizeStock(p) {
   if (!p) return;
   if (p.stock == null) {
@@ -47,16 +42,14 @@ export function findProduct(id) {
   return p;
 }
 
-/* -------------------------
-   Toast visual
-   ------------------------- */
+
 function ensureToastHost() {
   let box = document.getElementById("toastBox");
   if (!box) {
     box = document.createElement("div");
     box.id = "toastBox";
 
-    box.className = "toast-box"; // Añadido: clase para estilos externos
+    box.className = "toast-box"; 
 
     document.body.appendChild(box); 
   }
@@ -100,9 +93,7 @@ export function toast(msg, type = "success", opts = {}) {
   return n;
 }
 
-/* -------------------------
-   Operaciones de carrito
-   ------------------------- */
+
 export function addToCart(id, qty = 1) {
   const p = findProduct(id);
   if (!p) {
@@ -190,9 +181,7 @@ export function clearCart() {
   syncCartCount();
 }
 
-/* -------------------------
-   Totales y render carrito
-   ------------------------- */
+
 export function cartTotal() {
   return getCart().reduce((acc, it) => acc + it.precio * it.cantidad, 0);
 }
@@ -247,9 +236,7 @@ function renderCarrito() {
   syncCartCount();
 }
 
-/* -------------------------
-   Eventos de la página carrito
-   ------------------------- */
+
 document.addEventListener("DOMContentLoaded", () => {
   try {
     const carritoBody = document.getElementById("carritoBody");
@@ -327,11 +314,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // render inicial
+   
     renderCarrito();
     syncCartCount();
   } catch (e) {
     console.error("[carrito-utils] init error:", e);
   }
 });
-// ...existing code...
+

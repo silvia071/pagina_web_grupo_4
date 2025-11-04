@@ -1,4 +1,3 @@
-// detalle.js — con avisos/toasts y actualización de stock en vivo
 import {
   addToCart,
   findProduct,
@@ -23,6 +22,7 @@ function rutaImg(img) {
 
 function showInlineMsg(container, text, type = "warning") {
   if (!container) return;
+
   let el = container.querySelector("#detalleMsg");
   if (!el) {
     el = document.createElement("div");
@@ -30,20 +30,14 @@ function showInlineMsg(container, text, type = "warning") {
     el.setAttribute("aria-live", "polite");
     container.appendChild(el);
   }
-  el.textContent = text;
-  Object.assign(el.style, {
-    display: "inline-block",
-    padding: "8px 10px",
-    marginTop: "8px",
-    borderRadius: "6px",
-    background: type === "warning" ? "#fff4e5" : "#d1f7c4",
-    border: "1px solid " + (type === "warning" ? "#e0b84d" : "#86d27c"),
-    color: "#000",
-  });
+
+  el.textContent = text; 
+  el.className = type === "warning" ? "inline-msg warning" : "inline-msg success";
+
   clearTimeout(el._hideTimer);
   el._hideTimer = setTimeout(() => {
-    el.textContent = "";
-    el.style.cssText = "";
+    el.classList.add("hide"); 
+    setTimeout(() => el.remove(), 500);
   }, 2500);
 }
 
@@ -114,7 +108,6 @@ async function mostrarDetalle() {
     </div>
   `;
 
-  // Volver
   document.getElementById("btnVolver")?.addEventListener("click", () => {
     if (history.length > 1) return history.back();
     const ref = document.referrer;
@@ -131,27 +124,24 @@ async function mostrarDetalle() {
   const qtyInput = document.getElementById("qty");
   const stockEl = cont.querySelector(".stockVal");
 
-  // Desactivar si no hay stock
   if (btnAgregar && typeof stockNum === "number" && stockNum <= 0) {
     btnAgregar.disabled = true;
   }
 
   if (btnAgregar) {
     btnAgregar.addEventListener("click", () => {
-      // 1) cantidad pedida (mínimo 1)
+  
       const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
 
-      // 2) stock visible actual (lo que muestra la página)
       const visibleTxt = cont.querySelector(".stockVal")?.textContent ?? "";
       const visible = Number(visibleTxt);
       const tieneStockVisible = Number.isFinite(visible);
 
-      // 3) cantidad a tomar (cap a lo disponible en pantalla)
-      const disponible = tieneStockVisible ? visible : qty; // si no hay número visible, no capemos
+ 
+      const disponible = tieneStockVisible ? visible : qty;
       const tomar = tieneStockVisible ? Math.min(qty, disponible) : qty;
 
       if (tieneStockVisible && disponible <= 0) {
-        // ya no hay stock visible: desactivar y avisar
         btnAgregar.disabled = true;
         btnAgregar.textContent = "Sin stock";
         showInlineMsg(cont, "Producto sin stock", "warning");
@@ -159,7 +149,7 @@ async function mostrarDetalle() {
         return;
       }
 
-      // 4) agregar al carrito
+    
       const res = addToCart(producto.id, tomar);
       if (!res.ok) {
         showInlineMsg(cont, res.error ?? "Error al agregar", "warning");
@@ -167,12 +157,12 @@ async function mostrarDetalle() {
         return;
       }
 
-      // 5) avisos de éxito
+    
       showInlineMsg(cont, `Agregado al carrito (×${tomar}) ✓`, "success");
       toast?.(`Agregado al carrito (×${tomar}) ✓`, "success");
       syncCartCount?.();
 
-      // 6) actualizar stock en pantalla sin recargar
+     
       if (tieneStockVisible) {
         const nuevo = Math.max(0, disponible - tomar);
         const stockEl = cont.querySelector(".stockVal");
@@ -186,7 +176,6 @@ async function mostrarDetalle() {
         }
       }
 
-      // opcional: resetear cantidad a 1
       qtyInput.value = "1";
     });
   }

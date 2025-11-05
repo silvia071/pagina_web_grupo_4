@@ -83,30 +83,34 @@ async function mostrarDetalle() {
 
   const stockNum = producto.stock == null ? null : Number(producto.stock);
 
-  cont.innerHTML = `
-    <button id="btnVolver" class="btn-back" aria-label="Volver">← Volver</button>
-    <h2>${producto.nombre}</h2>
-    <img src="${rutaImg(producto.img)}" alt="${
-    producto.nombre
-  }" style="max-width:300px;" />
-    <p><strong>Precio:</strong> $${Number(producto.precio).toLocaleString(
-      "es-AR"
-    )}</p>
-    <p><strong>Detalle:</strong> ${producto.detalle}</p>
-    <p><strong>Categoría:</strong> ${producto.categoria}</p>
-    <p><strong>Stock:</strong> <span class="stockVal">${
-      stockNum ?? "—"
-    }</span></p>
-    <div class="agregar" style="margin-top:10px;">
-      <label for="qty">Cantidad:</label>
-      <input id="qty" type="number" min="1" value="1" style="width:64px; margin-left:8px;" />
-      <button id="btnAgregar" class="btn-add" style="margin-left:12px;">${
+cont.innerHTML = `
+  <h2>${producto.nombre}</h2>
+  <img src="${rutaImg(producto.img)}" alt="${
+  producto.nombre
+}" style="max-width:300px;" />
+  <p><strong>Precio:</strong> $${Number(producto.precio).toLocaleString(
+    "es-AR"
+  )}</p>
+  <p><strong>Detalle:</strong> ${producto.detalle}</p>
+  <p><strong>Categoría:</strong> ${producto.categoria}</p>
+  <p><strong>Stock:</strong> <span class="stockVal">${
+    stockNum ?? "—"
+  }</span></p>
+
+  <div class="agregar" style="margin-top:10px;">
+    <label for="qty">Cantidad:</label>
+    <input id="qty" type="number" min="1" value="1" style="width:64px; margin-left:8px;" />
+    <button id="btnAgregar" class="btn btn-primary btn-sm" style="margin-left:12px;">
+      ${
         typeof stockNum === "number" && stockNum <= 0
           ? "Sin stock"
           : "Agregar al carrito"
-      }</button>
-    </div>
-  `;
+      }
+    </button>
+    <button id="btnVolver" type="button" class="btn btn-outline-secondary btn-sm">Volver</button>
+  </div>
+`;
+
 
   document.getElementById("btnVolver")?.addEventListener("click", () => {
     if (history.length > 1) return history.back();

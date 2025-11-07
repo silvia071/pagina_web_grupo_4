@@ -17,6 +17,7 @@ export function getCart() {
 export function saveCart(cart) {
   localStorage.setItem(KEY, JSON.stringify(cart));
   syncCartCount();
+  updateCartSummary();
 }
 
 export function syncCartCount() {
@@ -55,10 +56,8 @@ function ensureToastHost() {
   if (!box) {
     box = document.createElement("div");
     box.id = "toastBox";
-
-    box.className = "toast-box"; // Añadido: clase para estilos externos
-
-    document.body.appendChild(box); 
+    box.className = "toast-box"; // estilos externos
+    document.body.appendChild(box);
   }
   return box;
 }
@@ -188,6 +187,7 @@ export function clearCart() {
   localStorage.removeItem(KEY);
   guardarProductos();
   syncCartCount();
+  updateCartSummary();
 }
 
 /* -------------------------
@@ -195,6 +195,17 @@ export function clearCart() {
    ------------------------- */
 export function cartTotal() {
   return getCart().reduce((acc, it) => acc + it.precio * it.cantidad, 0);
+}
+
+function itemsCount() {
+  return getCart().reduce((acc, it) => acc + it.cantidad, 0);
+}
+
+function updateCartSummary() {
+  const itemsEl = document.getElementById("summary-items");
+  const totalSpan = document.getElementById("total"); // lo usás en el HTML del panel
+  if (itemsEl) itemsEl.textContent = String(itemsCount());
+  if (totalSpan) totalSpan.textContent = cartTotal().toLocaleString("es-AR");
 }
 
 function renderCarrito() {
@@ -213,6 +224,7 @@ function renderCarrito() {
     if (tabla) tabla.hidden = true;
     if (totalEl) totalEl.textContent = "0";
     syncCartCount();
+    updateCartSummary();
     return;
   }
 
@@ -226,17 +238,22 @@ function renderCarrito() {
     const plusDisabledAttr = disp !== null && disp <= 0 ? "disabled" : "";
 
     tr.dataset.id = item.id;
+    tr.dataset.price = item.precio;
+    tr.dataset.stock = disp ?? "";
+
     tr.innerHTML = `
       <td>${item.nombre}</td>
       <td>$${item.precio.toLocaleString("es-AR")}</td>
-      <td class="qty">
-        <button class="btn-menos" data-accion="menos" aria-label="Disminuir">−</button>
-        <input class="qty-input" value="${
-          item.cantidad
-        }" readonly aria-label="Cantidad">
-        <button class="btn-mas" data-accion="mas" ${plusDisabledAttr} aria-label="Aumentar">+</button>
-        ${disp !== null ? `<small class="disp">Disp: ${disp}</small>` : ""}
+
+      <td class="cantidad">
+        <div class="qty">
+          <button class="btn-menos" data-accion="menos" aria-label="Disminuir">−</button>
+          <input class="qty-input" value="${item.cantidad}" readonly aria-label="Cantidad">
+          <button class="btn-mas" data-accion="mas" ${plusDisabledAttr} aria-label="Aumentar">+</button>
+          ${disp !== null ? `<small class="stock">Disp: ${disp}</small>` : ""}
+        </div>
       </td>
+
       <td>$${(item.precio * item.cantidad).toLocaleString("es-AR")}</td>
       <td><button class="btn-eliminar" data-accion="eliminar" aria-label="Eliminar">🗑️</button></td>
     `;
@@ -245,6 +262,7 @@ function renderCarrito() {
 
   if (totalEl) totalEl.textContent = cartTotal().toLocaleString("es-AR");
   syncCartCount();
+  updateCartSummary();
 }
 
 /* -------------------------
@@ -330,8 +348,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // render inicial
     renderCarrito();
     syncCartCount();
+    updateCartSummary();
   } catch (e) {
     console.error("[carrito-utils] init error:", e);
   }
 });
 // ...existing code...
+
+

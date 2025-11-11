@@ -1,8 +1,6 @@
-// assets/js/validacion-contacto.js
 (() => {
   "use strict";
 
-  // ======= FUNCIONES AUXILIARES =======
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
 
   const setInvalid = (input, msg) => {
@@ -35,7 +33,6 @@
     box.classList.add("d-none");
   };
 
-  // ======= REGLAS DE VALIDACIÓN =======
   const nombreRegex = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]{3,50}$/;
   const emailRegex  = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -77,32 +74,26 @@
     return true;
   };
 
-  // ======= FUNCIÓN PRINCIPAL DE LA CONSIGNA =======
   function validarFormulario(event) {
-    event.preventDefault(); // Detenemos el envío
-
+    event.preventDefault(); 
     const form = $("#contactForm");
     const name = $("#name", form);
     const email = $("#email", form);
     const message = $("#message", form);
 
-    // Ocultamos alert verde si estaba visible
     hideSuccess();
 
     const okName = validarNombre(name);
     const okEmail = validarEmail(email);
     const okMessage = validarMensaje(message);
 
-    // Si hay errores -> no mostrar éxito
     if (!okName || !okEmail || !okMessage) {
       form.classList.add("was-validated");
       return;
     }
 
-    // Si todo está correcto -> mostrar éxito
     showSuccess("¡Gracias! Tu mensaje fue enviado correctamente.");
 
-    // Limpiar campos y clases
     form.reset();
     form.classList.remove("was-validated");
     [name, email, message].forEach((el) => {
@@ -111,13 +102,11 @@
     });
   }
 
-  // ======= INICIALIZACIÓN =======
   document.addEventListener("DOMContentLoaded", () => {
     const form = $("#contactForm");
     const alertBox = $("#formAlert");
 
-  // Eliminar el alert de éxito para que no aparezca nunca (estaba mostrándose continuamente)
-  if (alertBox) alertBox.remove();
+if (alertBox) alertBox.classList.add("d-none");
 
     if (!form) return;
 
@@ -125,12 +114,10 @@
     const email = $("#email", form);
     const message = $("#message", form);
 
-    // Validación en tiempo real
     name.addEventListener("input", () => { hideSuccess(); validarNombre(name); });
     email.addEventListener("input", () => { hideSuccess(); validarEmail(email); });
     message.addEventListener("input", () => { hideSuccess(); validarMensaje(message); });
 
-    // Capturar evento submit
     form.addEventListener("submit", validarFormulario);
   });
 })();

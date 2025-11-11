@@ -1,0 +1,27 @@
+:root {
+        --brand: #0d6efd;
+      }
+      body {
+        background-color: #f8f9fa;
+      }
+      .topbar {
+        height: 14px;
+        background-color: var(--brand);
+      }
+      .card-contacto {
+        border: 0;
+        border-radius: 1rem;
+      }
+      .btn-primary {
+        background-color: var(--brand);
+        border-color: var(--brand);
+      }
+      .btn-primary:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.35);
+      }
+      .form-control:focus {
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+      }
+    
+    .invalid-feedback { display: block; }
+    .valid-feedback { display: none; }

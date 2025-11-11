@@ -292,3 +292,11 @@ footer a:hover {
 .inline-msg.hide {
   opacity: 0;
 }
+
+.agregar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center; /* cambiá a flex-start si lo querés a la izquierda */
+}

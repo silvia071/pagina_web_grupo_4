@@ -268,3 +268,35 @@ footer a:hover {
   cursor: pointer;
   margin-bottom: 8px;
 }
+
+/* Estilos para los mensajes inline */
+.inline-msg {
+  display: inline-block;
+  padding: 8px 10px;
+  margin-top: 8px;
+  border-radius: 6px;
+  color: #000;
+  transition: opacity 0.5s ease;
+}
+
+.inline-msg.warning {
+  background: #fff4e5;
+  border: 1px solid #e0b84d;
+}
+
+.inline-msg.success {
+  background: #d1f7c4;
+  border: 1px solid #86d27c;
+}
+
+.inline-msg.hide {
+  opacity: 0;
+}
+
+.agregar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center; /* cambiá a flex-start si lo querés a la izquierda */
+}

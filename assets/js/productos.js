@@ -1,5 +1,31 @@
-import { productos } from "./data.js";
-import { addToCart, syncCartCount, toast } from "./carrito-utils.js";
+// productos.js - usando fetch a data.json (sin import de data.js)
+import {
+  addToCart,
+  syncCartCount,
+  toast,
+  findProduct,
+} from "./carrito-utils.js";
+
+const DATA_URL = `${location.origin}/assets/data.json`;
+let productos = [];
+
+async function cargarProductos() {
+  try {
+    const res = await fetch(DATA_URL, { cache: "no-store" });
+    if (!res.ok) throw new Error(`Error ${res.status} al leer ${DATA_URL}`);
+    productos = await res.json();
+
+    // opcional: cache para detalle.html
+    try {
+      localStorage.setItem("productosStock", JSON.stringify(productos));
+    } catch {}
+  } catch (err) {
+    console.error("[productos] No se pudo cargar el catálogo:", err);
+    productos = [];
+    const msg = document.getElementById("detalleMsg");
+    if (msg) msg.textContent = "No se pudo cargar el catálogo local.";
+  }
+}
 
 function rutaImg(img) {
   if (!img) return "";
@@ -16,11 +42,15 @@ function cardProducto(p) {
   div.innerHTML = `
     <h3>${p.nombre}</h3>
     <img src="${rutaImg(p.img)}" alt="${p.nombre}" loading="lazy" />
-    <p><strong>Precio: $${p.precio.toLocaleString("es-AR")}</strong></p>
+    <p><strong>Precio: $${Number(p.precio).toLocaleString("es-AR")}</strong></p>
     <p>${p.descripcion}</p>
     <p>Categoría: ${p.categoria} • Stock: ${stockNum ?? "—"}</p>
     <button class="btn-add" data-id="${p.id}" data-stock="${stockNum ?? ""}">
-      ${stockNum === 0 ? "Sin stock" : "Agregar al carrito"}
+       ${
+         typeof stockNum === "number" && stockNum <= 0
+           ? "Sin stock"
+           : "Agregar al carrito"
+       }
     </button>
     <a href="detalle.html?id=${
       p.id
@@ -52,7 +82,18 @@ function renderProductos(filtrarCategoria = "todas") {
   if (filtrarCategoria !== "todas") {
     lista = productos.filter((p) => p.categoria === filtrarCategoria);
   }
-  lista.forEach((p) => cont.appendChild(cardProducto(p)));
+  lista.forEach((pBase) => {
+    const pReal = (() => {
+      try {
+        return findProduct?.(pBase.id) || pBase;
+      } catch {
+        return pBase;
+      }
+    })();
+    // mantené todos los campos del JSON, pero reemplazá stock (y cualquier otro que te calcule findProduct)
+    const pUI = { ...pBase, ...pReal };
+    cont.appendChild(cardProducto(pUI));
+  });
   actualizarContador(lista.length);
 }
 
@@ -65,17 +106,8 @@ function manejarAgregarCarrito() {
 
     const stockAttr = btn.dataset.stock;
     const stockNum = stockAttr === "" ? null : Number(stockAttr);
-    console.log(
-      "[productos] click btn, id:",
-      btn.dataset.id,
-      "stockAttr:",
-      stockAttr,
-      "stockNum:",
-      stockNum
-    );
 
     const res = addToCart(btn.dataset.id, 1);
-    console.log("[productos] addToCart resultado:", res);
     if (!res.ok) {
       toast(res.error || "Error al agregar", "warning");
       return;
@@ -99,12 +131,18 @@ function manejarFiltro() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  // 1) cargar JSON
+  await cargarProductos();
+
+  // 2) inicializar UI
   llenarFiltroCategorias();
   const filtro = document.getElementById("filtroCategoria");
   const guardada = localStorage.getItem("filtroCategoriaSel") || "todas";
   if (filtro) filtro.value = guardada;
   renderProductos(guardada);
+
+  // 3) eventos
   manejarAgregarCarrito();
   manejarFiltro();
   syncCartCount();

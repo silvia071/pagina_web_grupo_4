@@ -1,0 +1,202 @@
+[
+  {
+    "id": "101",
+    "nombre": "Bowl de acero inoxidable",
+    "descripcion": "Bowl de acero inoxidable 24 cm, plateado.",
+    "detalle": "Bowl de acero inoxidable 24 cm, plateado. Ideal para mezclar ingredientes en la cocina o para servir ensaladas y otros alimentos. Resistente y duradero, fácil de limpiar y apto para uso diario.",
+    "categoria": "cocina",
+    "precio": 10000,
+    "stock": 8,
+    "img": "assets/img/Bowl.jpg"
+  },
+  {
+    "id": "102",
+    "nombre": "Canasto ratán mediano",
+    "descripcion": "Práctico, decorativo y súper funcional.",
+    "detalle": "Canasto de ratán mediano, ideal para organizar y decorar cualquier espacio de tu hogar. Perfecto para almacenar ropa, juguetes, revistas u otros objetos, manteniendo todo en orden con estilo. Su diseño natural y elegante se adapta a cualquier ambiente.",
+    "categoria": "organizadores",
+    "precio": 20000,
+    "stock": 12,
+    "img": "assets/img/Canasto-ratan.jpg"
+  },
+  {
+    "id": "103",
+    "nombre": "Jabonera",
+    "descripcion": "Jabonera lisa - Varios colores.",
+    "detalle": "Jabonera lisa disponible en varios colores, perfecta para mantener tu jabón seco y al alcance de la mano en el baño o la cocina. Su diseño sencillo y funcional se adapta a cualquier estilo de decoración, añadiendo un toque de color y practicidad a tu espacio.",
+    "categoria": "baño",
+    "precio": 5000,
+    "stock": 12,
+    "img": "assets/img/Jabonera.jpg"
+  },
+  {
+    "id": "104",
+    "nombre": "Banqueta reforzada",
+    "descripcion": "Banqueta plástica reforzada apilable.",
+    "detalle": "Banqueta plástica reforzada apilable, ideal para uso en interiores y exteriores. Su diseño resistente soporta hasta 150 kg, proporcionando una solución práctica y cómoda para sentarse o alcanzar objetos en lugares altos. Fácil de limpiar y almacenar gracias a su capacidad de apilamiento.",
+    "categoria": "jardín",
+    "precio": 32000,
+    "stock": 12,
+    "img": "assets/img/Banqueta-reforzada.png"
+  },
+  {
+    "id": "105",
+    "nombre": "Cuchillos de cocina 6 pzs",
+    "descripcion": "Set de cuchillos con soporte.",
+    "detalle": "Set de cuchillos de cocina que incluye 6 piezas esenciales para diversas tareas culinarias, junto con un soporte para mantenerlos organizados y accesibles. Cada cuchillo está diseñado con hojas afiladas y mangos ergonómicos para un manejo cómodo y seguro. Ideal para cortar, picar y filetear con precisión en la cocina.",
+    "categoria": "cocina",
+    "precio": 28000,
+    "stock": 6,
+    "img": "assets/img/set-cuchillos.jpg"
+  },
+  {
+    "id": "106",
+    "nombre": "Organizador plástico con tapa",
+    "descripcion": "Caja organizadora apilable, 20 L.",
+    "detalle": "Caja organizadora plástica con tapa, capacidad de 20 litros, ideal para mantener tus pertenencias ordenadas y protegidas. Su diseño apilable permite ahorrar espacio, siendo perfecta para almacenar ropa, juguetes, herramientas u otros objetos en el hogar o la oficina. Fabricada con materiales duraderos y fácil de limpiar.",
+    "categoria": "organizadores",
+    "precio": 18000,
+    "stock": 10,
+    "img": "assets/img/contenedor-20lt.jpg"
+  },
+  {
+    "id": "107",
+    "nombre": "Dispenser de jabón",
+    "descripcion": "Dispenser recargable de 300 ml.",
+    "detalle": "Dispenser de jabón recargable con capacidad de 300 ml, ideal para mantener el jabón líquido siempre a mano en el baño o la cocina. Su diseño moderno y funcional permite una fácil dispensación del jabón, ayudando a mantener la higiene y el orden en tu espacio. Fabricado con materiales duraderos y fácil de rellenar.",
+    "categoria": "baño",
+    "precio": 7500,
+    "stock": 15,
+    "img": "assets/img/Dispenser-jabon.jpg"
+  },
+  {
+    "id": "108",
+    "nombre": "Maceta de cemento mediana",
+    "descripcion": "Ø 28 cm, apta exterior.",
+    "detalle": "Maceta de cemento mediana con un diámetro de 28 cm, apta para uso en exteriores. Su diseño robusto y moderno es ideal para plantar flores, suculentas u otras plantas, añadiendo un toque de estilo a tu jardín, balcón o terraza. Resistente a las inclemencias del tiempo, esta maceta es perfecta para cualquier espacio al aire libre.",
+    "categoria": "jardín",
+    "precio": 22000,
+    "stock": 9,
+    "img": "assets/img/maceta-cemento.png"
+  },
+  {
+    "id": "109",
+    "nombre": "Tabla de cortar bambú",
+    "descripcion": "Tabla 35x25 cm con canaleta.",
+    "detalle": "Tabla de cortar de bambú de 35x25 cm con canaleta recoge jugos. Superficie amigable con los cuchillos y fácil de limpiar. Ideal para uso diario.",
+    "categoria": "cocina",
+    "precio": 11000,
+    "stock": 20,
+    "img": "assets/img/tabla-bambu.jpg"
+  },
+  {
+    "id": "110",
+    "nombre": "Escurridor de platos",
+    "descripcion": "Escurridor metálico con bandeja.",
+    "detalle": "Escurridor de platos metálico con bandeja colectora desmontable. Capacidad para 10 platos, cubiertos y vasos. Compacto y resistente.",
+    "categoria": "cocina",
+    "precio": 18500,
+    "stock": 14,
+    "img": "assets/img/escurridor-platos.jpg"
+  },
+  {
+    "id": "111",
+    "nombre": "Set frascos herméticos x3",
+    "descripcion": "Vidrio con tapa a rosca.",
+    "detalle": "Set de 3 frascos de vidrio con tapa metálica a rosca (500, 750 y 1000 ml). Ideales para almacenar secos o conservas.",
+    "categoria": "cocina",
+    "precio": 16000,
+    "stock": 18,
+    "img": "assets/img/frascos-hermeticos.jpg"
+  },
+  {
+    "id": "112",
+    "nombre": "Organizador de ropa colgante",
+    "descripcion": "6 estantes de tela.",
+    "detalle": "Organizador colgante de armario con 6 estantes de tela no tejida. Ahorra espacio y mantiene la ropa ordenada.",
+    "categoria": "organizadores",
+    "precio": 15000,
+    "stock": 16,
+    "img": "assets/img/organizador-colgante.jpg"
+  },
+  {
+    "id": "113",
+    "nombre": "Set cajas organizadoras x3",
+    "descripcion": "Cajas plegables de tela.",
+    "detalle": "Set de 3 cajas plegables de tela con manijas. Perfectas para estantes, placares o bajo cama.",
+    "categoria": "organizadores",
+    "precio": 17500,
+    "stock": 22,
+    "img": "assets/img/cajas-tela.jpg"
+  },
+  {
+    "id": "114",
+    "nombre": "Perchero de pie",
+    "descripcion": "Perchero metálico 12 ganchos.",
+    "detalle": "Perchero de pie de acero con 12 ganchos y base estable. Ideal para recibidor u oficina.",
+    "categoria": "organizadores",
+    "precio": 28000,
+    "stock": 7,
+    "img": "assets/img/perchero-pie.jpg"
+  },
+  {
+    "id": "115",
+    "nombre": "Alfombra de baño antideslizante",
+    "descripcion": "60x40 cm microfibra.",
+    "detalle": "Alfombra de baño de microfibra 60x40 cm con base antideslizante. Secado rápido y suave al tacto.",
+    "categoria": "baño",
+    "precio": 9000,
+    "stock": 25,
+    "img": "assets/img/alfombra-bano.jpg"
+  },
+  {
+    "id": "116",
+    "nombre": "Cortina de baño PEVA",
+    "descripcion": "180x180 cm con ganchos.",
+    "detalle": "Cortina de baño de PEVA impermeable 180x180 cm. Incluye 12 ganchos. Fácil de limpiar, libre de PVC.",
+    "categoria": "baño",
+    "precio": 12000,
+    "stock": 13,
+    "img": "assets/img/cortina-bano.jpg"
+  },
+  {
+    "id": "117",
+    "nombre": "Portarrollos con tapa",
+    "descripcion": "Acero inoxidable.",
+    "detalle": "Portarrollos de papel higiénico con tapa en acero inoxidable. Instalación sencilla y duradera.",
+    "categoria": "baño",
+    "precio": 8000,
+    "stock": 19,
+    "img": "assets/img/portarrollos.jpg"
+  },
+  {
+    "id": "118",
+    "nombre": "Manguera de jardín 15 m",
+    "descripcion": "Con pico regulable.",
+    "detalle": "Manguera de jardín de 1/2'' x 15 m con pico pulverizador regulable y conectores rápidos.",
+    "categoria": "jardín",
+    "precio": 26000,
+    "stock": 11,
+    "img": "assets/img/manguera-15m.jpg"
+  },
+  {
+    "id": "119",
+    "nombre": "Regadera plástica 8 L",
+    "descripcion": "Liviana y resistente.",
+    "detalle": "Regadera de 8 litros con pico roseta para riego suave. Ideal para macetas y canteros.",
+    "categoria": "jardín",
+    "precio": 14000,
+    "stock": 17,
+    "img": "assets/img/regadera-8l.jpg"
+  },
+  {
+    "id": "120",
+    "nombre": "Guantes de jardín",
+    "descripcion": "Talle único con refuerzos.",
+    "detalle": "Guantes para jardinería con palma reforzada y dorso respirable. Protección y agarre para tareas domésticas.",
+    "categoria": "jardín",
+    "precio": 6000,
+    "stock": 30,
+    "img": "assets/img/guantes-jardin.jpg"
+  }
+]

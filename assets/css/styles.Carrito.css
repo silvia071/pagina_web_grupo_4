@@ -1,24 +1,10 @@
-/* TABLA DEL CARRITO  */
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  padding: 0.75rem;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
-}
-
-thead th {
-  background: #040404;
-}
-
-#totales {
-  margin-top: 1rem;
-  text-align: right;
-}
+/* ===========================
+   TABLA DEL CARRITO (base)
+   =========================== */
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 0.75rem; border-bottom: 1px solid #ddd; text-align: left; }
+thead th { background: #040404; color: #fff; }
+#totales { margin-top: 1rem; text-align: right; }
 
 .empty {
   padding: 1rem;
@@ -28,14 +14,14 @@ thead th {
 }
 
 .icono-carrito {
-  width: 26px;
-  height: 26px;
-  vertical-align: middle;
-  margin-right: 6px;
+  width: 26px; height: 26px;
+  vertical-align: middle; margin-right: 6px;
   object-fit: contain;
 }
 
-/*  MENÚ HAMBURGUESA  */
+/* ===========================
+   MENÚ HAMBURGUESA (botón)
+   =========================== */
 .menu-toggle {
   display: none;
   border: 0;
@@ -47,14 +33,11 @@ thead th {
   cursor: pointer;
 }
 
-/* MEDIA QUERIES – RESPONSIVIDAD DEL SITIO*/
-
-@media (max-width: 37.5rem) {
-
-  /* 600px */
-  header h1 {
-    font-size: 1.6rem;
-  }
+/* ===========================
+   MEDIA QUERIES – RESPONSIVO
+   =========================== */
+@media (max-width: 37.5rem) { /* 600px */
+  header h1 { font-size: 1.6rem; }
 
   .menu-toggle {
     display: inline-block;
@@ -62,47 +45,23 @@ thead th {
     padding: 0.85rem 1.1rem;
   }
 
-  nav ul {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
+  nav ul { flex-direction: column; align-items: center; gap: 0.5rem; }
 
   nav a {
-    font-size: 1.15rem;
-    padding: 1rem 1rem;
-    min-height: 48px;
-    display: block;
+    font-size: 1.15rem; padding: 1rem 1rem;
+    min-height: 48px; display: block;
   }
 
-  .icono-carrito {
-    width: 28px;
-    height: 28px;
-    margin-right: 8px;
-  }
+  .icono-carrito { width: 28px; height: 28px; margin-right: 8px; }
 
-  main {
-    padding: 1rem;
-  }
+  main { padding: 1rem; }
+  table, th, td { font-size: 0.95rem; }
 
-  table,
-  th,
-  td {
-    font-size: 0.95rem;
-  }
-
-  footer {
-    font-size: 1rem;
-    padding: 0.9rem;
-  }
+  footer { font-size: 1rem; padding: 0.9rem; }
 }
 
-@media (max-width: 56.25rem) {
-
-  /* 900px */
-  header h1 {
-    font-size: 1.8rem;
-  }
+@media (max-width: 56.25rem) { /* 900px */
+  header h1 { font-size: 1.8rem; }
 
   .menu-toggle {
     display: inline-block;
@@ -120,132 +79,50 @@ thead th {
     border-radius: 12px;
     padding: 0.5rem;
   }
-
-  nav ul[hidden] {
-    display: none;
-  }
-
-  nav ul li {
-    margin: 0.25rem 0;
-  }
+  nav ul[hidden] { display: none; }
+  nav ul li { margin: 0.25rem 0; }
 
   nav a {
-    display: block;
-    font-size: 1.1rem;
-    padding: 0.85rem 1rem;
-    min-height: 48px;
+    display: block; font-size: 1.1rem;
+    padding: 0.85rem 1rem; min-height: 48px;
   }
 
-  main {
-    padding: 1.5rem;
-  }
-
-  table,
-  th,
-  td {
-    font-size: 1rem;
-  }
+  main { padding: 1.5rem; }
+  table, th, td { font-size: 1rem; }
 }
 
-@media (max-width: 75rem) {
-
-  /* 1200px */
-  body {
-    font-size: 1rem;
-  }
-
-  header h1 {
-    font-size: 2rem;
-  }
+@media (max-width: 75rem) { /* 1200px */
+  body { font-size: 1rem; }
+  header h1 { font-size: 2rem; }
 }
 
-/* Contenedor de toasts */
+/* ===========================
+   TOASTS (notificaciones)
+   =========================== */
 .toast-box {
-  position: fixed;
-  right: 16px;
-  top: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 99999;
-  pointer-events: none;
-  max-width: 360px;
+  position: fixed; right: 16px; top: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  z-index: 99999; pointer-events: none; max-width: 360px;
 }
-
-/* Estilos de los toasts */
 .toast {
-  pointer-events: auto;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 10px 12px;
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, .12);
-  font-size: 14px;
-  color: #042028;
-  transform-origin: right top;
-  animation: toast-in .18s ease-out;
+  pointer-events: auto; display: flex; gap: 10px; align-items: center;
+  padding: 10px 12px; border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+  font-size: 14px; color: #042028;
+  transform-origin: right top; animation: toast-in .18s ease-out;
 }
+.toast.toast-success { background: linear-gradient(180deg,#dff7e6,#c6f0d3); border: 1px solid #86d27c; }
+.toast.toast-warning { background: linear-gradient(180deg,#fff7ea,#fff0d8); border: 1px solid #e0b84d; }
+.toast .toast-icon { font-weight: 700; width: 26px; text-align: center; }
+.toast .toast-text { flex: 1; line-height: 1.1; }
+.toast .toast-close { margin-left: 8px; background: transparent; border: 0; cursor: pointer; font-size: 16px; color: rgba(0,0,0,.6); }
 
-.toast.toast-success {
-  background: linear-gradient(180deg, #dff7e6, #c6f0d3);
-  border: 1px solid #86d27c;
-}
-
-.toast.toast-warning {
-  background: linear-gradient(180deg, #fff7ea, #fff0d8);
-  border: 1px solid #e0b84d;
-}
-
-.toast .toast-icon {
-  font-weight: 700;
-  width: 26px;
-  text-align: center;
-}
-
-.toast .toast-text {
-  flex: 1;
-  line-height: 1.1;
-}
-
-.toast .toast-close {
-  margin-left: 8px;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  font-size: 16px;
-  color: rgba(0, 0, 0, .6);
-}
-
-@keyframes toast-in {
-  from {
-    transform: translateX(12px) scale(.98);
-    opacity: 0
-  }
-
-  to {
-    transform: translateX(0) scale(1);
-    opacity: 1
-  }
-}
-
-@keyframes toast-out {
-  from {
-    opacity: 1;
-    transform: scale(1)
-  }
-
-  to {
-    opacity: 0;
-    transform: scale(.98)
-  }
-}
+@keyframes toast-in { from { transform: translateX(12px) scale(.98); opacity: 0 } to { transform: translateX(0) scale(1); opacity: 1 } }
+@keyframes toast-out { from { opacity: 1; transform: scale(1) } to { opacity: 0; transform: scale(.98) } }
 
 /* ===========================
    CARRITO: Layout + Resumen
    =========================== */
-
-/* Layout de dos columnas: tabla (izq) + resumen (der) */
 #carritoTabla.cart-layout {
   display: grid;
   grid-template-columns: 1fr 320px;
@@ -256,114 +133,76 @@ thead th {
   #carritoTabla.cart-layout { grid-template-columns: 1fr; }
 }
 
-/* Wrapper de la tabla (por si necesitás scroll horizontal en móviles) */
-.cart-table-wrapper {
-  overflow-x: auto;
-}
+/* Tabla con wrapper por si requiere scroll horizontal en pantallas chicas */
+.cart-table-wrapper { overflow-x: auto; }
 
-/* Panel lateral de resumen */
+/* Panel lateral */
 .cart-summary {
-  position: sticky;
-  top: 16px;
-  background: #fff;
-  border: 1px solid #e3e7ee;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  position: sticky; top: 16px;
+  background: #fff; border: 1px solid #e3e7ee; border-radius: 12px;
+  padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.04);
 }
-.cart-summary h3 {
-  margin: 0 0 12px;
-  font-size: 18px;
-}
+.cart-summary h3 { margin: 0 0 12px; font-size: 18px; }
 .summary-rows > div {
-  display: flex;
-  justify-content: space-between;
-  padding: 6px 0;
-  border-bottom: 1px dashed #e7e7e7;
+  display: flex; justify-content: space-between;
+  padding: 6px 0; border-bottom: 1px dashed #e7e7e7;
 }
 .summary-rows > div:last-child { border-bottom: none; }
-.summary-actions {
-  display: grid;
-  gap: 10px;
-  margin-top: 14px;
-}
+.summary-actions { display: grid; gap: 10px; margin-top: 14px; }
 
-
-#carritoTabla .qty {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
+/* ===========================
+   Cantidades (inputs + botones)
+   =========================== */
+#carritoTabla .qty { display: inline-flex; align-items: center; gap: 8px; }
 
 #carritoTabla .btn-qty {
-  width: 28px;
-  height: 28px;
-  border: 1px solid #cfd6de;
-  background: #fff;
-  border-radius: 6px;
-  font-size: 18px;
-  line-height: 1;
-  cursor: pointer;
-  user-select: none;
+  width: 28px; height: 28px;
+  border: 1px solid #cfd6de; background: #fff; border-radius: 6px;
+  font-size: 18px; line-height: 1; cursor: pointer; user-select: none;
 }
 
-
+/* Inputs numéricos */
 #carritoTabla .qty-input,
 #carritoTabla td input[type="number"] {
-  width: 56px;              
-  height: 28px;
-  padding: 2px 6px;
-  text-align: center;
-  border: 1px solid #cfd6de;
-  border-radius: 6px;
-  -moz-appearance: textfield;          
+  width: 56px; height: 28px; padding: 2px 6px;
+  text-align: center; border: 1px solid #cfd6de; border-radius: 6px;
+
+  /* Prefijos + estándar (soluciona warnings del linter) */
+  -moz-appearance: textfield;   /* Firefox */
+  -webkit-appearance: none;     /* WebKit */
+  appearance: none;             /* Estándar */
 }
+
+/* Quitar spinners en Chrome/Safari */
 #carritoTabla .qty-input::-webkit-outer-spin-button,
 #carritoTabla .qty-input::-webkit-inner-spin-button {
-  -webkit-appearance: none; margin: 0; /* Quita spinners en Chrome */
-}
-#carritoTabla .qty .stock {
-  margin-left: 6px;
-  color: #666;
-  font-size: 12px;
+  -webkit-appearance: none; margin: 0;
 }
 
+#carritoTabla .qty .stock { margin-left: 6px; color: #666; font-size: 12px; }
 
-
+/* ===========================
+   Botones
+   =========================== */
 .btn-primary, .btn-outline, .btn-danger {
-  display: inline-block;
-  text-align: center;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-weight: 600;
-  border: 1px solid transparent;
-  cursor: pointer;
+  display: inline-block; text-align: center;
+  padding: 10px 12px; border-radius: 8px;
+  font-weight: 600; border: 1px solid transparent; cursor: pointer;
 }
 .btn-primary { background: #0d6efd; color: #fff; }
 .btn-outline { background: #0d6efd; border-color: #0d6efd; color: #fff; }
 .btn-danger  { background: #0d6efd; color: #fff; border-color: #0d6efd; }
-
 .btn-primary:hover, .btn-danger:hover { filter: brightness(0.95); }
 .btn-outline:hover { background: #0d6efd; color: #fff; }
 
-
+/* Ajustes finales de tabla del carrito */
 #carritoTabla table { width: 100%; border-collapse: collapse; }
 #carritoTabla thead th { background: #040404; color: #fff; }
 #carritoTabla th, #carritoTabla td { vertical-align: middle; }
+#totales { margin-top: 1rem; text-align: right; }
+.cart-summary a { text-decoration: none; color: #fff; font-size: 16px; font-weight: 600; }
+.cart-summary a:hover { text-decoration: none; }
 
-
-#totales { margin-top: 1rem; text-align: right; } 
-
-.cart-summary a {
-  text-decoration: none;   
-  color: #fff;             
-  font-size: 16px;         
-  font-weight: 600;        
-}
-
-.cart-summary a:hover {
-  text-decoration: none;  
-}
-
-
+/* Seguridad global para evitar scroll horizontal accidental */
+html, body { max-width: 100%; overflow-x: hidden; }
 

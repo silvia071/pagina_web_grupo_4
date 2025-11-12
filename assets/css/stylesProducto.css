@@ -1,9 +1,8 @@
-/* estilo general */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* =========================
+   ESTILO GENERAL
+   ========================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { max-width: 100%; overflow-x: hidden; }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -11,59 +10,65 @@ body {
   color: #333;
   line-height: 1.6;
 
-  /* Grid layout principal */
   display: grid;
   grid-template-rows: auto 1fr auto; /* header/nav - main - footer */
-  grid-template-areas:
-    "nav"
-    "main"
-    "footer";
+  grid-template-areas: "nav" "main" "footer";
   min-height: 100vh;
 }
 
-/* header y nav */
+/* =========================
+   HEADER / NAV
+   ========================= */
 header {
   grid-area: nav;
   background-color: #004466;
   color: white;
-  padding: 0.7rem;
+  padding: 0.7rem 1rem;
+  position: relative;   /* evita cortes del menú en mobile */
+  z-index: 1000;
 }
 
-header h1 {
-  margin-bottom: 1rem;
-  text-align: center;
-}
+header h1 { margin-bottom: 1rem; text-align: center; }
 
-nav ul {
-  list-style: none;
-  display: flex; /* Flexbox para menú */
-  justify-content: space-evenly;
+/* Contenedor flexible: hamburguesa + menú (izq) | carrito (der) */
+header .navbar {
+  display: flex;
   align-items: center;
-  gap: 1rem;            
+  gap: 1rem;
+  position: relative;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+/* Orden visual */
+header .menu-toggle { order: 0; }
+header .menu        { order: 1; }
+header .cart-link   { order: 2; margin-left: auto; }
+
+/* Menú */
+header .menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
 nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.05rem;   
-  padding: 0.75rem 1rem; 
+  font-size: 1.05rem;
+  padding: 0.75rem 1rem;
   line-height: 1.2;
-  min-height: 44px;      
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   border-radius: 10px;
 }
-
-.icono-carrito {
-  width: 26px; height: 26px;     
-  margin-right: 6px;
-  object-fit: contain;
-}
-
-nav a:hover {
-  background: #006699;
-}
+nav a:hover,
+nav a:focus-visible { background: #006699; }
 
 /* Botón hamburguesa (oculto en desktop; visible en <=900px) */
 .menu-toggle {
@@ -77,11 +82,24 @@ nav a:hover {
   cursor: pointer;
 }
 
-/* main y footer asignados al grid */
-main {
-  grid-area: main;
+/* Carrito fijo a la derecha */
+header .cart-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  white-space: nowrap; /* evita salto raro */
 }
+header .icono-carrito { width: 26px; height: 26px; object-fit: contain; }
+/* Contador sin fondo rojo */
+header #cartCount { background: none; color: #fff; font-weight: bold; font-size: 1rem; padding: 0; line-height: 1; }
 
+/* =========================
+   MAIN / FOOTER
+   ========================= */
+main { grid-area: main; }
 footer {
   grid-area: footer;
   background: #004466;
@@ -90,24 +108,19 @@ footer {
   padding: 1rem;
 }
 
-/* catálogo de productos */
-#catalogo {
-  padding: 2rem;
-}
+/* =========================
+   CATÁLOGO
+   ========================= */
+#catalogo { padding: 2rem; }
+#catalogo h2 { margin-bottom: 1rem; text-align: center; }
 
-#catalogo h2 {
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-/* grid reutilizable para contenedores de cards */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
+  overflow-x: hidden; /* cinturón de seguridad */
 }
 
-/* tarjeta de producto */
 .producto {
   background: white;
   border-radius: 10px;
@@ -123,15 +136,10 @@ footer {
 .producto img {
   width: 100%;
   height: 200px;
-  object-fit: contain;
+  object-fit: contain;   /* muestra la imagen completa */
   border-radius: 10px;
   margin-bottom: 1rem;
-}
-
-/* ==== Destacados (index) ==== */
-.destacado img {
-  height: 200px;
-  object-fit: cover;
+  background: #fff;
 }
 
 .producto button {
@@ -144,12 +152,9 @@ footer {
   cursor: pointer;
   transition: background 0.3s;
 }
+.producto button:hover { background: #006699; }
 
-.producto button:hover {
-  background: #006699;
-}
-
-/* ==== Tabla del carrito (carrito.html) ==== */
+/* ==== Tabla del carrito (si se reutiliza) ==== */
 #carritoTabla table {
   width: 100%;
   border-collapse: collapse;
@@ -158,84 +163,45 @@ footer {
   border-radius: 8px;
   overflow: hidden;
 }
+#carritoTabla thead { background: #004466; color: white; }
+#carritoTabla th, #carritoTabla td { padding: 0.75rem 1rem; text-align: left; }
+#carritoTabla tr:nth-child(even) { background: #f2f2f2; }
+#carritoTabla tr:hover { background: #e6f3ff; }
+#totales { margin-top: 1rem; text-align: right; font-size: 1.1rem; font-weight: bold; color: #004466; }
 
-#carritoTabla thead {
-  background: #004466;
-  color: white;
-}
+/* =========================
+   MEDIA QUERIES
+   ========================= */
 
-#carritoTabla th,
-#carritoTabla td {
-  padding: 0.75rem 1rem;
-  text-align: left;
-}
+/* ≤600px */
+@media (max-width: 37.5rem) {
+  header h1 { font-size: 1.6rem; }
+  .menu-toggle { font-size: 1.6rem; padding: 0.85rem 1.1rem; }
 
-#carritoTabla tr:nth-child(even) {
-  background: #f2f2f2;
-}
-
-#carritoTabla tr:hover {
-  background: #e6f3ff;
-}
-
-#totales {
-  margin-top: 1rem;
-  text-align: right;
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #004466;
-}
-
-/* MEDIA QUERIES – Sitio responsivo */
-
-
-@media (max-width: 37.5rem) { /* 600px */
-  header h1 { font-size: 1.6rem; }      
-
-  
-  .menu-toggle {
-    font-size: 1.6rem;
-    padding: 0.85rem 1.1rem;
-  }
-
-  nav ul {
+  header .menu {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    background: #004466;
+    width: 100%;
   }
 
-  nav a {
-    font-size: 1.15rem;                
-    padding: 1rem 1rem;                
-    min-height: 48px;
-    display: block;
-  }
-
-  .icono-carrito { width: 28px; height: 28px; margin-right: 8px; }
-
+  nav a { font-size: 1.15rem; padding: 1rem; display: block; }
+  header .icono-carrito { width: 28px; height: 28px; }
   #catalogo { padding: 1rem; }
   main { padding: 1rem; }
 
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
+  .grid { grid-template-columns: 1fr; gap: 1rem; }
   .producto img { height: 150px; }
 
-  /* Tabla carrito */
-  #carritoTabla th,
-  #carritoTabla td {
-    padding: 0.5rem;
-    font-size: 0.95rem;                 
-  }
+  #carritoTabla th, #carritoTabla td { padding: 0.5rem; font-size: 0.95rem; }
 }
 
-
-@media (max-width: 56.25rem) { /* 900px */
+/* ≤900px */
+@media (max-width: 56.25rem) {
   header h1 { font-size: 1.8rem; }
 
-  /* Menú hamburguesa activo y UL colapsable  */
+  /* Hamburguesa visible */
   .menu-toggle {
     display: inline-block;
     margin-left: 0.5rem;
@@ -244,37 +210,38 @@ footer {
     min-height: 44px;
   }
 
-  nav ul {
-    display: block;
-    margin-top: 0.75rem;
+  /* ✅ Menú controlado por JS sin absolute (evita scroll horizontal) */
+  header .menu {
+    flex-direction: column;
+    position: static;     /* <- clave: NO absolute */
+    width: 100%;
     background: #004466;
-    border-radius: 12px;
-    padding: 0.5rem;
+    border-radius: 0 0 12px 12px;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    display: block;       /* se oculta/muestra con [hidden] */
   }
-  nav ul[hidden] { display: none; }
+  header .menu[hidden] { display: none; }
+  header .menu li { margin: 0.25rem 0; }
+  header .menu a  { display: block; font-size: 1.1rem; padding: 0.85rem 1rem; min-height: 48px; }
 
-  nav ul li { margin: 0.25rem 0; }
-
-  nav a {
-    display: block;
-    font-size: 1.1rem;
-    padding: 0.85rem 1rem;
-    min-height: 48px;
-  }
+  /* Carrito visible a la derecha sin posición absoluta */
+  header .cart-link { position: static; margin-left: auto; }
 
   #catalogo { padding: 1.25rem; }
-
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
   .producto img { height: 180px; }
 }
 
-
-@media (max-width: 75rem) { /* 1200px */
+/* ≤1200px */
+@media (max-width: 75rem) {
   .grid { grid-template-columns: repeat(3, 1fr); }
   main { width: min(1100px, 92%); }
 }
 
+/* ≥900px: menú siempre visible */
+@media (min-width: 56.251rem) {
+  header .menu-toggle { display: none; }
+  header .menu { display: flex; align-items: center; gap: 1rem; }
+  header .menu[hidden] { display: flex !important; }
+}

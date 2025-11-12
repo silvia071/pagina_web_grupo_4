@@ -12,22 +12,38 @@
 
   <body class="layout">
     <header>
-      <h1>Bazar Home</h1>
-      <nav aria-label="Navegación principal">
-        <button class="menu-toggle" aria-expanded="false" aria-controls="mainmenu" aria-label="Abrir menú">☰</button>
-        <ul id="mainmenu">
-          <li><a href="../index.html">Inicio</a></li>
-          <li><a href="productos.html">Productos</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-          <li>
-            <a href="carrito.html" aria-current="page">
-              <img src="../assets/img/carrito.svg" alt="" class="icono-carrito" aria-hidden="true"/>
-              Carrito (<span id="cartCount">0</span>)
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <nav class="navbar" aria-label="Navegación principal">
+    <!-- 🍔 Hamburguesa a la izquierda -->
+    <button
+      class="menu-toggle"
+      aria-expanded="false"
+      aria-controls="mainmenu"
+      aria-label="Abrir menú"
+    >
+      ☰
+    </button>
+
+    <!-- Menú (colapsable con JS) -->
+    <ul id="mainmenu" class="menu" hidden>
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+
+    <!-- 🛒 Carrito a la derecha -->
+    <a href="carrito.html" class="cart-link" aria-label="Ir al carrito">
+      <img
+        src="../assets/img/carrito.svg"
+        alt=""
+        class="icono-carrito"
+        aria-hidden="true"
+      />
+      <span class="cart-label">Carrito</span>
+      (<span id="cartCount">0</span>)
+    </a>
+   </nav>
+  </header>
+
 
     <main>
       <h2>Tu carrito</h2>

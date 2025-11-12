@@ -6,7 +6,7 @@ import {
   findProduct,
 } from "./carrito-utils.js";
 
-const DATA_URL = `${location.origin}/assets/data.json`;
+const DATA_URL = "../assets/data.json";
 let productos = [];
 
 async function cargarProductos() {

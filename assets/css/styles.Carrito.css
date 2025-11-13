@@ -1,9 +1,10 @@
+
 /* ===========================
    TABLA DEL CARRITO (base)
    =========================== */
 table { width: 100%; border-collapse: collapse; }
-th, td { padding: 0.75rem; border-bottom: 1px solid #ddd; text-align: left; }
-thead th { background: #040404; color: #fff; }
+th, td { padding: 0.75rem; border-bottom: 1px solid #ddd; text-align: left; font-family: Arial, Helvetica, sans-serif; }
+thead th { background: #004466; color: #fff; }   /* color marca */
 #totales { margin-top: 1rem; text-align: right; }
 
 .empty {
@@ -166,8 +167,6 @@ thead th { background: #040404; color: #fff; }
 #carritoTabla td input[type="number"] {
   width: 56px; height: 28px; padding: 2px 6px;
   text-align: center; border: 1px solid #cfd6de; border-radius: 6px;
-
-  /* Prefijos + estándar (soluciona warnings del linter) */
   -moz-appearance: textfield;   /* Firefox */
   -webkit-appearance: none;     /* WebKit */
   appearance: none;             /* Estándar */
@@ -182,27 +181,59 @@ thead th { background: #040404; color: #fff; }
 #carritoTabla .qty .stock { margin-left: 6px; color: #666; font-size: 12px; }
 
 /* ===========================
-   Botones
+   Botones (unificados con la marca)
    =========================== */
-.btn-primary, .btn-outline, .btn-danger {
-  display: inline-block; text-align: center;
-  padding: 10px 12px; border-radius: 8px;
-  font-weight: 600; border: 1px solid transparent; cursor: pointer;
+.btn-primary, .btn-outline, .btn-danger,
+#carritoTabla button,           /* por si vienen <button> sueltos */
+.summary-actions a,             /* los 3 enlaces del panel lateral */
+.summary-actions button {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0;
+  background: #004466;         /* color base Bazar Home */
+  color: #fff;
+  border: 1px solid #004466;
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif; /* misma fuente del sitio */
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .2s ease-in-out, transform .08s ease-in-out;
 }
-.btn-primary { background: #0d6efd; color: #fff; }
-.btn-outline { background: #0d6efd; border-color: #0d6efd; color: #fff; }
-.btn-danger  { background: #0d6efd; color: #fff; border-color: #0d6efd; }
-.btn-primary:hover, .btn-danger:hover { filter: brightness(0.95); }
-.btn-outline:hover { background: #0d6efd; color: #fff; }
+
+.btn-primary:hover, .btn-outline:hover, .btn-danger:hover,
+#carritoTabla button:hover,
+.summary-actions a:hover,
+.summary-actions button:hover {
+  background: #006699;         /* hover marca */
+  border-color: #006699;
+  transform: translateY(-1px);
+}
+
+.btn-primary:active, .btn-outline:active, .btn-danger:active,
+#carritoTabla button:active,
+.summary-actions a:active,
+.summary-actions button:active {
+  transform: scale(.98);
+}
+
+/* Si alguna vez necesitás un botón "contorno" real, descomentá:
+.btn-outline {
+  background: transparent;
+  color: #004466;
+}
+*/
 
 /* Ajustes finales de tabla del carrito */
 #carritoTabla table { width: 100%; border-collapse: collapse; }
-#carritoTabla thead th { background: #040404; color: #fff; }
+#carritoTabla thead th { background: #004466; color: #fff; } /* consistente */
 #carritoTabla th, #carritoTabla td { vertical-align: middle; }
 #totales { margin-top: 1rem; text-align: right; }
-.cart-summary a { text-decoration: none; color: #fff; font-size: 16px; font-weight: 600; }
+.cart-summary a { color: #fff; font-size: 16px; font-weight: 600; text-decoration: none; }
 .cart-summary a:hover { text-decoration: none; }
 
 /* Seguridad global para evitar scroll horizontal accidental */
 html, body { max-width: 100%; overflow-x: hidden; }
-

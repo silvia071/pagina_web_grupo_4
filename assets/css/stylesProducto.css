@@ -9,7 +9,6 @@ body {
   background-color: #f7f7f7;
   color: #333;
   line-height: 1.6;
-
   display: grid;
   grid-template-rows: auto 1fr auto; /* header/nav - main - footer */
   grid-template-areas: "nav" "main" "footer";
@@ -24,7 +23,7 @@ header {
   background-color: #004466;
   color: white;
   padding: 0.7rem 1rem;
-  position: relative;   /* evita cortes del menú en mobile */
+  position: relative;
   z-index: 1000;
 }
 
@@ -70,7 +69,7 @@ nav a {
 nav a:hover,
 nav a:focus-visible { background: #006699; }
 
-/* Botón hamburguesa (oculto en desktop; visible en <=900px) */
+/* Botón hamburguesa */
 .menu-toggle {
   display: none;
   border: 0;
@@ -82,7 +81,7 @@ nav a:focus-visible { background: #006699; }
   cursor: pointer;
 }
 
-/* Carrito fijo a la derecha */
+/* Carrito: ícono + contador (sin texto visible) */
 header .cart-link {
   display: inline-flex;
   align-items: center;
@@ -90,11 +89,19 @@ header .cart-link {
   text-decoration: none;
   color: #fff;
   font-weight: bold;
-  white-space: nowrap; /* evita salto raro */
+  white-space: nowrap;
 }
 header .icono-carrito { width: 26px; height: 26px; object-fit: contain; }
-/* Contador sin fondo rojo */
 header #cartCount { background: none; color: #fff; font-weight: bold; font-size: 1rem; padding: 0; line-height: 1; }
+
+/* Ocultar texto visualmente pero mantener accesible */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0);
+  white-space: nowrap; border: 0;
+}
 
 /* =========================
    MAIN / FOOTER
@@ -114,13 +121,15 @@ footer {
 #catalogo { padding: 2rem; }
 #catalogo h2 { margin-bottom: 1rem; text-align: center; }
 
+/* 📱 Celular: 2 columnas */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  overflow-x: hidden; /* cinturón de seguridad */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  overflow-x: hidden;
 }
 
+/* Tarjetas */
 .producto {
   background: white;
   border-radius: 10px;
@@ -136,7 +145,7 @@ footer {
 .producto img {
   width: 100%;
   height: 200px;
-  object-fit: contain;   /* muestra la imagen completa */
+  object-fit: contain;
   border-radius: 10px;
   margin-bottom: 1rem;
   background: #fff;
@@ -173,6 +182,18 @@ footer {
    MEDIA QUERIES
    ========================= */
 
+/* 📲 Tablet (≥600px): 3 columnas */
+@media (min-width: 37.5rem) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* 🖥️ Desktop (≥1200px): mantener 3 columnas o ampliar a 4 */
+@media (min-width: 75rem) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+  /* Para 4 columnas grandes:
+     .grid { grid-template-columns: repeat(4, 1fr); } */
+}
+
 /* ≤600px */
 @media (max-width: 37.5rem) {
   header h1 { font-size: 1.6rem; }
@@ -191,9 +212,7 @@ footer {
   #catalogo { padding: 1rem; }
   main { padding: 1rem; }
 
-  .grid { grid-template-columns: 1fr; gap: 1rem; }
-  .producto img { height: 150px; }
-
+  .producto img { height: 160px; }
   #carritoTabla th, #carritoTabla td { padding: 0.5rem; font-size: 0.95rem; }
 }
 
@@ -210,33 +229,25 @@ footer {
     min-height: 44px;
   }
 
-  /* ✅ Menú controlado por JS sin absolute (evita scroll horizontal) */
+  /* Menú controlado por JS */
   header .menu {
     flex-direction: column;
-    position: static;     /* <- clave: NO absolute */
+    position: static;
     width: 100%;
     background: #004466;
     border-radius: 0 0 12px 12px;
     padding: 0.75rem;
     margin-top: 0.5rem;
-    display: block;       /* se oculta/muestra con [hidden] */
+    display: block;
   }
   header .menu[hidden] { display: none; }
   header .menu li { margin: 0.25rem 0; }
   header .menu a  { display: block; font-size: 1.1rem; padding: 0.85rem 1rem; min-height: 48px; }
 
-  /* Carrito visible a la derecha sin posición absoluta */
   header .cart-link { position: static; margin-left: auto; }
 
   #catalogo { padding: 1.25rem; }
-  .grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
   .producto img { height: 180px; }
-}
-
-/* ≤1200px */
-@media (max-width: 75rem) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
-  main { width: min(1100px, 92%); }
 }
 
 /* ≥900px: menú siempre visible */

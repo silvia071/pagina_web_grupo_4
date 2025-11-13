@@ -1,9 +1,8 @@
-// Esperar a que el DOM esté listo
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Obtener el formulario
     const form = document.getElementById('contactForm');
-    
-    // Objeto con mensajes de error personalizados
+    if (!form) return;
+
     const errorMessages = {
         name: {
             valueMissing: 'Por favor ingresa tu nombre',
@@ -23,38 +22,54 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Función para mostrar errores
+    // claves de valididad a comprobar en orden
+    const validityKeys = [
+        'valueMissing',
+        'typeMismatch',
+        'patternMismatch',
+        'tooShort',
+        'tooLong',
+        'rangeUnderflow',
+        'rangeOverflow',
+        'stepMismatch',
+        'badInput',
+        'customError'
+    ];
+
     function showError(input, message) {
         input.classList.add('is-invalid');
         input.classList.remove('is-valid');
         const errorDiv = document.getElementById(`${input.id}Error`);
         if (errorDiv) {
             errorDiv.textContent = message;
+            // Bootstrap oculta .invalid-feedback por defecto; forzamos su visualización
+            errorDiv.classList.add('d-block');
         }
     }
 
-    // Función para mostrar éxito
-    function showSuccess(input) {
+    function hideError(input) {
         input.classList.remove('is-invalid');
         input.classList.add('is-valid');
+        const errorDiv = document.getElementById(`${input.id}Error`);
+        if (errorDiv) {
+            errorDiv.textContent = '';
+            errorDiv.classList.remove('d-block');
+        }
     }
 
-    // Validar campo individual
     function validateField(input) {
         const validity = input.validity;
-        
         if (validity.valid) {
-            showSuccess(input);
+            hideError(input);
             return true;
         }
 
-        // Obtener mensaje de error correspondiente
+        // buscar primer error relevante y mensaje personalizado si existe
         let message = '';
         const messages = errorMessages[input.id];
-        
-        for (const key in validity) {
-            if (validity[key] && messages && messages[key]) {
-                message = messages[key];
+        for (const key of validityKeys) {
+            if (validity[key]) {
+                message = (messages && messages[key]) ? messages[key] : input.validationMessage || 'Campo inválido';
                 break;
             }
         }
@@ -63,40 +78,48 @@ document.addEventListener('DOMContentLoaded', function() {
         return false;
     }
 
-    // Validar todos los campos cuando se envía el formulario
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        
-        const inputs = form.querySelectorAll('input');
+
+        const inputs = Array.from(form.querySelectorAll('input'));
         let isValid = true;
+        let firstInvalid = null;
 
         inputs.forEach(input => {
             if (!validateField(input)) {
                 isValid = false;
+                if (!firstInvalid) firstInvalid = input;
             }
         });
 
-        if (isValid) {
-            // Mostrar mensaje de éxito
-            const formAlert = document.getElementById('formAlert');
-            formAlert.classList.remove('d-none');
-            
-            // Limpiar formulario
-            form.reset();
-            
-            // Remover clases de validación
-            inputs.forEach(input => {
-                input.classList.remove('is-valid');
-            });
-
-            // Ocultar mensaje después de 5 segundos
-            setTimeout(() => {
-                formAlert.classList.add('d-none');
-            }, 5000);
+        if (!isValid) {
+            // enfocar el primer campo inválido
+            firstInvalid && firstInvalid.focus();
+            return;
         }
+
+        // éxito: mostrar alerta y limpiar
+        const formAlert = document.getElementById('formAlert');
+        if (formAlert) {
+            formAlert.textContent = '¡En 48hs recibirás tu pedido!';
+            formAlert.classList.remove('d-none');
+            formAlert.style.fontSize = '1.25rem';
+            formAlert.style.fontWeight = '600';
+        }
+
+        form.reset();
+        inputs.forEach(i => {
+            i.classList.remove('is-valid');
+            const err = document.getElementById(`${i.id}Error`);
+            if (err) { err.textContent = ''; err.classList.remove('d-block'); }
+        });
+
+        setTimeout(() => {
+            if (formAlert) formAlert.classList.add('d-none');
+        }, 5000);
     });
 
-    // Validar campos mientras el usuario escribe
+    // validación en tiempo real
     form.querySelectorAll('input').forEach(input => {
         input.addEventListener('input', () => validateField(input));
         input.addEventListener('blur', () => validateField(input));

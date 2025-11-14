@@ -73,13 +73,18 @@ body {
   flex-wrap: wrap;
 }
 
-/* Botones de la sección de contacto:
-   exactamente iguales para <button> y <a> */
-.contacto-acciones .btn-contacto {
+/* Mismo estilo para TODOS los botones dentro de contacto-acciones
+   (tanto <button> como <a>) */
+.contacto-acciones .btn,
+.contacto-acciones .btn-primary,
+.contacto-acciones a.btn,
+.contacto-acciones a.btn-primary,
+.contacto-acciones button.btn,
+.contacto-acciones button.btn-primary {
   background-color: #004466 !important;
   border-color: #004466 !important;
   color: #ffffff !important;
-  min-width: 160px;
+  min-width: 180px;
   padding: 0.6rem 1.4rem;
   border-radius: 0.5rem;
   display: inline-flex;
@@ -88,8 +93,28 @@ body {
   text-decoration: none;
 }
 
-.contacto-acciones .btn-contacto:hover,
-.contacto-acciones .btn-contacto:focus-visible {
+.contacto-acciones .btn:hover,
+.contacto-acciones .btn:focus,
+.contacto-acciones .btn-primary:hover,
+.contacto-acciones .btn-primary:focus,
+.contacto-acciones a.btn:hover,
+.contacto-acciones a.btn:focus,
+.contacto-acciones a.btn-primary:hover,
+.contacto-acciones a.btn-primary:focus {
+  background-color: #006699 !important;
+  border-color: #006699 !important;
+  color: #ffffff !important;
+  text-decoration: none;
+}
+/* FORZAR estilo de TODOS los .btn-primary en la página de contacto */
+.btn-primary {
+  background-color: #004466 !important;
+  border-color: #004466 !important;
+  color: #ffffff !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
   background-color: #006699 !important;
   border-color: #006699 !important;
   color: #ffffff !important;

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("validacioncompra.js v2 cargado"); // para verificar en consola
+  console.log("validacioncompra.js v2 cargado"); 
 
   const form = document.getElementById("contactForm");
   if (!form) return;
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // ✅ Recuadro verde dentro de la tarjeta
+   
     const formAlert = document.getElementById("formAlert");
     if (formAlert) {
       formAlert.textContent = MENSAJE_COMPRA;
@@ -113,12 +113,12 @@ document.addEventListener("DOMContentLoaded", function () {
       formAlert.style.fontWeight = "600";
     }
 
-    // ✅ Cartel lindo tipo modal
+   
     if (overlay) {
       overlay.classList.remove("hidden");
     }
 
-    // limpiar formulario y estados
+   
     form.reset();
     inputs.forEach((i) => {
       i.classList.remove("is-valid");
@@ -133,8 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (btnCerrar && overlay) {
     btnCerrar.addEventListener("click", () => {
       overlay.classList.add("hidden");
-      // si querés redirigir al inicio:
-      // window.location.href = "../index.html";
+      
     });
   }
 

@@ -87,5 +87,5 @@ async function initIndex() {
   }
 }
 
-// Run
+
 document.addEventListener("DOMContentLoaded", initIndex);

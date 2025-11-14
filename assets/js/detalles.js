@@ -144,7 +144,7 @@ async function mostrarDetalle() {
   const btnAgregar = document.getElementById("btnAgregar");
   const qtyInput = document.getElementById("qty");
 
-  // Botones + y − de cantidad
+  
   const qtyBtns = cont.querySelectorAll(".qty-btn");
   qtyBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -153,7 +153,7 @@ async function mostrarDetalle() {
       valor += delta;
       if (valor < 1) valor = 1;
 
-      // limitar por stock visible si es numérico
+      
       const visibleTxt = cont.querySelector(".stockVal")?.textContent ?? "";
       const visible = Number(visibleTxt);
       if (Number.isFinite(visible)) {

@@ -194,7 +194,7 @@ function itemsCount() {
 
 function updateCartSummary() {
   const itemsEl = document.getElementById("summary-items");
-  const totalSpan = document.getElementById("total"); // lo usás en el HTML del panel
+  const totalSpan = document.getElementById("total"); // lo 
   if (itemsEl) itemsEl.textContent = String(itemsCount());
   if (totalSpan) totalSpan.textContent = cartTotal().toLocaleString("es-AR");
 }

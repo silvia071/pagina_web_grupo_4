@@ -9,7 +9,7 @@
   </head>
 
   <body class="page-confirmacion">
-    <!-- SACAMOS el texto fijo de "¡Gracias por tu compra!" -->
+   
 
     <main class="container py-5">
       <div class="text-center mb-4">
@@ -69,28 +69,27 @@
     </main>
 
     <script>
-      // Mostrar el mensaje SOLO como cartel emergente
+     
       document.addEventListener("DOMContentLoaded", () => {
         const form = document.getElementById("form-confirmacion");
 
         if (!form) return;
 
         form.addEventListener("submit", function (e) {
-          e.preventDefault(); // evitamos que recargue la página
+          e.preventDefault(); 
 
           alert(
             "¡Gracias por tu compra!\n\nPronto nos pondremos en contacto para coordinar la entrega."
           );
 
-          // Si después querés volver al inicio, descomentá esta línea:
-          // window.location.href = "../index.html";
+          
         });
       });
     </script>
-    <!-- Bootstrap JS (Bundle con Popper) -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Script de validación -->
+   
     <script src="../assets/js/validacioncompra.js?v=2" defer></script>
   </body>
 </html>

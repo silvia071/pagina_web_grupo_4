@@ -1,4 +1,4 @@
-
+// productos.js - usando fetch a data.json (sin import de data.js)
 import {
   addToCart,
   syncCartCount,
@@ -9,34 +9,13 @@ import {
 const DATA_URL = "../assets/data.json";
 let productos = [];
 
-
-function showMsgProducto(card, texto, type = "success") {
-  if (!card) return;
-
-  let box = card.querySelector(".card-msg");
-  if (!box) {
-    box = document.createElement("div");
-    box.className = "card-msg inline-msg";
-    card.appendChild(box); 
-  }
-
-  box.textContent = texto;
-  box.classList.remove("warning", "success", "hide");
-  box.classList.add(type === "warning" ? "warning" : "success");
-
-  clearTimeout(box._timer);
-  box._timer = setTimeout(() => {
-    box.classList.add("hide");
-  }, 2000);
-}
-
 async function cargarProductos() {
   try {
     const res = await fetch(DATA_URL, { cache: "no-store" });
     if (!res.ok) throw new Error(`Error ${res.status} al leer ${DATA_URL}`);
     productos = await res.json();
 
-   
+    // opcional: cache para detalle.html
     try {
       localStorage.setItem("productosStock", JSON.stringify(productos));
     } catch {}
@@ -66,28 +45,16 @@ function cardProducto(p) {
     <p><strong>Precio: $${Number(p.precio).toLocaleString("es-AR")}</strong></p>
     <p>${p.descripcion}</p>
     <p>Categoría: ${p.categoria} • Stock: ${stockNum ?? "—"}</p>
-
-    <div class="acciones">
-      <button
-        class="btn-accion btn-add"
-        data-id="${p.id}"
-        data-stock="${stockNum ?? ""}"
-      >
-        ${
-          typeof stockNum === "number" && stockNum <= 0
-            ? "Sin stock"
-            : "Agregar al carrito"
-        }
-      </button>
-
-      <a
-        href="detalle.html?id=${p.id}"
-        class="btn-accion btn-detalle"
-        target="_blank"
-      >
-        Ver detalle
-      </a>
-    </div>
+    <button class="btn-add" data-id="${p.id}" data-stock="${stockNum ?? ""}">
+       ${
+         typeof stockNum === "number" && stockNum <= 0
+           ? "Sin stock"
+           : "Agregar al carrito"
+       }
+    </button>
+    <a href="detalle.html?id=${
+      p.id
+    }" class="btn-detalle" target="_blank"> Ver detalle</a>
   `;
   return div;
 }
@@ -111,12 +78,10 @@ function renderProductos(filtrarCategoria = "todas") {
   const cont = document.getElementById("gridProductos");
   if (!cont) return;
   cont.innerHTML = "";
-
   let lista = productos;
   if (filtrarCategoria !== "todas") {
     lista = productos.filter((p) => p.categoria === filtrarCategoria);
   }
-
   lista.forEach((pBase) => {
     const pReal = (() => {
       try {
@@ -125,57 +90,35 @@ function renderProductos(filtrarCategoria = "todas") {
         return pBase;
       }
     })();
-   
+    // mantené todos los campos del JSON, pero reemplazá stock (y cualquier otro que te calcule findProduct)
     const pUI = { ...pBase, ...pReal };
     cont.appendChild(cardProducto(pUI));
   });
-
   actualizarContador(lista.length);
 }
 
 function manejarAgregarCarrito() {
   const cont = document.getElementById("gridProductos");
   if (!cont) return;
-
   cont.addEventListener("click", (e) => {
     const btn = e.target.closest(".btn-add");
     if (!btn) return;
 
-    const card = btn.closest(".producto");
     const stockAttr = btn.dataset.stock;
     const stockNum = stockAttr === "" ? null : Number(stockAttr);
 
-    
-    if (typeof stockNum === "number" && stockNum <= 0) {
-      toast("Producto sin stock", "warning");
-      showMsgProducto(card, "Producto sin stock", "warning");
-      return;
-    }
-
     const res = addToCart(btn.dataset.id, 1);
     if (!res.ok) {
-      const msg = res.error || "Error al agregar";
-      toast(msg, "warning");
-      if (msg.toLowerCase().includes("stock")) {
-        showMsgProducto(card, "Producto sin stock", "warning");
-      } else {
-        showMsgProducto(card, msg, "warning");
-      }
+      toast(res.error || "Error al agregar", "warning");
       return;
     }
-
-   
     toast("Producto agregado correctamente", "success");
-    showMsgProducto(card, "Agregado al carrito", "success");
-    syncCartCount();
 
     btn.textContent = "Agregado ✓";
-
-    setTimeout(() => {
-      btn.textContent = "Agregar al carrito";
-      const filtro = document.getElementById("filtroCategoria");
-      renderProductos(filtro ? filtro.value : "todas");
-    }, 900);
+    setTimeout(() => (btn.textContent = "Agregar al carrito"), 900);
+    syncCartCount();
+    const filtro = document.getElementById("filtroCategoria");
+    renderProductos(filtro ? filtro.value : "todas");
   });
 }
 
@@ -189,17 +132,17 @@ function manejarFiltro() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
- 
+  // 1) cargar JSON
   await cargarProductos();
 
-
+  // 2) inicializar UI
   llenarFiltroCategorias();
   const filtro = document.getElementById("filtroCategoria");
   const guardada = localStorage.getItem("filtroCategoriaSel") || "todas";
   if (filtro) filtro.value = guardada;
   renderProductos(guardada);
 
- 
+  // 3) eventos
   manejarAgregarCarrito();
   manejarFiltro();
   syncCartCount();

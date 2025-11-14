@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     menu.hidden = false;
   };
 
-
+  // Estado inicial según tamaño
   const sync = () => {
     if (mq.matches) {
       if (toggle.getAttribute("aria-expanded") !== "true") menu.hidden = true;
@@ -29,12 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
     toggle.getAttribute("aria-expanded") === "true" ? close() : open();
   });
 
- 
+  // Cerrar al elegir un link (mejor UX)
   menu.addEventListener("click", (e) => {
     if (e.target.closest("a") && mq.matches) close();
   });
 
-
+  // Esc para cerrar
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && mq.matches) close();
   });

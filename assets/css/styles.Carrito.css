@@ -1,22 +1,11 @@
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-th,
-td {
-  padding: 0.75rem;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
-  font-family: Arial, Helvetica, sans-serif;
-}
-thead th {
-  background: #004466;
-  color: #fff;
-}
-#totales {
-  margin-top: 1rem;
-  text-align: right;
-}
+
+/* ===========================
+   TABLA DEL CARRITO (base)
+   =========================== */
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 0.75rem; border-bottom: 1px solid #ddd; text-align: left; font-family: Arial, Helvetica, sans-serif; }
+thead th { background: #004466; color: #fff; }   /* color marca */
+#totales { margin-top: 1rem; text-align: right; }
 
 .empty {
   padding: 1rem;
@@ -26,13 +15,14 @@ thead th {
 }
 
 .icono-carrito {
-  width: 26px;
-  height: 26px;
-  vertical-align: middle;
-  margin-right: 6px;
+  width: 26px; height: 26px;
+  vertical-align: middle; margin-right: 6px;
   object-fit: contain;
 }
 
+/* ===========================
+   MENÚ HAMBURGUESA (botón)
+   =========================== */
 .menu-toggle {
   display: none;
   border: 0;
@@ -44,10 +34,11 @@ thead th {
   cursor: pointer;
 }
 
-@media (max-width: 37.5rem) {
-  header h1 {
-    font-size: 1.6rem;
-  }
+/* ===========================
+   MEDIA QUERIES – RESPONSIVO
+   =========================== */
+@media (max-width: 37.5rem) { /* 600px */
+  header h1 { font-size: 1.6rem; }
 
   .menu-toggle {
     display: inline-block;
@@ -55,44 +46,23 @@ thead th {
     padding: 0.85rem 1.1rem;
   }
 
-  nav ul {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
+  nav ul { flex-direction: column; align-items: center; gap: 0.5rem; }
 
   nav a {
-    font-size: 1.15rem;
-    padding: 1rem 1rem;
-    min-height: 48px;
-    display: block;
+    font-size: 1.15rem; padding: 1rem 1rem;
+    min-height: 48px; display: block;
   }
 
-  .icono-carrito {
-    width: 28px;
-    height: 28px;
-    margin-right: 8px;
-  }
+  .icono-carrito { width: 28px; height: 28px; margin-right: 8px; }
 
-  main {
-    padding: 1rem;
-  }
-  table,
-  th,
-  td {
-    font-size: 0.95rem;
-  }
+  main { padding: 1rem; }
+  table, th, td { font-size: 0.95rem; }
 
-  footer {
-    font-size: 1rem;
-    padding: 0.9rem;
-  }
+  footer { font-size: 1rem; padding: 0.9rem; }
 }
 
-@media (max-width: 56.25rem) {
-  header h1 {
-    font-size: 1.8rem;
-  }
+@media (max-width: 56.25rem) { /* 900px */
+  header h1 { font-size: 1.8rem; }
 
   .menu-toggle {
     display: inline-block;
@@ -102,6 +72,7 @@ thead th {
     min-height: 44px;
   }
 
+  /* Menú colapsable controlado por JS */
   nav ul {
     display: block;
     margin-top: 0.75rem;
@@ -109,110 +80,50 @@ thead th {
     border-radius: 12px;
     padding: 0.5rem;
   }
-  nav ul[hidden] {
-    display: none;
-  }
-  nav ul li {
-    margin: 0.25rem 0;
-  }
+  nav ul[hidden] { display: none; }
+  nav ul li { margin: 0.25rem 0; }
 
   nav a {
-    display: block;
-    font-size: 1.1rem;
-    padding: 0.85rem 1rem;
-    min-height: 48px;
+    display: block; font-size: 1.1rem;
+    padding: 0.85rem 1rem; min-height: 48px;
   }
 
-  main {
-    padding: 1.5rem;
-  }
-  table,
-  th,
-  td {
-    font-size: 1rem;
-  }
+  main { padding: 1.5rem; }
+  table, th, td { font-size: 1rem; }
 }
 
-@media (max-width: 75rem) {
-  body {
-    font-size: 1rem;
-  }
-  header h1 {
-    font-size: 2rem;
-  }
+@media (max-width: 75rem) { /* 1200px */
+  body { font-size: 1rem; }
+  header h1 { font-size: 2rem; }
 }
 
+/* ===========================
+   TOASTS (notificaciones)
+   =========================== */
 .toast-box {
-  position: fixed;
-  right: 16px;
-  top: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 99999;
-  pointer-events: none;
-  max-width: 360px;
+  position: fixed; right: 16px; top: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  z-index: 99999; pointer-events: none; max-width: 360px;
 }
 .toast {
-  pointer-events: auto;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 10px 12px;
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  font-size: 14px;
-  color: #042028;
-  transform-origin: right top;
-  animation: toast-in 0.18s ease-out;
+  pointer-events: auto; display: flex; gap: 10px; align-items: center;
+  padding: 10px 12px; border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+  font-size: 14px; color: #042028;
+  transform-origin: right top; animation: toast-in .18s ease-out;
 }
-.toast.toast-success {
-  background: linear-gradient(180deg, #dff7e6, #c6f0d3);
-  border: 1px solid #86d27c;
-}
-.toast.toast-warning {
-  background: linear-gradient(180deg, #fff7ea, #fff0d8);
-  border: 1px solid #e0b84d;
-}
-.toast .toast-icon {
-  font-weight: 700;
-  width: 26px;
-  text-align: center;
-}
-.toast .toast-text {
-  flex: 1;
-  line-height: 1.1;
-}
-.toast .toast-close {
-  margin-left: 8px;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  font-size: 16px;
-  color: rgba(0, 0, 0, 0.6);
-}
+.toast.toast-success { background: linear-gradient(180deg,#dff7e6,#c6f0d3); border: 1px solid #86d27c; }
+.toast.toast-warning { background: linear-gradient(180deg,#fff7ea,#fff0d8); border: 1px solid #e0b84d; }
+.toast .toast-icon { font-weight: 700; width: 26px; text-align: center; }
+.toast .toast-text { flex: 1; line-height: 1.1; }
+.toast .toast-close { margin-left: 8px; background: transparent; border: 0; cursor: pointer; font-size: 16px; color: rgba(0,0,0,.6); }
 
-@keyframes toast-in {
-  from {
-    transform: translateX(12px) scale(0.98);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0) scale(1);
-    opacity: 1;
-  }
-}
-@keyframes toast-out {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-}
+@keyframes toast-in { from { transform: translateX(12px) scale(.98); opacity: 0 } to { transform: translateX(0) scale(1); opacity: 1 } }
+@keyframes toast-out { from { opacity: 1; transform: scale(1) } to { opacity: 0; transform: scale(.98) } }
 
+/* ===========================
+   CARRITO: Layout + Resumen
+   =========================== */
 #carritoTabla.cart-layout {
   display: grid;
   grid-template-columns: 1fr 320px;
@@ -220,161 +131,118 @@ thead th {
   align-items: start;
 }
 @media (max-width: 992px) {
-  #carritoTabla.cart-layout {
-    grid-template-columns: 1fr;
-  }
+  #carritoTabla.cart-layout { grid-template-columns: 1fr; }
 }
 
-.cart-table-wrapper {
-  overflow-x: auto;
-}
+/* Tabla con wrapper por si requiere scroll horizontal en pantallas chicas */
+.cart-table-wrapper { overflow-x: auto; }
 
+/* Panel lateral */
 .cart-summary {
-  position: sticky;
-  top: 16px;
-  background: #fff;
-  border: 1px solid #e3e7ee;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  position: sticky; top: 16px;
+  background: #fff; border: 1px solid #e3e7ee; border-radius: 12px;
+  padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.04);
 }
-.cart-summary h3 {
-  margin: 0 0 12px;
-  font-size: 18px;
-}
+.cart-summary h3 { margin: 0 0 12px; font-size: 18px; }
 .summary-rows > div {
-  display: flex;
-  justify-content: space-between;
-  padding: 6px 0;
-  border-bottom: 1px dashed #e7e7e7;
+  display: flex; justify-content: space-between;
+  padding: 6px 0; border-bottom: 1px dashed #e7e7e7;
 }
-.summary-rows > div:last-child {
-  border-bottom: none;
-}
-.summary-actions {
-  display: grid;
-  gap: 10px;
-  margin-top: 14px;
-}
+.summary-rows > div:last-child { border-bottom: none; }
+.summary-actions { display: grid; gap: 10px; margin-top: 14px; }
 
-#carritoTabla .qty {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
+/* ===========================
+   Cantidades (inputs + botones)
+   =========================== */
+#carritoTabla .qty { display: inline-flex; align-items: center; gap: 8px; }
 
 #carritoTabla .btn-qty {
-  width: 28px;
-  height: 28px;
-  border: 1px solid #cfd6de;
-  background: #fff;
-  border-radius: 6px;
-  font-size: 18px;
-  line-height: 1;
-  cursor: pointer;
-  user-select: none;
+  width: 28px; height: 28px;
+  border: 1px solid #cfd6de; background: #fff; border-radius: 6px;
+  font-size: 18px; line-height: 1; cursor: pointer; user-select: none;
 }
 
+/* Inputs numéricos */
 #carritoTabla .qty-input,
 #carritoTabla td input[type="number"] {
-  width: 56px;
-  height: 28px;
-  padding: 2px 6px;
-  text-align: center;
-  border: 1px solid #cfd6de;
-  border-radius: 6px;
-  -moz-appearance: textfield;
-  -webkit-appearance: none;
-  appearance: none;
+  width: 56px; height: 28px; padding: 2px 6px;
+  text-align: center; border: 1px solid #cfd6de; border-radius: 6px;
+  -moz-appearance: textfield;   /* Firefox */
+  -webkit-appearance: none;     /* WebKit */
+  appearance: none;             /* Estándar */
 }
 
+/* Quitar spinners en Chrome/Safari */
 #carritoTabla .qty-input::-webkit-outer-spin-button,
 #carritoTabla .qty-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+  -webkit-appearance: none; margin: 0;
 }
 
-#carritoTabla .qty .stock {
-  margin-left: 6px;
-  color: #666;
-  font-size: 12px;
-}
+#carritoTabla .qty .stock { margin-left: 6px; color: #666; font-size: 12px; }
 
-.btn-primary,
-.btn-outline,
-.btn-danger,
-#carritoTabla button,
-.summary-actions a,
+/* ===========================
+   Botones (unificados con la marca)
+   =========================== */
+.btn-primary, .btn-outline, .btn-danger,
+#carritoTabla button,           /* por si vienen <button> sueltos */
+.summary-actions a,             /* los 3 enlaces del panel lateral */
 .summary-actions button {
   display: block;
   width: 100%;
   margin: 0.5rem 0;
-  background: #004466;
+  background: #004466;         /* color base Bazar Home */
   color: #fff;
   border: 1px solid #004466;
   border-radius: 8px;
   padding: 0.9rem 1rem;
   font-size: 1rem;
   font-weight: bold;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif; /* misma fuente del sitio */
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.2s ease-in-out, transform 0.08s ease-in-out;
+  transition: background .2s ease-in-out, transform .08s ease-in-out;
 }
 
-.btn-primary:hover,
-.btn-outline:hover,
-.btn-danger:hover,
+.btn-primary:hover, .btn-outline:hover, .btn-danger:hover,
 #carritoTabla button:hover,
 .summary-actions a:hover,
 .summary-actions button:hover {
-  background: #006699;
+  background: #006699;         /* hover marca */
   border-color: #006699;
   transform: translateY(-1px);
 }
 
-.btn-primary:active,
-.btn-outline:active,
-.btn-danger:active,
+.btn-primary:active, .btn-outline:active, .btn-danger:active,
 #carritoTabla button:active,
 .summary-actions a:active,
 .summary-actions button:active {
-  transform: scale(0.98);
+  transform: scale(.98);
 }
 
-#carritoTabla table {
-  width: 100%;
-  border-collapse: collapse;
+/* Si alguna vez necesitás un botón "contorno" real, descomentá:
+.btn-outline {
+  background: transparent;
+  color: #004466;
 }
-#carritoTabla thead th {
-  background: #004466;
-  color: #fff;
-}
-/ #carritoTabla th,
-#carritoTabla td {
-  vertical-align: middle;
-}
-#totales {
-  margin-top: 1rem;
-  text-align: right;
-}
-.cart-summary a {
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
-}
-.cart-summary a:hover {
-  text-decoration: none;
-}
+*/
 
-html,
-body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
+/* Ajustes finales de tabla del carrito */
+#carritoTabla table { width: 100%; border-collapse: collapse; }
+#carritoTabla thead th { background: #004466; color: #fff; } /* consistente */
+#carritoTabla th, #carritoTabla td { vertical-align: middle; }
+#totales { margin-top: 1rem; text-align: right; }
+.cart-summary a { color: #fff; font-size: 16px; font-weight: 600; text-decoration: none; }
+.cart-summary a:hover { text-decoration: none; }
 
+/* Seguridad global para evitar scroll horizontal accidental */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* ===========================
+   VALIDACIÓN DE FORMULARIOS
+   =========================== */
+
+/* Helpers para validación (muestran mensajes y estilos si no cargás Bootstrap CSS) */
 .is-invalid {
   border-color: #dc3545 !important;
   background-color: #fff;
@@ -386,26 +254,27 @@ body {
 }
 
 .invalid-feedback {
-  display: none;
+  display: none;             /* oculto por defecto */
   color: #dc3545;
-  font-size: 0.9rem;
-  margin-top: 0.25rem;
+  font-size: .9rem;
+  margin-top: .25rem;
 }
 
+/* clase que usa el JS para forzar la visualización */
 .invalid-feedback.d-block,
 .invalid-feedback.show {
   display: block;
 }
 
-.d-block {
-  display: block !important;
-}
+/* utilidad mínima similar a Bootstrap d-block (por si no está disponible) */
+.d-block { display: block !important; }
 
+/* Validación: ocultar feedback por defecto y mostrar según clases/estado */
 .invalid-feedback {
   display: none;
   color: #dc3545;
-  font-size: 0.9rem;
-  margin-top: 0.25rem;
+  font-size: .9rem;
+  margin-top: .25rem;
 }
 
 .invalid-feedback.d-block,
@@ -416,10 +285,12 @@ body {
 .valid-feedback {
   display: none;
   color: #28a745;
-  font-size: 0.9rem;
-  margin-top: 0.25rem;
+  font-size: .9rem;
+  margin-top: .25rem;
 }
 
+/* Mostrar el mensaje de éxito si el input tiene la clase .is-valid
+   o si el JS fuerza .d-block / .show en el elemento */
 input.is-valid + .valid-feedback,
 input.is-valid ~ .valid-feedback,
 input:valid + .valid-feedback,
@@ -429,28 +300,53 @@ input:valid ~ .valid-feedback,
   display: block !important;
 }
 
-.d-block {
+/* utilidad por si tu JS usa .d-block */
+.d-block { display: block !important; }
+
+/* ===========================
+   ESTILOS ESPECÍFICOS PARA confirmacioncompra.html
+   =========================== */
+   
+/* CENTRADO SÓLO EN confirmacioncompra.html */
+.page-confirmacion .card-body,
+.page-confirmacion h1,
+.page-confirmacion h2,
+.page-confirmacion h3,
+.page-confirmacion p,
+.page-confirmacion label,
+.page-confirmacion .form-label,
+.page-confirmacion .valid-feedback,
+.page-confirmacion .invalid-feedback {
+  text-align: center;
+}
+
+/* Centrar el formulario visualmente y limitar ancho de inputs */
+.page-confirmacion form {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 520px; /* ajusta si necesitas más o menos ancho */
+}
+
+.page-confirmacion .form-control {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 420px; /* ancho del input dentro del formulario centrado */
+  box-sizing: border-box;
+}
+
+/* Asegurar que los mensajes de feedback se muestren centrados */
+.page-confirmacion .invalid-feedback,
+.page-confirmacion .valid-feedback {
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+.page-confirmacion input.is-invalid + .invalid-feedback,
+.page-confirmacion input.is-valid + .valid-feedback,
+.page-confirmacion .invalid-feedback.d-block,
+.page-confirmacion .valid-feedback.d-block {
   display: block !important;
 }
 
-.page-confirmacion {
-  background-color: #f7f7f7;
-}
-
-.card-confirmacion {
-  border: 0;
-  border-radius: 1rem;
-  background-color: #ffffff;
-  color: #212529;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.page-confirmacion .card-confirmacion .btn-primary {
-  min-width: 200px;
-}
-.page-confirmacion .titulo-contacto,
-.page-confirmacion .intro-contacto {
-  text-align: center !important;
-}

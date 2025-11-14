@@ -260,6 +260,7 @@ footer a:hover {
     font-size: 2rem;
   }
 }
+
 .btn-back {
   background: none;
   border: none;
@@ -293,10 +294,87 @@ footer a:hover {
   opacity: 0;
 }
 
+/* (ya casi no se usa, pero lo dejo por compatibilidad) */
 .agregar {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
-  justify-content: center; /* cambiá a flex-start si lo querés a la izquierda */
+  justify-content: center;
+}
+
+/* Botones principales (Agregar al carrito / Volver) */
+#detalleProducto .btn-accion {
+  display: inline-block;
+  background: #004466;
+  color: #ffffff;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background 0.3s;
+  margin-left: 0.5rem;
+}
+
+#detalleProducto .btn-accion:hover {
+  background: #006699;
+}
+
+/* Contenedor de la fila "Cantidad" */
+#detalleProducto .fila-cantidad {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem; /* <<< antes era 0 o muy poco */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+/* Caja de cantidad, parecida a la del carrito */
+#detalleProducto #qty {
+  width: 3.2rem;
+  text-align: center;
+  padding: 0.35rem 0.4rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #ffffff;
+  font-size: 0.95rem;
+}
+
+/* Botones + y − de cantidad */
+#detalleProducto .qty-btn {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 8px;
+  border: none;
+  background: #004466;
+  color: #ffffff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+#detalleProducto .qty-btn:hover {
+  background: #006699;
+}
+
+/* Ocultar flechitas nativas del input number */
+#detalleProducto #qty::-webkit-inner-spin-button,
+#detalleProducto #qty::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#detalleProducto #qty {
+  -moz-appearance: textfield;
+}
+#detalleProducto .acciones {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
 }

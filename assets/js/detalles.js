@@ -31,12 +31,13 @@ function showInlineMsg(container, text, type = "warning") {
     container.appendChild(el);
   }
 
-  el.textContent = text; 
-  el.className = type === "warning" ? "inline-msg warning" : "inline-msg success";
+  el.textContent = text;
+  el.className =
+    type === "warning" ? "inline-msg warning" : "inline-msg success";
 
   clearTimeout(el._hideTimer);
   el._hideTimer = setTimeout(() => {
-    el.classList.add("hide"); 
+    el.classList.add("hide");
     setTimeout(() => el.remove(), 500);
   }, 2500);
 }
@@ -83,35 +84,51 @@ async function mostrarDetalle() {
 
   const stockNum = producto.stock == null ? null : Number(producto.stock);
 
-cont.innerHTML = `
-  <h2>${producto.nombre}</h2>
-  <img src="${rutaImg(producto.img)}" alt="${
-  producto.nombre
-}" style="max-width:300px;" />
-  <p><strong>Precio:</strong> $${Number(producto.precio).toLocaleString(
-    "es-AR"
-  )}</p>
-  <p><strong>Detalle:</strong> ${producto.detalle}</p>
-  <p><strong>Categoría:</strong> ${producto.categoria}</p>
-  <p><strong>Stock:</strong> <span class="stockVal">${
-    stockNum ?? "—"
-  }</span></p>
+  cont.innerHTML = `
+    <h2>${producto.nombre}</h2>
+    <img src="${rutaImg(producto.img)}" alt="${
+    producto.nombre
+  }" style="max-width:300px;" />
+    <p><strong>Precio:</strong> $${Number(producto.precio).toLocaleString(
+      "es-AR"
+    )}</p>
+    <p><strong>Detalle:</strong> ${producto.detalle}</p>
+    <p><strong>Categoría:</strong> ${producto.categoria}</p>
+    <p><strong>Stock:</strong> <span class="stockVal">${
+      stockNum ?? "—"
+    }</span></p>
 
-  <div class="agregar" style="margin-top:10px;">
-    <label for="qty">Cantidad:</label>
-    <input id="qty" type="number" min="1" value="1" style="width:64px; margin-left:8px;" />
-    <button id="btnAgregar" class="btn btn-primary btn-sm" style="margin-left:12px;">
-      ${
-        typeof stockNum === "number" && stockNum <= 0
-          ? "Sin stock"
-          : "Agregar al carrito"
-      }
-    </button>
-    <button id="btnVolver" type="button" class="btn btn-outline-secondary btn-sm">Volver</button>
-  </div>
-`;
+    <div class="fila-cantidad">
+      <span>Cantidad:</span>
+      <button type="button" class="qty-btn" data-delta="-1">−</button>
+      <input id="qty" type="number" min="1" value="1" />
+      <button type="button" class="qty-btn" data-delta="1">+</button>
+    </div>
 
+    <div class="acciones">
+      <button
+        id="btnAgregar"
+        class="btn-accion btn-add-detalle"
+        type="button"
+      >
+        ${
+          typeof stockNum === "number" && stockNum <= 0
+            ? "Sin stock"
+            : "Agregar al carrito"
+        }
+      </button>
 
+      <button
+        id="btnVolver"
+        type="button"
+        class="btn-accion btn-volver"
+      >
+        Volver
+      </button>
+    </div>
+  `;
+
+  // Botón volver
   document.getElementById("btnVolver")?.addEventListener("click", () => {
     if (history.length > 1) return history.back();
     const ref = document.referrer;
@@ -126,7 +143,26 @@ cont.innerHTML = `
 
   const btnAgregar = document.getElementById("btnAgregar");
   const qtyInput = document.getElementById("qty");
-  const stockEl = cont.querySelector(".stockVal");
+
+  // Botones + y − de cantidad
+  const qtyBtns = cont.querySelectorAll(".qty-btn");
+  qtyBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const delta = Number(btn.dataset.delta) || 0;
+      let valor = parseInt(qtyInput.value, 10) || 1;
+      valor += delta;
+      if (valor < 1) valor = 1;
+
+      // limitar por stock visible si es numérico
+      const visibleTxt = cont.querySelector(".stockVal")?.textContent ?? "";
+      const visible = Number(visibleTxt);
+      if (Number.isFinite(visible)) {
+        valor = Math.min(valor, Math.max(1, visible));
+      }
+
+      qtyInput.value = String(valor);
+    });
+  });
 
   if (btnAgregar && typeof stockNum === "number" && stockNum <= 0) {
     btnAgregar.disabled = true;
@@ -134,14 +170,12 @@ cont.innerHTML = `
 
   if (btnAgregar) {
     btnAgregar.addEventListener("click", () => {
-  
       const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
 
       const visibleTxt = cont.querySelector(".stockVal")?.textContent ?? "";
       const visible = Number(visibleTxt);
       const tieneStockVisible = Number.isFinite(visible);
 
- 
       const disponible = tieneStockVisible ? visible : qty;
       const tomar = tieneStockVisible ? Math.min(qty, disponible) : qty;
 
@@ -153,7 +187,6 @@ cont.innerHTML = `
         return;
       }
 
-    
       const res = addToCart(producto.id, tomar);
       if (!res.ok) {
         showInlineMsg(cont, res.error ?? "Error al agregar", "warning");
@@ -161,12 +194,10 @@ cont.innerHTML = `
         return;
       }
 
-    
       showInlineMsg(cont, `Agregado al carrito (×${tomar}) ✓`, "success");
       toast?.(`Agregado al carrito (×${tomar}) ✓`, "success");
       syncCartCount?.();
 
-     
       if (tieneStockVisible) {
         const nuevo = Math.max(0, disponible - tomar);
         const stockEl = cont.querySelector(".stockVal");

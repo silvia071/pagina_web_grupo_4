@@ -1,6 +1,5 @@
 const DATA_URL = `${location.origin}/assets/data.json`;
 
-// Lee del cache si existe; si no, trae el JSON y lo guarda
 async function cargarCatalogo() {
   try {
     const cache = localStorage.getItem("productosStock");
@@ -20,7 +19,6 @@ async function cargarCatalogo() {
   return data;
 }
 
-// Toma n productos aleatorios, priorizando stock > 0
 function tomarAleatorios(arr, n = 3) {
   const src = Array.isArray(arr) ? [...arr] : [];
   const enStock = src.filter((p) => Number(p?.stock) > 0);
@@ -32,14 +30,13 @@ function tomarAleatorios(arr, n = 3) {
   return base.slice(0, n);
 }
 
-// Resuelve ruta de imagen desde index (raíz)
 function rutaImg(img) {
   if (!img) return "";
   if (String(img).startsWith("/")) return img;
-  return String(img).replace(/^\.?\/*/, ""); // normaliza "assets/..."
+  return String(img).replace(/^\.?\/*/, "");
+  ("assets/...");
 }
 
-// Formato ARS
 function precioARS(n) {
   const num = Number(n);
   if (Number.isNaN(num)) return "—";
@@ -54,22 +51,16 @@ function precioARS(n) {
   }
 }
 
-// Crea tarjeta de destacado
 function cardDestacado(p) {
   const div = document.createElement("div");
   div.className = "producto destacado";
   div.innerHTML = `
     <img src="${rutaImg(p.img)}" alt="${p.nombre}" loading="lazy" />
     <h3>${p.nombre}</h3>
-    <p class="precio">${precioARS(p.precio)}</p>
-    <a href="pages/detalle.html?id=${encodeURIComponent(
-      p.id
-    )}" class="btn-detalle" target="_blank">Ver detalle</a>
   `;
   return div;
 }
 
-// Inicializa la sección de destacados
 async function initIndex() {
   const cont = document.querySelector("#destacados .cards");
   const msg = document.getElementById("detalleMsg"); // opcional

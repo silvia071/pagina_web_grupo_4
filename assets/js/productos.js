@@ -1,10 +1,10 @@
-// productos.js - usando fetch a data.json (sin import de data.js)
 import {
   addToCart,
   syncCartCount,
-  toast,
   findProduct,
 } from "./carrito-utils.js";
+
+import { toast } from "./carrito-utils.js";
 
 const DATA_URL = "../assets/data.json";
 let productos = [];
@@ -15,7 +15,6 @@ async function cargarProductos() {
     if (!res.ok) throw new Error(`Error ${res.status} al leer ${DATA_URL}`);
     productos = await res.json();
 
-    // opcional: cache para detalle.html
     try {
       localStorage.setItem("productosStock", JSON.stringify(productos));
     } catch {}
@@ -90,7 +89,6 @@ function renderProductos(filtrarCategoria = "todas") {
         return pBase;
       }
     })();
-    // mantené todos los campos del JSON, pero reemplazá stock (y cualquier otro que te calcule findProduct)
     const pUI = { ...pBase, ...pReal };
     cont.appendChild(cardProducto(pUI));
   });
@@ -132,17 +130,14 @@ function manejarFiltro() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // 1) cargar JSON
   await cargarProductos();
 
-  // 2) inicializar UI
   llenarFiltroCategorias();
   const filtro = document.getElementById("filtroCategoria");
   const guardada = localStorage.getItem("filtroCategoriaSel") || "todas";
   if (filtro) filtro.value = guardada;
   renderProductos(guardada);
 
-  // 3) eventos
   manejarAgregarCarrito();
   manejarFiltro();
   syncCartCount();

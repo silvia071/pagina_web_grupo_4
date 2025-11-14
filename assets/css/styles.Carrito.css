@@ -1,10 +1,7 @@
 
-/* ===========================
-   TABLA DEL CARRITO (base)
-   =========================== */
 table { width: 100%; border-collapse: collapse; }
 th, td { padding: 0.75rem; border-bottom: 1px solid #ddd; text-align: left; font-family: Arial, Helvetica, sans-serif; }
-thead th { background: #004466; color: #fff; }   /* color marca */
+thead th { background: #004466; color: #fff; } 
 #totales { margin-top: 1rem; text-align: right; }
 
 .empty {
@@ -20,9 +17,7 @@ thead th { background: #004466; color: #fff; }   /* color marca */
   object-fit: contain;
 }
 
-/* ===========================
-   MENÚ HAMBURGUESA (botón)
-   =========================== */
+
 .menu-toggle {
   display: none;
   border: 0;
@@ -34,10 +29,8 @@ thead th { background: #004466; color: #fff; }   /* color marca */
   cursor: pointer;
 }
 
-/* ===========================
-   MEDIA QUERIES – RESPONSIVO
-   =========================== */
-@media (max-width: 37.5rem) { /* 600px */
+
+@media (max-width: 37.5rem) { 
   header h1 { font-size: 1.6rem; }
 
   .menu-toggle {
@@ -61,7 +54,7 @@ thead th { background: #004466; color: #fff; }   /* color marca */
   footer { font-size: 1rem; padding: 0.9rem; }
 }
 
-@media (max-width: 56.25rem) { /* 900px */
+@media (max-width: 56.25rem) { 
   header h1 { font-size: 1.8rem; }
 
   .menu-toggle {
@@ -72,7 +65,6 @@ thead th { background: #004466; color: #fff; }   /* color marca */
     min-height: 44px;
   }
 
-  /* Menú colapsable controlado por JS */
   nav ul {
     display: block;
     margin-top: 0.75rem;
@@ -92,14 +84,12 @@ thead th { background: #004466; color: #fff; }   /* color marca */
   table, th, td { font-size: 1rem; }
 }
 
-@media (max-width: 75rem) { /* 1200px */
+@media (max-width: 75rem) { 
   body { font-size: 1rem; }
   header h1 { font-size: 2rem; }
 }
 
-/* ===========================
-   TOASTS (notificaciones)
-   =========================== */
+
 .toast-box {
   position: fixed; right: 16px; top: 16px;
   display: flex; flex-direction: column; gap: 10px;
@@ -121,9 +111,7 @@ thead th { background: #004466; color: #fff; }   /* color marca */
 @keyframes toast-in { from { transform: translateX(12px) scale(.98); opacity: 0 } to { transform: translateX(0) scale(1); opacity: 1 } }
 @keyframes toast-out { from { opacity: 1; transform: scale(1) } to { opacity: 0; transform: scale(.98) } }
 
-/* ===========================
-   CARRITO: Layout + Resumen
-   =========================== */
+
 #carritoTabla.cart-layout {
   display: grid;
   grid-template-columns: 1fr 320px;
@@ -134,10 +122,8 @@ thead th { background: #004466; color: #fff; }   /* color marca */
   #carritoTabla.cart-layout { grid-template-columns: 1fr; }
 }
 
-/* Tabla con wrapper por si requiere scroll horizontal en pantallas chicas */
 .cart-table-wrapper { overflow-x: auto; }
 
-/* Panel lateral */
 .cart-summary {
   position: sticky; top: 16px;
   background: #fff; border: 1px solid #e3e7ee; border-radius: 12px;
@@ -151,9 +137,7 @@ thead th { background: #004466; color: #fff; }   /* color marca */
 .summary-rows > div:last-child { border-bottom: none; }
 .summary-actions { display: grid; gap: 10px; margin-top: 14px; }
 
-/* ===========================
-   Cantidades (inputs + botones)
-   =========================== */
+
 #carritoTabla .qty { display: inline-flex; align-items: center; gap: 8px; }
 
 #carritoTabla .btn-qty {
@@ -162,17 +146,15 @@ thead th { background: #004466; color: #fff; }   /* color marca */
   font-size: 18px; line-height: 1; cursor: pointer; user-select: none;
 }
 
-/* Inputs numéricos */
 #carritoTabla .qty-input,
 #carritoTabla td input[type="number"] {
   width: 56px; height: 28px; padding: 2px 6px;
   text-align: center; border: 1px solid #cfd6de; border-radius: 6px;
-  -moz-appearance: textfield;   /* Firefox */
-  -webkit-appearance: none;     /* WebKit */
-  appearance: none;             /* Estándar */
+  -moz-appearance: textfield;   
+  -webkit-appearance: none;     
+  appearance: none;            
 }
 
-/* Quitar spinners en Chrome/Safari */
 #carritoTabla .qty-input::-webkit-outer-spin-button,
 #carritoTabla .qty-input::-webkit-inner-spin-button {
   -webkit-appearance: none; margin: 0;
@@ -180,24 +162,22 @@ thead th { background: #004466; color: #fff; }   /* color marca */
 
 #carritoTabla .qty .stock { margin-left: 6px; color: #666; font-size: 12px; }
 
-/* ===========================
-   Botones (unificados con la marca)
-   =========================== */
+
 .btn-primary, .btn-outline, .btn-danger,
-#carritoTabla button,           /* por si vienen <button> sueltos */
-.summary-actions a,             /* los 3 enlaces del panel lateral */
+#carritoTabla button,           
+.summary-actions a,           
 .summary-actions button {
   display: block;
   width: 100%;
   margin: 0.5rem 0;
-  background: #004466;         /* color base Bazar Home */
+  background: #004466;       
   color: #fff;
   border: 1px solid #004466;
   border-radius: 8px;
   padding: 0.9rem 1rem;
   font-size: 1rem;
   font-weight: bold;
-  font-family: Arial, Helvetica, sans-serif; /* misma fuente del sitio */
+  font-family: Arial, Helvetica, sans-serif; 
   text-align: center;
   text-decoration: none;
   cursor: pointer;
@@ -208,7 +188,7 @@ thead th { background: #004466; color: #fff; }   /* color marca */
 #carritoTabla button:hover,
 .summary-actions a:hover,
 .summary-actions button:hover {
-  background: #006699;         /* hover marca */
+  background: #006699;         
   border-color: #006699;
   transform: translateY(-1px);
 }
@@ -220,29 +200,18 @@ thead th { background: #004466; color: #fff; }   /* color marca */
   transform: scale(.98);
 }
 
-/* Si alguna vez necesitás un botón "contorno" real, descomentá:
-.btn-outline {
-  background: transparent;
-  color: #004466;
-}
-*/
 
-/* Ajustes finales de tabla del carrito */
 #carritoTabla table { width: 100%; border-collapse: collapse; }
-#carritoTabla thead th { background: #004466; color: #fff; } /* consistente */
+#carritoTabla thead th { background: #004466; color: #fff; }
 #carritoTabla th, #carritoTabla td { vertical-align: middle; }
 #totales { margin-top: 1rem; text-align: right; }
 .cart-summary a { color: #fff; font-size: 16px; font-weight: 600; text-decoration: none; }
 .cart-summary a:hover { text-decoration: none; }
 
-/* Seguridad global para evitar scroll horizontal accidental */
+
 html, body { max-width: 100%; overflow-x: hidden; }
 
-/* ===========================
-   VALIDACIÓN DE FORMULARIOS
-   =========================== */
 
-/* Helpers para validación (muestran mensajes y estilos si no cargás Bootstrap CSS) */
 .is-invalid {
   border-color: #dc3545 !important;
   background-color: #fff;
@@ -254,22 +223,19 @@ html, body { max-width: 100%; overflow-x: hidden; }
 }
 
 .invalid-feedback {
-  display: none;             /* oculto por defecto */
+  display: none;             
   color: #dc3545;
   font-size: .9rem;
   margin-top: .25rem;
 }
 
-/* clase que usa el JS para forzar la visualización */
 .invalid-feedback.d-block,
 .invalid-feedback.show {
   display: block;
 }
 
-/* utilidad mínima similar a Bootstrap d-block (por si no está disponible) */
 .d-block { display: block !important; }
 
-/* Validación: ocultar feedback por defecto y mostrar según clases/estado */
 .invalid-feedback {
   display: none;
   color: #dc3545;
@@ -289,8 +255,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
   margin-top: .25rem;
 }
 
-/* Mostrar el mensaje de éxito si el input tiene la clase .is-valid
-   o si el JS fuerza .d-block / .show en el elemento */
+
 input.is-valid + .valid-feedback,
 input.is-valid ~ .valid-feedback,
 input:valid + .valid-feedback,
@@ -300,14 +265,10 @@ input:valid ~ .valid-feedback,
   display: block !important;
 }
 
-/* utilidad por si tu JS usa .d-block */
 .d-block { display: block !important; }
 
-/* ===========================
-   ESTILOS ESPECÍFICOS PARA confirmacioncompra.html
-   =========================== */
+
    
-/* CENTRADO SÓLO EN confirmacioncompra.html */
 .page-confirmacion .card-body,
 .page-confirmacion h1,
 .page-confirmacion h2,
@@ -320,23 +281,20 @@ input:valid ~ .valid-feedback,
   text-align: center;
 }
 
-/* Centrar el formulario visualmente y limitar ancho de inputs */
 .page-confirmacion form {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  max-width: 520px; /* ajusta si necesitas más o menos ancho */
+  max-width: 520px; 
 }
-
 .page-confirmacion .form-control {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  max-width: 420px; /* ancho del input dentro del formulario centrado */
+  max-width: 420px; 
   box-sizing: border-box;
 }
 
-/* Asegurar que los mensajes de feedback se muestren centrados */
 .page-confirmacion .invalid-feedback,
 .page-confirmacion .valid-feedback {
   display: none;
@@ -348,5 +306,4 @@ input:valid ~ .valid-feedback,
 .page-confirmacion .invalid-feedback.d-block,
 .page-confirmacion .valid-feedback.d-block {
   display: block !important;
-}
-
+};

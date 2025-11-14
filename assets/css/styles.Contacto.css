@@ -1,27 +1,111 @@
 :root {
-        --brand: #0d6efd;
-      }
-      body {
-        background-color: #f8f9fa;
-      }
-      .topbar {
-        height: 14px;
-        background-color: var(--brand);
-      }
-      .card-contacto {
-        border: 0;
-        border-radius: 1rem;
-      }
-      .btn-primary {
-        background-color: var(--brand);
-        border-color: var(--brand);
-      }
-      .btn-primary:focus {
-        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.35);
-      }
-      .form-control:focus {
-        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
-      }
-    
-    .invalid-feedback { display: block; }
-    .valid-feedback { display: none; }
+  --brand: #004466;
+}
+
+body {
+  background-color: #f7f7f7;
+}
+
+
+.topbar {
+  height: 14px;
+  background-color: var(--brand);
+}
+
+.main-contacto {
+  width: min(1100px, 92%);
+  margin: 1rem auto 3rem;
+}
+
+.card.card-contacto {
+  border: 0;
+  border-radius: 1rem;
+  background-color: #ffffff;
+  color: #212529;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.titulo-contacto {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #004466;
+  margin-bottom: 0.5rem;
+}
+
+.intro-contacto {
+  text-align: center;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.card-contacto .form-label {
+  font-weight: 500;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+.invalid-feedback {
+  display: block;
+}
+
+.valid-feedback {
+  display: none;
+}
+
+.contacto-acciones {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+
+.contacto-acciones .btn,
+.contacto-acciones .btn-primary,
+.contacto-acciones a.btn,
+.contacto-acciones a.btn-primary,
+.contacto-acciones button.btn,
+.contacto-acciones button.btn-primary {
+  background-color: #004466 !important;
+  border-color: #004466 !important;
+  color: #ffffff !important;
+  min-width: 180px;
+  padding: 0.6rem 1.4rem;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.contacto-acciones .btn:hover,
+.contacto-acciones .btn:focus,
+.contacto-acciones .btn-primary:hover,
+.contacto-acciones .btn-primary:focus,
+.contacto-acciones a.btn:hover,
+.contacto-acciones a.btn:focus,
+.contacto-acciones a.btn-primary:hover,
+.contacto-acciones a.btn-primary:focus {
+  background-color: #006699 !important;
+  border-color: #006699 !important;
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: #004466 !important;
+  border-color: #004466 !important;
+  color: #ffffff !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #006699 !important;
+  border-color: #006699 !important;
+  color: #ffffff !important;
+}

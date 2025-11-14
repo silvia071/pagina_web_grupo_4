@@ -256,3 +256,28 @@ a:focus-visible { outline: 2px solid #66bfff; outline-offset: 2px; }
   .menu { display: flex; align-items: center; gap: 1rem; }
   .menu[hidden] { display: flex !important; }
 }
+/* Cards de destacados (home) */
+#destacados .cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+/* Botón "Ver detalle" de la home */
+.btn-detalle,
+.btn-detalle:visited {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  background-color: #004466;   /* mismo color que en productos */
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.btn-detalle:hover {
+  background-color: #00334f;   /* un poquito más oscuro al pasar el mouse */
+}

@@ -56,8 +56,9 @@ function precioARS(n) {
 
 // Crea tarjeta de destacado
 function cardDestacado(p) {
-  const div = document.createElement("div");
+  const div = document.createElement("article");
   div.className = "producto destacado";
+
   div.innerHTML = `
     <img src="${rutaImg(p.img)}" alt="${p.nombre}" loading="lazy" />
     <h3>${p.nombre}</h3>
@@ -66,6 +67,7 @@ function cardDestacado(p) {
       p.id
     )}" class="btn-detalle" target="_blank">Ver detalle</a>
   `;
+
   return div;
 }
 
@@ -96,5 +98,4 @@ async function initIndex() {
   }
 }
 
-// Run
 document.addEventListener("DOMContentLoaded", initIndex);

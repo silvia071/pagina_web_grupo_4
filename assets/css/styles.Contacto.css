@@ -2,24 +2,24 @@
   --brand: #004466;
 }
 
-/* Fondo igual que el resto del sitio */
+
 body {
   background-color: #f7f7f7;
 }
 
-/* Barra superior */
+
 .topbar {
   height: 14px;
   background-color: var(--brand);
 }
 
-/* Main con mismo ancho que productos */
+
 .main-contacto {
   width: min(1100px, 92%);
   margin: 1rem auto 3rem;
 }
 
-/* Card de contacto */
+
 .card.card-contacto {
   border: 0;
   border-radius: 1rem;
@@ -30,7 +30,7 @@ body {
   margin: 0 auto;
 }
 
-/* Título e intro */
+
 .titulo-contacto {
   text-align: center;
   font-size: 2rem;
@@ -45,7 +45,7 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Campos del formulario */
+
 .card-contacto .form-label {
   font-weight: 500;
 }
@@ -54,7 +54,7 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
 }
 
-/* Mensajes de validación */
+
 .invalid-feedback {
   display: block;
 }
@@ -63,9 +63,7 @@ body {
   display: none;
 }
 
-/* ---- BOTONES ---- */
 
-/* Contenedor de botones centrado */
 .contacto-acciones {
   display: flex;
   justify-content: center;
@@ -73,8 +71,7 @@ body {
   flex-wrap: wrap;
 }
 
-/* Mismo estilo para TODOS los botones dentro de contacto-acciones
-   (tanto <button> como <a>) */
+
 .contacto-acciones .btn,
 .contacto-acciones .btn-primary,
 .contacto-acciones a.btn,
@@ -106,7 +103,7 @@ body {
   color: #ffffff !important;
   text-decoration: none;
 }
-/* FORZAR estilo de TODOS los .btn-primary en la página de contacto */
+
 .btn-primary {
   background-color: #004466 !important;
   border-color: #004466 !important;

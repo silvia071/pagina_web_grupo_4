@@ -1,4 +1,4 @@
-/* estilo general */
+
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +19,7 @@ body {
   min-height: 100vh;
 }
 
-/* header y nav */
+
 header {
   grid-area: nav;
   background-color: #004466;
@@ -72,7 +72,7 @@ main {
   align-items: center;
 }
 
-/* Centrado y estilo para el detalle del producto */
+
 #detalleProducto {
   display: flex;
   flex-direction: column;
@@ -112,7 +112,7 @@ main {
   text-align: center;
 }
 
-/* footer */
+
 footer {
   grid-area: footer;
   background-color: #004466;
@@ -132,7 +132,6 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* MENÚ HAMBURGUESA */
 .menu-toggle {
   display: none;
   border: 0;
@@ -144,9 +143,9 @@ footer a:hover {
   cursor: pointer;
 }
 
-/* MEDIA QUERIES – RESPONSIVIDAD DEL SITIO */
+
 @media (max-width: 37.5rem) {
-  /* 600px */
+ 
   header h1 {
     font-size: 1.6rem;
   }
@@ -198,7 +197,7 @@ footer a:hover {
 }
 
 @media (max-width: 56.25rem) {
-  /* 900px */
+
   header h1 {
     font-size: 1.8rem;
   }
@@ -251,7 +250,7 @@ footer a:hover {
 }
 
 @media (max-width: 75rem) {
-  /* 1200px */
+
   body {
     font-size: 1rem;
   }
@@ -270,7 +269,7 @@ footer a:hover {
   margin-bottom: 8px;
 }
 
-/* Estilos para los mensajes inline */
+
 .inline-msg {
   display: inline-block;
   padding: 8px 10px;
@@ -294,7 +293,7 @@ footer a:hover {
   opacity: 0;
 }
 
-/* (ya casi no se usa, pero lo dejo por compatibilidad) */
+
 .agregar {
   display: flex;
   align-items: center;
@@ -303,7 +302,7 @@ footer a:hover {
   justify-content: center;
 }
 
-/* Botones principales (Agregar al carrito / Volver) */
+
 #detalleProducto .btn-accion {
   display: inline-block;
   background: #004466;
@@ -322,10 +321,10 @@ footer a:hover {
   background: #006699;
 }
 
-/* Contenedor de la fila "Cantidad" */
+
 #detalleProducto .fila-cantidad {
   margin-top: 1.5rem;
-  margin-bottom: 1.5rem; /* <<< antes era 0 o muy poco */
+  margin-bottom: 1.5rem; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -333,7 +332,7 @@ footer a:hover {
   font-weight: 600;
 }
 
-/* Caja de cantidad, parecida a la del carrito */
+
 #detalleProducto #qty {
   width: 3.2rem;
   text-align: center;
@@ -344,7 +343,7 @@ footer a:hover {
   font-size: 0.95rem;
 }
 
-/* Botones + y − de cantidad */
+
 #detalleProducto .qty-btn {
   width: 2.2rem;
   height: 2.2rem;
@@ -364,7 +363,7 @@ footer a:hover {
   background: #006699;
 }
 
-/* Ocultar flechitas nativas del input number */
+
 #detalleProducto #qty::-webkit-inner-spin-button,
 #detalleProducto #qty::-webkit-outer-spin-button {
   -webkit-appearance: none;

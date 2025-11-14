@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
   console.log("validacioncompra.js v2 cargado"); 
 
-  const form = document.getElementById("contactForm");
+  const form = document.getElementById("form-confirmacion");
   if (!form) return;
 
-  const overlay = document.getElementById("compraOverlay");
-  const btnCerrar = document.getElementById("cerrarCompra");
+
 
   const MENSAJE_COMPRA =
     "¡Muchas gracias por tu compra! En un plazo de 48 horas recibirás tu pedido. Pronto nos pondremos en contacto para coordinar la entrega.";
@@ -29,116 +28,108 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   };
 
-  const validityKeys = [
-    "valueMissing",
-    "typeMismatch",
-    "patternMismatch",
-    "tooShort",
-    "tooLong",
-    "rangeUnderflow",
-    "rangeOverflow",
-    "stepMismatch",
-    "badInput",
-    "customError",
-  ];
 
-  function showError(input, message) {
-    input.classList.add("is-invalid");
-    input.classList.remove("is-valid");
-    const errorDiv = document.getElementById(`${input.id}Error`);
-    if (errorDiv) {
-      errorDiv.textContent = message;
-      errorDiv.classList.add("d-block");
-    }
-  }
 
-  function hideError(input) {
-    input.classList.remove("is-invalid");
-    input.classList.add("is-valid");
-    const errorDiv = document.getElementById(`${input.id}Error`);
-    if (errorDiv) {
-      errorDiv.textContent = "";
-      errorDiv.classList.remove("d-block");
-    }
-  }
+const setInvalid = (input, msg) => {
+  input.classList.remove("is-valid");
+  input.classList.add("is-invalid");
+  input.setAttribute("aria-invalid", "true");
+  const err = document.getElementById(input.id + "Error");
+  if (err) err.textContent = msg || "Campo inválido.";
+};
 
-  function validateField(input) {
-    const validity = input.validity;
-    if (validity.valid) {
-      hideError(input);
-      return true;
-    }
+const setValid = (input) => {
+  input.classList.remove("is-invalid");
+  input.classList.add("is-valid");
+  input.setAttribute("aria-invalid", "false");
+  const err = document.getElementById(input.id + "Error");
+  if (err) err.textContent = "";
+};
 
-    let message = "";
-    const messages = errorMessages[input.id];
-    for (const key of validityKeys) {
-      if (validity[key]) {
-        message =
-          messages && messages[key]
-            ? messages[key]
-            : input.validationMessage || "Campo inválido";
-        break;
-      }
-    }
+const nombreRegex = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]{3,50}$/;
+const direccionRegex = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9 ,.#-]{3,150}$/;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-    showError(input, message);
+const validarNombre = (input) => {
+  const v = input.value.trim();
+  if (v.length < 3) {
+    setInvalid(input, "El nombre debe tener al menos 3 caracteres.");
     return false;
   }
+  if (!nombreRegex.test(v)) {
+    setInvalid(input, "Solo letras y espacios.");
+    return false;
+  }
+  setValid(input);
+  return true;
+};
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
+const validarDireccion = (input) => {
+  const v = input.value.trim();
+  if (v.length < 3) {
+    setInvalid(input, "La dirección debe tener al menos 3 caracteres.");
+    return false;
+  }
+  if (!direccionRegex.test(v)) {
+    setInvalid(input, "Dirección inválida.");
+    return false;
+  }
+  setValid(input);
+  return true;
+};
 
-    const inputs = Array.from(form.querySelectorAll("input"));
-    let isValid = true;
-    let firstInvalid = null;
+const validarEmail = (input) => {
+  const v = input.value.trim();
+  if (v === "") {
+    setInvalid(input, "El correo es obligatorio.");
+    return false;
+  }
+  if (!emailRegex.test(v)) {
+    setInvalid(input, "Correo inválido.");
+    return false;
+  }
+  setValid(input);
+  return true;
+};
 
-    inputs.forEach((input) => {
-      if (!validateField(input)) {
-        isValid = false;
-        if (!firstInvalid) firstInvalid = input;
-      }
-    });
+const vaciarCarrito = () => {
+  localStorage.removeItem("carrito");
+  const cartCount = document.getElementById("cartCount");
+  if (cartCount) {
+    cartCount.textContent = "0";
+  }
+};
 
-    if (!isValid) {
-      firstInvalid && firstInvalid.focus();
-      return;
-    }
+ form.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-   
-    const formAlert = document.getElementById("formAlert");
-    if (formAlert) {
-      formAlert.textContent = MENSAJE_COMPRA;
-      formAlert.classList.remove("d-none");
-      formAlert.style.fontSize = "1.05rem";
-      formAlert.style.fontWeight = "600";
-    }
+  const nombre = document.getElementById("nombre");
+  const direccion = document.getElementById("direccion");
+  const email = document.getElementById("email");
 
-   
-    if (overlay) {
-      overlay.classList.remove("hidden");
-    }
+  const okNombre = validarNombre(nombre);
+  const okDireccion = validarDireccion(direccion);
+  const okEmail = validarEmail(email);
 
-   
-    form.reset();
-    inputs.forEach((i) => {
-      i.classList.remove("is-valid");
-      const err = document.getElementById(`${i.id}Error`);
-      if (err) {
-        err.textContent = "";
-        err.classList.remove("d-block");
-      }
-    });
-  });
-
-  if (btnCerrar && overlay) {
-    btnCerrar.addEventListener("click", () => {
-      overlay.classList.add("hidden");
-      
-    });
+  if (!okNombre || !okDireccion || !okEmail) {
+    return;
   }
 
-  form.querySelectorAll("input").forEach((input) => {
-    input.addEventListener("input", () => validateField(input));
-    input.addEventListener("blur", () => validateField(input));
+  alert("¡Muchas gracias por tu compra! En 48 horas recibirás tu pedido.");
+  vaciarCarrito();
+  form.reset();
+  [nombre, direccion, email].forEach((el) => {
+    el.classList.remove("is-valid", "is-invalid");
+    el.setAttribute("aria-invalid", "false");
   });
 });
+
+
+form.querySelectorAll("input").forEach((input) => {
+  input.addEventListener("input", () => {
+    if (input.id === "nombre") validarNombre(input);
+    if (input.id === "direccion") validarDireccion(input);
+    if (input.id === "email") validarEmail(input);
+  });
+});
+}); 

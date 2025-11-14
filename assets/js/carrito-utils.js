@@ -194,7 +194,7 @@ function itemsCount() {
 
 function updateCartSummary() {
   const itemsEl = document.getElementById("summary-items");
-  const totalSpan = document.getElementById("total"); // lo usás en el HTML del panel
+  const totalSpan = document.getElementById("total"); // lo 
   if (itemsEl) itemsEl.textContent = String(itemsCount());
   if (totalSpan) totalSpan.textContent = cartTotal().toLocaleString("es-AR");
 }
@@ -348,11 +348,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!finalizarBtn) return;
 
   finalizarBtn.addEventListener('click', (e) => {
-    // Si quieres prevenir ir si el carrito está vacío, comprueba antes
+   
     const itemsCount = Number(document.getElementById('cartCount')?.textContent || 0);
     if (itemsCount === 0) { alert('El carrito está vacío'); return; }
 
-    // Redirigir a la página de confirmación (mismo directorio pages/)
+   
     location.href = 'confirmacioncompra.html';
 
   });

@@ -1,8 +1,14 @@
-/* =========================
-   ESTILO GENERAL
-   ========================= */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { max-width: 100%; overflow-x: hidden; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -10,14 +16,11 @@ body {
   color: #333;
   line-height: 1.6;
   display: grid;
-  grid-template-rows: auto 1fr auto; /* header/nav - main - footer */
+  grid-template-rows: auto 1fr auto; 
   grid-template-areas: "nav" "main" "footer";
   min-height: 100vh;
 }
 
-/* =========================
-   HEADER / NAV
-   ========================= */
 header {
   grid-area: nav;
   background-color: #004466;
@@ -27,9 +30,11 @@ header {
   z-index: 1000;
 }
 
-header h1 { margin-bottom: 1rem; text-align: center; }
+header h1 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
 
-/* Contenedor flexible: hamburguesa + menú (izq) | carrito (der) */
 header .navbar {
   display: flex;
   align-items: center;
@@ -39,12 +44,17 @@ header .navbar {
   flex-wrap: nowrap;
 }
 
-/* Orden visual */
-header .menu-toggle { order: 0; }
-header .menu        { order: 1; }
-header .cart-link   { order: 2; margin-left: auto; }
+header .menu-toggle {
+  order: 0;
+}
+header .menu {
+  order: 1;
+}
+header .cart-link {
+  order: 2;
+  margin-left: auto;
+}
 
-/* Menú */
 header .menu {
   list-style: none;
   display: flex;
@@ -67,9 +77,10 @@ nav a {
   border-radius: 10px;
 }
 nav a:hover,
-nav a:focus-visible { background: #006699; }
+nav a:focus-visible {
+  background: #006699;
+}
 
-/* Botón hamburguesa */
 .menu-toggle {
   display: none;
   border: 0;
@@ -81,7 +92,6 @@ nav a:focus-visible { background: #006699; }
   cursor: pointer;
 }
 
-/* Carrito: ícono + contador (sin texto visible) */
 header .cart-link {
   display: inline-flex;
   align-items: center;
@@ -91,22 +101,35 @@ header .cart-link {
   font-weight: bold;
   white-space: nowrap;
 }
-header .icono-carrito { width: 26px; height: 26px; object-fit: contain; }
-header #cartCount { background: none; color: #fff; font-weight: bold; font-size: 1rem; padding: 0; line-height: 1; }
-
-/* Ocultar texto visualmente pero mantener accesible */
-.sr-only {
-  position: absolute !important;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden; clip: rect(0, 0, 0, 0);
-  white-space: nowrap; border: 0;
+header .icono-carrito {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+header #cartCount {
+  background: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0;
+  line-height: 1;
 }
 
-/* =========================
-   MAIN / FOOTER
-   ========================= */
-main { grid-area: main; }
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+main {
+  grid-area: main;
+}
 footer {
   grid-area: footer;
   background: #004466;
@@ -115,13 +138,14 @@ footer {
   padding: 1rem;
 }
 
-/* =========================
-   CATÁLOGO
-   ========================= */
-#catalogo { padding: 2rem; }
-#catalogo h2 { margin-bottom: 1rem; text-align: center; }
+#catalogo {
+  padding: 2rem;
+}
+#catalogo h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
 
-/* 📱 Celular: 2 columnas */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -129,7 +153,6 @@ footer {
   overflow-x: hidden;
 }
 
-/* Tarjetas */
 .producto {
   background: white;
   border-radius: 10px;
@@ -151,8 +174,18 @@ footer {
   background: #fff;
 }
 
-.producto button {
+
+.producto .acciones {
   margin-top: auto;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+.btn-accion {
+  display: inline-block;
   background: #004466;
   color: white;
   border: none;
@@ -160,10 +193,13 @@ footer {
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s;
+  text-decoration: none; 
 }
-.producto button:hover { background: #006699; }
 
-/* ==== Tabla del carrito (si se reutiliza) ==== */
+.btn-accion:hover {
+  background: #006699;
+}
+
 #carritoTabla table {
   width: 100%;
   border-collapse: collapse;
@@ -172,32 +208,49 @@ footer {
   border-radius: 8px;
   overflow: hidden;
 }
-#carritoTabla thead { background: #004466; color: white; }
-#carritoTabla th, #carritoTabla td { padding: 0.75rem 1rem; text-align: left; }
-#carritoTabla tr:nth-child(even) { background: #f2f2f2; }
-#carritoTabla tr:hover { background: #e6f3ff; }
-#totales { margin-top: 1rem; text-align: right; font-size: 1.1rem; font-weight: bold; color: #004466; }
+#carritoTabla thead {
+  background: #004466;
+  color: white;
+}
+#carritoTabla th,
+#carritoTabla td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+#carritoTabla tr:nth-child(even) {
+  background: #f2f2f2;
+}
+#carritoTabla tr:hover {
+  background: #e6f3ff;
+}
+#totales {
+  margin-top: 1rem;
+  text-align: right;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #004466;
+}
 
-/* =========================
-   MEDIA QUERIES
-   ========================= */
-
-/* 📲 Tablet (≥600px): 3 columnas */
 @media (min-width: 37.5rem) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-/* 🖥️ Desktop (≥1200px): mantener 3 columnas o ampliar a 4 */
 @media (min-width: 75rem) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
-  /* Para 4 columnas grandes:
-     .grid { grid-template-columns: repeat(4, 1fr); } */
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-/* ≤600px */
 @media (max-width: 37.5rem) {
-  header h1 { font-size: 1.6rem; }
-  .menu-toggle { font-size: 1.6rem; padding: 0.85rem 1.1rem; }
+  header h1 {
+    font-size: 1.6rem;
+  }
+  .menu-toggle {
+    font-size: 1.6rem;
+    padding: 0.85rem 1.1rem;
+  }
 
   header .menu {
     flex-direction: column;
@@ -207,20 +260,37 @@ footer {
     width: 100%;
   }
 
-  nav a { font-size: 1.15rem; padding: 1rem; display: block; }
-  header .icono-carrito { width: 28px; height: 28px; }
-  #catalogo { padding: 1rem; }
-  main { padding: 1rem; }
+  nav a {
+    font-size: 1.15rem;
+    padding: 1rem;
+    display: block;
+  }
+  header .icono-carrito {
+    width: 28px;
+    height: 28px;
+  }
+  #catalogo {
+    padding: 1rem;
+  }
+  main {
+    padding: 1rem;
+  }
 
-  .producto img { height: 160px; }
-  #carritoTabla th, #carritoTabla td { padding: 0.5rem; font-size: 0.95rem; }
+  .producto img {
+    height: 160px;
+  }
+  #carritoTabla th,
+  #carritoTabla td {
+    padding: 0.5rem;
+    font-size: 0.95rem;
+  }
 }
 
-/* ≤900px */
 @media (max-width: 56.25rem) {
-  header h1 { font-size: 1.8rem; }
+  header h1 {
+    font-size: 1.8rem;
+  }
 
-  /* Hamburguesa visible */
   .menu-toggle {
     display: inline-block;
     margin-left: 0.5rem;
@@ -229,7 +299,6 @@ footer {
     min-height: 44px;
   }
 
-  /* Menú controlado por JS */
   header .menu {
     flex-direction: column;
     position: static;
@@ -240,19 +309,64 @@ footer {
     margin-top: 0.5rem;
     display: block;
   }
-  header .menu[hidden] { display: none; }
-  header .menu li { margin: 0.25rem 0; }
-  header .menu a  { display: block; font-size: 1.1rem; padding: 0.85rem 1rem; min-height: 48px; }
+  header .menu[hidden] {
+    display: none;
+  }
+  header .menu li {
+    margin: 0.25rem 0;
+  }
+  header .menu a {
+    display: block;
+    font-size: 1.1rem;
+    padding: 0.85rem 1rem;
+    min-height: 48px;
+  }
 
-  header .cart-link { position: static; margin-left: auto; }
+  header .cart-link {
+    position: static;
+    margin-left: auto;
+  }
 
-  #catalogo { padding: 1.25rem; }
-  .producto img { height: 180px; }
+  #catalogo {
+    padding: 1.25rem;
+  }
+  .producto img {
+    height: 180px;
+  }
 }
 
-/* ≥900px: menú siempre visible */
 @media (min-width: 56.251rem) {
-  header .menu-toggle { display: none; }
-  header .menu { display: flex; align-items: center; gap: 1rem; }
-  header .menu[hidden] { display: flex !important; }
+  header .menu-toggle {
+    display: none;
+  }
+  header .menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  header .menu[hidden] {
+    display: flex !important;
+  }
+}
+.inline-msg {
+  display: inline-block;
+  padding: 8px 10px;
+  margin-top: 12px;
+  border-radius: 6px;
+  color: #000;
+  transition: opacity 0.5s ease;
+}
+
+.inline-msg.warning {
+  background: #fff4e5;
+  border: 1px solid #e0b84d;
+}
+
+.inline-msg.success {
+  background: #d1f7c4;
+  border: 1px solid #86d27c;
+}
+
+.inline-msg.hide {
+  opacity: 0;
 }

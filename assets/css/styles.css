@@ -1,9 +1,14 @@
-/* =====================================
-   ESTILO GENERAL
-   ===================================== */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-html, body { max-width: 100%; overflow-x: hidden; }
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -16,12 +21,15 @@ body {
   min-height: 100vh;
 }
 
-/* Medios fluidos */
-img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
-/* =====================================
-   HEADER Y NAVEGACIÓN
-   ===================================== */
 header {
   grid-area: nav;
   background-color: #004466;
@@ -32,7 +40,6 @@ header {
   overflow: visible;
 }
 
-/* Contenedor flexible para hamburguesa, menú y carrito */
 .navbar {
   display: flex;
   align-items: center;
@@ -42,12 +49,18 @@ header {
   flex-wrap: nowrap;
 }
 
-/* Orden visual: hamburguesa izq, menú centro, carrito der */
-.menu-toggle { order: 0; }
-.menu        { order: 1; }
-.cart-link   { order: 2; margin-left: auto; white-space: nowrap; }
+.menu-toggle {
+  order: 0;
+}
+.menu {
+  order: 1;
+}
+.cart-link {
+  order: 2;
+  margin-left: auto;
+  white-space: nowrap;
+}
 
-/* Enlaces del menú */
 .menu {
   list-style: none;
   display: flex;
@@ -70,9 +83,10 @@ nav a {
 }
 
 nav a:hover,
-nav a:focus-visible { background: #006699; }
+nav a:focus-visible {
+  background: #006699;
+}
 
-/* Botón hamburguesa */
 .menu-toggle {
   display: none;
   background: #006699;
@@ -84,7 +98,6 @@ nav a:focus-visible { background: #006699; }
   cursor: pointer;
 }
 
-/* Carrito a la derecha */
 .cart-link {
   display: inline-flex;
   align-items: center;
@@ -94,9 +107,12 @@ nav a:focus-visible { background: #006699; }
   font-weight: bold;
 }
 
-.icono-carrito { width: 26px; height: 26px; object-fit: contain; }
+.icono-carrito {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
 
-/* Contador del carrito sin fondo rojo */
 #cartCount {
   background: none;
   color: white;
@@ -106,9 +122,6 @@ nav a:focus-visible { background: #006699; }
   line-height: 1;
 }
 
-/* =====================================
-   MAIN
-   ===================================== */
 main {
   grid-area: main;
   padding: 2rem;
@@ -125,20 +138,21 @@ main {
   margin-bottom: 2rem;
 }
 
-#destacados h2 { margin-bottom: 1rem; text-align: center; }
+#destacados h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
 
-/* =====================================
-   CARDS DE PRODUCTOS
-   ===================================== */
-.cards, .grid {
+.cards,
+.grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 📱 Celular: 2 columnas */
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   overflow-x: hidden;
 }
 
-.card,
-.producto {
+.cards .card,
+.grid .card {
   background: #006699;
   border-radius: 8px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
@@ -150,7 +164,21 @@ main {
   min-height: 100%;
 }
 
-.producto { background: #fff; color: #333; border: 1px solid #e6e6e6; }
+.producto {
+  background: #fff;
+  color: #333;
+  border: 1px solid #e6e6e6;
+}
+
+
+.producto.destacado {
+  text-align: center;
+}
+
+.producto.destacado h3 {
+  margin-top: 0.5rem;
+  text-align: center;
+}
 
 .card img,
 .producto img {
@@ -177,11 +205,10 @@ main {
 .card button:hover,
 .producto button:hover,
 .card button:focus-visible,
-.producto button:focus-visible { background: #006699; }
+.producto button:focus-visible {
+  background: #006699;
+}
 
-/* =====================================
-   FOOTER
-   ===================================== */
 footer {
   grid-area: footer;
   background: #004466;
@@ -190,37 +217,63 @@ footer {
   padding: 1rem;
 }
 
-/* Accesibilidad */
-a:focus-visible { outline: 2px solid #66bfff; outline-offset: 2px; }
+a:focus-visible {
+  outline: 2px solid #66bfff;
+  outline-offset: 2px;
+}
 
-/* =====================================
-   MEDIA QUERIES (mobile-first)
-   ===================================== */
 
-/* 📲 Tablet (≥ 600px): 3 columnas */
 @media (min-width: 37.5rem) {
-  .cards, .grid { grid-template-columns: repeat(3, 1fr); }
+  .cards,
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-/* 🖥️ Desktop (≥ 1200px): mantenemos 3 columnas
-   (si querés 4 en desktop, cambiá a repeat(4,1fr)) */
+
 @media (min-width: 75rem) {
-  .cards, .grid { grid-template-columns: repeat(3, 1fr); }
-  /* .cards, .grid { grid-template-columns: repeat(4, 1fr); } */
+  .cards,
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+ 
 }
 
-/* === Pequeñas: hasta 600px === */
+
 @media (max-width: 37.5rem) {
-  .menu-toggle { font-size: 1.6rem; padding: 0.85rem 1.1rem; }
-  .menu { flex-direction: column; align-items: center; gap: 0.5rem; background: #004466; width: 100%; }
-  nav a { font-size: 1.15rem; padding: 1rem; display: block; }
-  .icono-carrito { width: 28px; height: 28px; }
-  main { padding: 1rem; }
-  .producto img { height: 150px; }
-  footer { font-size: 1rem; padding: 0.9rem; }
+  .menu-toggle {
+    font-size: 1.6rem;
+    padding: 0.85rem 1.1rem;
+  }
+  .menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background: #004466;
+    width: 100%;
+  }
+  nav a {
+    font-size: 1.15rem;
+    padding: 1rem;
+    display: block;
+  }
+  .icono-carrito {
+    width: 28px;
+    height: 28px;
+  }
+  main {
+    padding: 1rem;
+  }
+  .producto img {
+    height: 150px;
+  }
+  footer {
+    font-size: 1rem;
+    padding: 0.9rem;
+  }
 }
 
-/* === Medianas: hasta 900px === */
+
 @media (max-width: 56.25rem) {
   .menu-toggle {
     display: inline-block;
@@ -240,19 +293,39 @@ a:focus-visible { outline: 2px solid #66bfff; outline-offset: 2px; }
     display: block;
   }
 
-  .menu[hidden] { display: none; }
+  .menu[hidden] {
+    display: none;
+  }
 
-  .menu li { margin: 0.25rem 0; text-align: center; }
+  .menu li {
+    margin: 0.25rem 0;
+    text-align: center;
+  }
 
-  .cart-link { position: static; margin-left: auto; }
+  .cart-link {
+    position: static;
+    margin-left: auto;
+  }
 
-  .producto img { height: 180px; }
-  main { padding: 1.5rem; }
+  .producto img {
+    height: 180px;
+  }
+  main {
+    padding: 1.5rem;
+  }
 }
 
-/* === Desktop (≥900px): menú siempre visible === */
+
 @media (min-width: 56.251rem) {
-  .menu-toggle { display: none; }
-  .menu { display: flex; align-items: center; gap: 1rem; }
-  .menu[hidden] { display: flex !important; }
+  .menu-toggle {
+    display: none;
+  }
+  .menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .menu[hidden] {
+    display: flex !important;
+  }
 }

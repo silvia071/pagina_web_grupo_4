@@ -52,12 +52,22 @@ function precioARS(n) {
 }
 
 function cardDestacado(p) {
-  const div = document.createElement("div");
+  const div = document.createElement("article");
   div.className = "producto destacado";
+
   div.innerHTML = `
     <img src="${rutaImg(p.img)}" alt="${p.nombre}" loading="lazy" />
     <h3>${p.nombre}</h3>
+
+    <!-- PRECIO -->
+    <p class="precio">${precioARS(p.precio)}</p>
+
+    <!-- VER DETALLE -->
+    <a href="pages/productos.html" class="btn-detalle">
+      Ver detalle
+    </a>
   `;
+
   return div;
 }
 
@@ -86,6 +96,5 @@ async function initIndex() {
     msg && (msg.textContent = "No se pudo cargar el catálogo local.");
   }
 }
-
 
 document.addEventListener("DOMContentLoaded", initIndex);

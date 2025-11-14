@@ -81,17 +81,17 @@ const productosOriginales = [
   },
 ];
 
-
+// Cargar productos desde localStorage o usar los originales
 function cargarProductos() {
   const guardados = localStorage.getItem("productosStock");
   if (guardados) return JSON.parse(guardados);
-
+  // Si no hay guardados, usa los originales
   return productosOriginales;
 }
 
 export const productos = cargarProductos();
 
-
+// Guardar productos en localStorage
 export function guardarProductos() {
   localStorage.setItem("productosStock", JSON.stringify(productos));
 }

@@ -14,7 +14,7 @@
   <body class="layout">
     <header>
     <nav class="navbar" aria-label="Navegación principal">
- 
+    <!-- 🍔 Hamburguesa a la izquierda -->
     <button
       class="menu-toggle"
       aria-expanded="false"
@@ -24,14 +24,14 @@
       ☰
     </button>
 
-   
+    <!-- Menú (colapsable con JS) -->
     <ul id="mainmenu" class="menu" hidden>
       <li><a href="../index.html">Inicio</a></li>
       <li><a href="productos.html">Productos</a></li>
       <li><a href="contacto.html">Contacto</a></li>
     </ul>
 
-   
+    <!-- 🛒 Carrito a la derecha -->
     <a href="carrito.html" class="cart-link" aria-label="Ir al carrito">
       <img
         src="../assets/img/carrito.svg"
@@ -53,9 +53,9 @@
         El carrito está vacío.
       </section>
 
-      
+      <!-- NUEVO: layout en 2 columnas -->
       <section id="carritoTabla" hidden class="cart-layout">
-       
+        <!-- Columna izquierda: tabla -->
         <div class="cart-table-wrapper">
           <table aria-label="Lista de productos en el carrito">
             <thead>
@@ -71,7 +71,7 @@
           </table>
         </div>
 
-       
+        <!-- Columna derecha: resumen -->
         <aside class="cart-summary" aria-label="Resumen de compra">
           <h3>Resumen</h3>
           <dl class="summary-rows">

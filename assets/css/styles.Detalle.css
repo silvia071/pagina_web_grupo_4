@@ -1,4 +1,4 @@
-
+/* estilo general */
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +19,7 @@ body {
   min-height: 100vh;
 }
 
-
+/* header y nav */
 header {
   grid-area: nav;
   background-color: #004466;
@@ -72,7 +72,7 @@ main {
   align-items: center;
 }
 
-
+/* Centrado y estilo para el detalle del producto */
 #detalleProducto {
   display: flex;
   flex-direction: column;
@@ -112,7 +112,7 @@ main {
   text-align: center;
 }
 
-
+/* footer */
 footer {
   grid-area: footer;
   background-color: #004466;
@@ -132,6 +132,7 @@ footer a:hover {
   text-decoration: underline;
 }
 
+/* MENÚ HAMBURGUESA */
 .menu-toggle {
   display: none;
   border: 0;
@@ -143,9 +144,9 @@ footer a:hover {
   cursor: pointer;
 }
 
-
+/* MEDIA QUERIES – RESPONSIVIDAD DEL SITIO */
 @media (max-width: 37.5rem) {
- 
+  /* 600px */
   header h1 {
     font-size: 1.6rem;
   }
@@ -197,7 +198,7 @@ footer a:hover {
 }
 
 @media (max-width: 56.25rem) {
-
+  /* 900px */
   header h1 {
     font-size: 1.8rem;
   }
@@ -250,7 +251,7 @@ footer a:hover {
 }
 
 @media (max-width: 75rem) {
-
+  /* 1200px */
   body {
     font-size: 1rem;
   }
@@ -259,7 +260,6 @@ footer a:hover {
     font-size: 2rem;
   }
 }
-
 .btn-back {
   background: none;
   border: none;
@@ -269,7 +269,7 @@ footer a:hover {
   margin-bottom: 8px;
 }
 
-
+/* Estilos para los mensajes inline */
 .inline-msg {
   display: inline-block;
   padding: 8px 10px;
@@ -293,87 +293,10 @@ footer a:hover {
   opacity: 0;
 }
 
-
 .agregar {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
-  justify-content: center;
-}
-
-
-#detalleProducto .btn-accion {
-  display: inline-block;
-  background: #004466;
-  color: #ffffff;
-  border: none;
-  padding: 0.7rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: background 0.3s;
-  margin-left: 0.5rem;
-}
-
-#detalleProducto .btn-accion:hover {
-  background: #006699;
-}
-
-
-#detalleProducto .fila-cantidad {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  font-weight: 600;
-}
-
-
-#detalleProducto #qty {
-  width: 3.2rem;
-  text-align: center;
-  padding: 0.35rem 0.4rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background: #ffffff;
-  font-size: 0.95rem;
-}
-
-
-#detalleProducto .qty-btn {
-  width: 2.2rem;
-  height: 2.2rem;
-  border-radius: 8px;
-  border: none;
-  background: #004466;
-  color: #ffffff;
-  font-size: 1.1rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s;
-}
-
-#detalleProducto .qty-btn:hover {
-  background: #006699;
-}
-
-
-#detalleProducto #qty::-webkit-inner-spin-button,
-#detalleProducto #qty::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-#detalleProducto #qty {
-  -moz-appearance: textfield;
-}
-#detalleProducto .acciones {
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;
+  justify-content: center; /* cambiá a flex-start si lo querés a la izquierda */
 }
